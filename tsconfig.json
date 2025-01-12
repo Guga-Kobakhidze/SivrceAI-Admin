@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES5", "ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@widgets/*": ["src/widgets/*"],
+      "@table/*": ["src/widgets/Table"],
+      "@assets/*": ["src/assets/*"],
+      "@context/*": ["src/context/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@features/*": ["src/features/*"],
+      "@utils": ["src/utils/index.ts"],
+      "@storage": ["src/utils/storage.ts"],
+      "@icons": ["src/icons/icons.ts"],
+      "@layouts": ["src/layouts/index.ts"],
+      "@pages": ["src/pages/index.ts"],
+      "@queryKeys": ["src/shared/utils/queryKeys.ts"],
+      "@constants": ["src/shared/utils/constants.ts"],
+      "@helpers": ["src/shared/helpers/index.ts"],
+      "@components": ["src/shared/components/index.ts"],
+      "@types": ["src/shared/types/*"],
+      "@config": ["src/config.ts"],
+      "@rootTypes": ["src/types.ts"]
+    }
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
