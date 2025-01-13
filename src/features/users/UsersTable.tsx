@@ -1,6 +1,6 @@
 import Table, { getTableProps } from '@widgets/Table'
+import { useState } from 'react'
 import { getSearchParams } from '@utils'
-import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Box, Button, Typography } from '@mui/material'
 
@@ -10,24 +10,9 @@ const IS_USER_ACTIVE = [
 ]
 
 const UsersTable = () => {
-  const [users, setUsers] = useState([])
+  const [users] = useState([])
   const [, setParams] = useSearchParams()
   const searchParams = getSearchParams<any>()
-
-  useEffect(() => {
-    async function getUsers() {
-      try {
-        const res = await fetch('/data/users.json')
-        if (!res.ok) throw new Error('no daataa')
-        const data = await res.json()
-        setUsers(data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    getUsers()
-  }, [])
 
   return (
     <Box width="100%">
@@ -36,7 +21,7 @@ const UsersTable = () => {
         <Table.DropdownFilter
           name="Names"
           label="Names"
-          items={users.map((user: any) => ({
+          items={users?.map((user: any) => ({
             value: user.name,
             label: user.name,
           }))}

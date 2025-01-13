@@ -1,19 +1,21 @@
-import { Box } from '@mui/material'
 import SportForm from './SportsForm'
 
 const SpotCreate = () => {
+  const defaultValues = {
+    spotName: '',
+    spotTitle: '',
+    spotDescription: '',
+    pricePerPerson: '',
+    spotNumber: '',
+    spotAddress: '',
+    spotImages: [],
+  }
+
   const onSubmit = (data: any) => {
     console.log(data)
   }
 
-  return (
-    <Box>
-      <SportForm
-        defaultValues={{ spotName: '', spotOption: '' }}
-        onSubmit={onSubmit}
-      />
-    </Box>
-  )
+  return <SportForm defaultValues={defaultValues} onSubmit={onSubmit} />
 }
 
 export default SpotCreate

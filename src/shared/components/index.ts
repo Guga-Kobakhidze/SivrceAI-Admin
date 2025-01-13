@@ -3,3 +3,5 @@ export { default as NumberFieldElement } from './NumberFieldElement/NumberFieldE
 export { default as TextAreaFieldElement } from './TextAreaFieldElement/TextAreaFieldElement'
 export { default as CheckboxFieldElement } from './CheckboxFieldElement/CheckboxFieldElement'
 export { default as AutoCompleteFieldElement } from './AutoCompleteFieldElement/AutoCompleteFieldElement'
+export { default as ImageFieldElement } from './ImageFieldElement/ImageFieldElement'
+export { default as ReachTextEditor } from './ReachTextFieldElement/ReachTextFieldElement'
