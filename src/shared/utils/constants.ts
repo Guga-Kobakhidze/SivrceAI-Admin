@@ -1,7 +1,7 @@
 export const ROUTES = {
-  usersPage: '/',
-  createUser: '/create-user',
-  editUser: '/edit-user',
+  usersPage: '/users',
+  createUser: '/users/create-user',
+  editUser: 'user/edit-user',
 
   spotsPage: '/spots',
   createSpot: '/spots/create',

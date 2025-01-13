@@ -1,17 +1,19 @@
+import Actions from '@widgets/Actions'
 import FormProvider from '@widgets/FormProvider'
 import { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { Box, Grid2 } from '@mui/material'
+import { useParams } from 'react-router-dom'
+import { AddIcon, DeleteIcon } from '@icons'
 import {
   ReachTextEditor,
   TextFieldElement,
   ImageFieldElement,
   NumberFieldElement,
 } from '@components'
-import Actions from '@widgets/Actions'
-import { AddIcon, DeleteIcon } from '@icons'
 
 const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
+  const { spotId } = useParams()
   const fileBlobs = useRef<string[]>([])
   const methods = useForm({
     // resolver: yupResolver(),
@@ -23,6 +25,10 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
   const submit = (data: any) => {
     onSubmit(data)
     reset()
+  }
+
+  const handleDeleteSpot = (id: string | undefined) => {
+    console.log(id)
   }
 
   return (
@@ -39,6 +45,9 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
               variant: 'contained',
               type: 'button',
               hidden: !isEdit,
+              action: () => {
+                handleDeleteSpot(spotId)
+              },
             },
             {
               title: 'Submit',

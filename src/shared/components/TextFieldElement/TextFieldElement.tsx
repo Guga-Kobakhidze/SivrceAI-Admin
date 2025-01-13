@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form'
 import { FieldProps } from '../type'
 import { useFormContext } from '@widgets/FormProvider'
 
-const TextFieldElement = ({ name, label }: FieldProps) => {
+const TextFieldElement = ({ name, label, ...rest }: FieldProps) => {
   const { control } = useFormContext()
 
   return (
@@ -12,8 +12,9 @@ const TextFieldElement = ({ name, label }: FieldProps) => {
       control={control}
       render={({ field, fieldState: { error } }) => (
         <TextField
-          {...field}
           fullWidth
+          {...rest}
+          {...field}
           label={label}
           variant="outlined"
           id="outlined-basic"

@@ -7,7 +7,7 @@ export const setStorageItem =
       JSON.stringify({
         value,
         createdAt: Date.now(),
-      })
+      }),
     )
   }
 
@@ -25,6 +25,7 @@ export const getStorageItem =
 export const removeStorageItem = (storage: Storage) => (key: string) => {
   storage.removeItem(key)
 }
+
 export const clearStorage = (storage: Storage) => () => {
   storage.clear()
 }
