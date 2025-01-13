@@ -1,14 +1,7 @@
-import SpotsTable from '@features/spots'
-import { Box } from '@mui/material'
-import { Outlet } from 'react-router-dom'
+import Spots from '@features/spots'
 
 const SpostsPage = () => {
-  return (
-    <Box>
-      <SpotsTable />
-      <Outlet />
-    </Box>
-  )
+  return <Spots />
 }
 
 export default SpostsPage

@@ -1,5 +1,7 @@
+import { Box } from '@mui/material'
+
 const SpotsTable = () => {
-  return <div>Spots Table</div>
+  return <Box></Box>
 }
 
 export default SpotsTable

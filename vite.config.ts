@@ -7,6 +7,9 @@ export default defineConfig({
   build: {
     outDir: './build',
   },
+  define: {
+    global: 'window',
+  },
   resolve: {
     alias: {
       '@widgets': path.resolve(__dirname, './src/widgets'),
@@ -31,3 +34,4 @@ export default defineConfig({
   },
   plugins: [react()],
 })
+
