@@ -38,7 +38,8 @@
       "@components": ["src/shared/components/index.ts"],
       "@types": ["src/shared/types/*"],
       "@config": ["src/config.ts"],
-      "@rootTypes": ["src/types.ts"]
+      "@rootTypes": ["src/types.ts"],
+      "@routes": ["src/routes/index.ts"]
     }
   },
   "include": ["src"],

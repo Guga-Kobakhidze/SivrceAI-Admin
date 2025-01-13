@@ -1,4 +1,6 @@
-export interface FieldProps {
+import { TextFieldProps } from '@mui/material'
+
+export interface FieldProps extends Omit<TextFieldProps, 'name'> {
   name: string
   label: string
   rows?: number

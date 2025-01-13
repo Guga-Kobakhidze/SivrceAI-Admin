@@ -29,7 +29,8 @@ export default defineConfig({
       '@helpers': path.resolve(__dirname, "./src/shared/helpers/index.ts"),
       "@types": path.resolve(__dirname, "./src/types"),
       "@config": path.resolve(__dirname, "./src/config.ts"),
-      "@rootTypes": path.resolve(__dirname, "./src/types.ts")
+      "@rootTypes": path.resolve(__dirname, "./src/types.ts"),
+      "@routes": path.resolve(__dirname, "./src/routes/index.ts")
     },
   },
   plugins: [react()],
