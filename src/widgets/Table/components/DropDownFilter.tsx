@@ -35,7 +35,7 @@ export const DropdownFilter = ({
           sx={{
             cursor: 'pointer',
             border: '1px solid #D5D5D5',
-            height: '98%',
+            height: '97%',
             paddingX: '20px',
             borderRadius: 0,
             borderLeft: 0,

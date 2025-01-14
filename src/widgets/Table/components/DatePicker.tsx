@@ -22,7 +22,7 @@ export const TableDatePicker: React.FC<
   const searchParams = getSearchParams<any>()
   const today = new Date()
   const [selectedDate, setSelectedDate] = useState<Date | null>(
-    searchParams[name] ? new Date(searchParams[name]) : null
+    searchParams[name] ? new Date(searchParams[name]) : null,
   )
 
   const handleDateChange = (date: Date) => {
@@ -50,7 +50,7 @@ export const TableDatePicker: React.FC<
           sx={{
             cursor: 'pointer',
             border: '1px solid #D5D5D5',
-            height: '98%',
+            height: '97%',
             paddingX: '20px',
             borderRadius: 0,
             ...sx,

@@ -1,14 +1,14 @@
-import { useUser } from '@context/UserContext'
+import { ROUTES } from '@constants'
+import { useUser } from '@context/userContext'
 import React, { PropsWithChildren, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AuthenticatedRoute: React.FC<PropsWithChildren> = ({ children }) => {
   const { isAuthenticated } = useUser()
-  console.log(isAuthenticated)
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!isAuthenticated) navigate('/login', { replace: true })
+    if (!isAuthenticated) navigate(ROUTES.userLogin, { replace: true })
   }, [isAuthenticated, navigate])
 
   if (isAuthenticated) return <React.Fragment>{children}</React.Fragment>

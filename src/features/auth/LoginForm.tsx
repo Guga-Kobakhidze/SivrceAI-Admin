@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import FormProvider from '@widgets/FormProvider'
 import { TextFieldElement } from '@components'
 import { useNavigate } from 'react-router-dom'
-import { useUser } from '@context/UserContext'
+import { useUser } from '@context/userContext'
 
 const LoginForm = () => {
   const { setIsAuthenticated } = useUser()

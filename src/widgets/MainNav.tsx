@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { ROUTES } from '@constants'
 import { NavLink } from 'react-router-dom'
-import { CoursesIcon, UserManagementIcon } from '@icons'
+import { CoursesIcon, HomeIcon, UserManagementIcon } from '@icons'
 import {
   Box,
   Collapse,
@@ -33,6 +33,7 @@ type NavItem = readonly [Name, Icon, Route, [Name, Route][]?]
 const NavItems: Readonly<NavItem[]> = [
   ['Spots', <CoursesIcon key="Spots" />, ROUTES.spotsPage],
   ['User Management', <UserManagementIcon key="User" />, ROUTES.usersPage],
+  ['Interior Design', <HomeIcon key="Interior" />, ROUTES.interiorPage],
 ]
 
 const MainNav = () => {
