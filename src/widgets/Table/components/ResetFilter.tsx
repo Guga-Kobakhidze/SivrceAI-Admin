@@ -24,7 +24,7 @@ export const ResetFilter: React.FC<Pick<TableFilterProps<unknown>, 'sx'>> = ({
         flexShrink: 0,
         cursor: 'pointer',
         border: '1px solid #D5D5D5',
-        height: '100',
+        height: '100%',
         borderRadius: 0,
         ...sx,
         borderLeft: 0,

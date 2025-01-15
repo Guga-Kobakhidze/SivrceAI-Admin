@@ -66,20 +66,21 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
           <Grid2 size={6}>
             <TextFieldElement label="Spot Title" name="spotTitle" />
           </Grid2>
-
-          <Grid2 size={4}>
-            <TextFieldElement name="spotAddress" label="Spot Address" />
+          <Grid2 size={6}>
+            <TextFieldElement label="Spot Email" name="spotEmail" />
           </Grid2>
-          <Grid2 size={4}>
+          <Grid2 size={6}>
             <NumberFieldElement name="spotNumber" label="Spot Number" />
           </Grid2>
-          <Grid2 size={4}>
+          <Grid2 size={6}>
             <NumberFieldElement
               name="pricePerPerson"
               label="Price Per Person"
             />
           </Grid2>
-
+          <Grid2 size={6}>
+            <TextFieldElement name="spotAddress" label="Spot Address" />
+          </Grid2>
           <Grid2 size={12}>
             <ReachTextEditor
               name="spotDescription"
@@ -87,7 +88,6 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
               isSubmited={formState.isSubmitted}
             />
           </Grid2>
-
           <Grid2 size={12}>
             <ImageFieldElement
               multiple

@@ -101,14 +101,16 @@ const UsersTable = () => {
             {
               Header: 'Action',
               accessor: 'action',
-              Cell: () => (
-                <Button
-                  variant="contained"
-                  onClick={() => console.log('hello')}
-                >
-                  Details
-                </Button>
-              ),
+              Cell: () => {
+                return (
+                  <Button
+                    variant="contained"
+                    onClick={() => console.log('hello')}
+                  >
+                    Details
+                  </Button>
+                )
+              },
             },
           ],
         })}

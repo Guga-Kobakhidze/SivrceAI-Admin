@@ -1,16 +1,27 @@
 import Logo from './Logo'
 import DropdownMenu from './DropdownMenu'
 import { ROUTES } from '@constants'
+import { useUser } from '@context/userContext'
 import { useNavigate } from 'react-router-dom'
 import { HEADER_HEIGHT } from '@config'
+import { useConfirmDialog } from '@context/confirmDialog'
 import { AccountIcon, LogoutIcon } from '@icons'
 import { AppBar, Box, IconButton, ListItemIcon, Toolbar } from '@mui/material'
 
 const Header = () => {
   const navigate = useNavigate()
+  const { setIsAuthenticated } = useUser()
+  const { showConfirmDialog } = useConfirmDialog()
 
   const logout = () => {
-    console.log('Logged Out')
+    showConfirmDialog({
+      title: 'Log Out',
+      buttonType: 'error',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Log out',
+      onSuccess: () => setIsAuthenticated(false),
+      description: 'Are you sure you want to log out?',
+    })
   }
 
   return (

@@ -5,3 +5,4 @@ export { default as CheckboxFieldElement } from './CheckboxFieldElement/Checkbox
 export { default as AutoCompleteFieldElement } from './AutoCompleteFieldElement/AutoCompleteFieldElement'
 export { default as ImageFieldElement } from './ImageFieldElement/ImageFieldElement'
 export { default as ReachTextEditor } from './ReachTextFieldElement/ReachTextFieldElement'
+export { default as ActionDialog } from './ActionDialog/ActionDialog'
