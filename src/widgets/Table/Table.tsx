@@ -13,11 +13,11 @@ import { HStack } from '@widgets/Stack'
 import { Search } from './components/Search'
 import { Box, Paper } from '@mui/material'
 import { ResetFilter } from './components/ResetFilter'
+import { MoreVertIcon } from '@icons'
 import { TableFilters } from './components/TableFilters'
 import { DropdownFilter } from './components/DropDownFilter'
 import { TableDatePicker } from './components/DatePicker'
 import { Data, TablePageInfo, TableProps } from './Table.config'
-import { MoreVertIcon } from '@icons'
 
 const getTableProps = <T extends string, K extends T = T>(
   x: TableProps<T, K>

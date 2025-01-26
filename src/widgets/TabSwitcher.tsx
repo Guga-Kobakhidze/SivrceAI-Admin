@@ -1,33 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
-
-interface TabPanelProps {
-  children?: React.ReactNode
-  index: number
-  value: number
-}
+import { useNavigate } from 'react-router-dom'
 
 interface TabSwitcherProps {
-  tabs: { label: string; id: number }[]
-  items: React.ReactNode[]
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  )
+  tabs: { label: string; id: number; link: string }[]
+  activeTab: number
 }
 
 function a11yProps(index: number) {
@@ -37,33 +16,33 @@ function a11yProps(index: number) {
   }
 }
 
-const TabSwitcher = ({ tabs, items }: TabSwitcherProps) => {
-  const [value, setValue] = React.useState(0)
+const TabSwitcher = ({ tabs, activeTab }: TabSwitcherProps) => {
+  const [value, setValue] = useState<number>(() => activeTab)
+  const navigate = useNavigate()
 
   // eslint-disable-next-line
   // @ts-ignore
   const handleChange = (e: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
+    if (tabs.length > 0) navigate(tabs[newValue].link)
   }
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          {tabs.map(({ label, id }) => (
-            <Tab key={id} label={label} {...a11yProps(id)} />
-          ))}
-        </Tabs>
-      </Box>
-      {items?.map((item, ind) => (
-        <CustomTabPanel value={value} index={ind}>
-          {item}
-        </CustomTabPanel>
-      ))}
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        aria-label="basic tabs example"
+      >
+        {tabs.map(({ label, id }) => (
+          <Tab
+            key={id}
+            label={label}
+            {...a11yProps(id)}
+            sx={{ fontWeight: 500 }}
+          />
+        ))}
+      </Tabs>
     </Box>
   )
 }

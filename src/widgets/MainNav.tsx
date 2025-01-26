@@ -31,9 +31,9 @@ type Icon = React.ReactElement
 type NavItem = readonly [Name, Icon, Route, [Name, Route][]?]
 
 const NavItems: Readonly<NavItem[]> = [
-  ['Spots', <CoursesIcon key="Spots" />, ROUTES.spotsPage],
-  ['User Management', <UserManagementIcon key="User" />, ROUTES.usersPage],
+  ['Spots', <CoursesIcon key="Spots" />, ROUTES.spotsTable],
   ['Interior Design', <HomeIcon key="Interior" />, ROUTES.interiorPage],
+  ['User Management', <UserManagementIcon key="User" />, ROUTES.usersPage],
 ]
 
 const MainNav = () => {

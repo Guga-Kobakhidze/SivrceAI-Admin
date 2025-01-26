@@ -5,9 +5,12 @@ export const ROUTES = {
   createUser: '/create-user',
   editUser: '/edit-user',
 
-  spotsPage: '/spots',
+  spotsTable: '/spots',
   createSpot: '/spots/create',
   editSpot: '/spots/edit',
+  spotsQuestionTable: '/spots?type=questions',
+  createSpotQuestion: '/spots/question-create',
+  editSpotQuestion: '/spots/question-edit',
 
   interiorPage: '/interior-design',
 }

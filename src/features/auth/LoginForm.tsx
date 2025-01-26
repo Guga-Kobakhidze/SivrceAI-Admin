@@ -18,10 +18,9 @@ const LoginForm = () => {
   const { handleSubmit, control } = methods
 
   const submit = (data: any) => {
-    console.log(data)
     if (data.email !== '') {
       setIsAuthenticated(true)
-      navigate('/users')
+      navigate('/')
     }
   }
 
