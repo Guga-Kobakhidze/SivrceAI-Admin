@@ -1,1 +1,0 @@
-import{u as e,Q as s}from"./queryKeys-B_vzKx7n.js";import{I as r,f as t}from"./index-DxfvgruV.js";const n=async()=>(await t.get(s.getInteriorQuestions)).data,u=()=>e({queryKey:[r],queryFn:n,staleTime:60*5e3});export{u};

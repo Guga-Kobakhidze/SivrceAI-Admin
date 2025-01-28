@@ -1,2 +1,0 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/index-B3U6aKHt.js","assets/index-DxfvgruV.js","assets/index-Cg8Vg3dD.css","assets/Table-CJs1WzdT.js","assets/index.esm-hcllBIN3.js","assets/Table-hsh9VnWV.css","assets/Actions-DUD2rIXS.js"])))=>i.map(i=>d[i]);
-import{r,_ as s,j as e}from"./index-DxfvgruV.js";const t=r.lazy(()=>s(()=>import("./index-B3U6aKHt.js"),__vite__mapDeps([0,1,2,3,4,5,6]))),o=()=>e.jsx(t,{});export{o as default};

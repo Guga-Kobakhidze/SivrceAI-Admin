@@ -1,1 +1,0 @@
-import{c as n,j as t}from"./index-DxfvgruV.js";import{C as a,T as x}from"./index.esm-hcllBIN3.js";const u=({name:o,label:s,...r})=>{const{control:i}=n();return t.jsx(a,{name:o,control:i,render:({field:l,fieldState:{error:e}})=>t.jsx(x,{fullWidth:!0,...r,...l,label:s,variant:"outlined",id:"outlined-basic",error:!!e,helperText:!!e&&e.message})})};export{u as T};
