@@ -1,4 +1,6 @@
-import Users from '@features/users'
+import { lazy } from 'react'
+
+const Users = lazy(() => import('@features/users'))
 
 const UsersPage = () => {
   return <Users />

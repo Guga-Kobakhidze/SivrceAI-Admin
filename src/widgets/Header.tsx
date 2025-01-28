@@ -1,10 +1,10 @@
 import Logo from './Logo'
 import DropdownMenu from './DropdownMenu'
 import { ROUTES } from '@constants'
-import { useUser } from '@context/userContext'
+import { useUser } from '@context/UserContext/userContext'
 import { useNavigate } from 'react-router-dom'
 import { HEADER_HEIGHT } from '@config'
-import { useConfirmDialog } from '@context/confirmDialog'
+import { useConfirmDialog } from '@context/ConfirmDialog/ConfirmDialog'
 import { AccountIcon, LogoutIcon } from '@icons'
 import { AppBar, Box, IconButton, ListItemIcon, Toolbar } from '@mui/material'
 
