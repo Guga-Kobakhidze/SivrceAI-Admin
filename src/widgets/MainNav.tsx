@@ -32,7 +32,11 @@ type NavItem = readonly [Name, Icon, Route, [Name, Route][]?]
 
 const NavItems: Readonly<NavItem[]> = [
   ['Spots', <CoursesIcon key="Spots" />, ROUTES.spotsTable],
-  ['Interior Design', <HomeIcon key="Interior" />, ROUTES.interiorPage],
+  [
+    'Interior Design',
+    <HomeIcon key="Interior" />,
+    ROUTES.interiorQuestionTable,
+  ],
   ['User Management', <UserManagementIcon key="User" />, ROUTES.usersPage],
 ]
 

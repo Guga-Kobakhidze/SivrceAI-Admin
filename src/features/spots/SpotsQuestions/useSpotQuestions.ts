@@ -1,5 +1,5 @@
 import { QKeys } from '@queryKeys'
-import { IQuestions } from './SpotsQuestions.config'
+import { IQuestions } from '@rootTypes'
 import { useQuery, UseQueryResult } from '@tanstack/react-query'
 import { axiosInstance, SPOT_QUESTIONS } from '@config'
 

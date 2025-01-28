@@ -1,23 +1,24 @@
-import Actions from '@widgets/Actions'
 import { Box } from '@mui/material'
-import { DownloadIcon } from '@icons'
+import { ROUTES } from '@constants'
+import TabSwitcher from '@widgets/TabSwitcher'
+import InteriorQuestionAction from './InteriorQuestion.action'
+import InteriorQuestionsTable from './InteriorQuestionsTable'
 
-const Interier = () => {
+const Interior = () => {
   return (
     <Box>
-      <Actions
-        title="Interier Design"
-        toolbars={[
-          {
-            title: 'Export',
-            color: 'success',
-            icon: <DownloadIcon />,
-            variant: 'contained',
-          },
-        ]}
-      />
+      <Box display="flex" justifyContent="space-between">
+        <TabSwitcher
+          activeTab={0}
+          tabs={[
+            { id: 1, label: 'Questions', link: ROUTES.interiorQuestionTable },
+          ]}
+        />
+        <InteriorQuestionAction />
+      </Box>
+      <InteriorQuestionsTable />
     </Box>
   )
 }
 
-export default Interier
+export default Interior

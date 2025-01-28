@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify'
+import { ROUTES } from '@constants'
+import { useNavigate } from 'react-router-dom'
 import SpotsQuestionsForm from './SpotsQuestionForm'
 import useCreateSpotQuestion from './useCreateSpotQuestion'
-import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '@constants'
 
 const SpotsQuesetionCreate = () => {
   const navigate = useNavigate()

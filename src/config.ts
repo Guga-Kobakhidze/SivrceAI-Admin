@@ -3,6 +3,8 @@ import axios from 'axios'
 
 const SPOT_QUESTIONS = 'spot_questions'
 const SPOT_QUESTION_ID = 'spot_question_id'
+const INTERIOR_QUESTIONS = 'interior_questions'
+const INTERIOR_QUESTION_ID = 'interior_question_id'
 
 export const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -30,4 +32,6 @@ export {
   PAGE_SIZES,
   SPOT_QUESTIONS,
   SPOT_QUESTION_ID,
+  INTERIOR_QUESTIONS,
+  INTERIOR_QUESTION_ID,
 }

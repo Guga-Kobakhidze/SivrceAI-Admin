@@ -1,12 +1,12 @@
-import { ROUTES } from '@constants'
-import { Box, Button, Typography } from '@mui/material'
-import { getSearchParams } from '@utils'
 import Table, { getTableProps } from '@widgets/Table'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { ROUTES } from '@constants'
+import { IQuestion } from '@rootTypes'
+import { getSearchParams } from '@utils'
 import { useSpotQuestions } from './useSpotQuestions'
+import { Box, Button, Typography } from '@mui/material'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import Loading from '@widgets/Loading'
 import NoDataFound from '@widgets/NoDataFound'
-import { IQuestion } from './SpotsQuestions.config'
 
 const SpotsQuestionsTable = () => {
   const [, setParams] = useSearchParams()

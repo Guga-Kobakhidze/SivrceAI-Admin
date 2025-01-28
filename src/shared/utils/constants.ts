@@ -12,5 +12,7 @@ export const ROUTES = {
   createSpotQuestion: '/spots/question-create',
   editSpotQuestion: '/spots/question-edit',
 
-  interiorPage: '/interior-design',
+  interiorQuestionTable: '/interior',
+  createInteriorQuestion: '/interior/question-create',
+  editInteriorQuestion: '/interior/question-edit',
 }

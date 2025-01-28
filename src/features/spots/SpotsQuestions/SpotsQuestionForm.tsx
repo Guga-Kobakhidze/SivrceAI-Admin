@@ -1,20 +1,17 @@
 import Actions from '@widgets/Actions'
 import NoDataFound from '@widgets/NoDataFound'
 import FormProvider from '@widgets/FormProvider'
-import SpotsAnwersFieldArray from './SpotsAnwersFieldArray'
 import { useForm } from 'react-hook-form'
+import { IQuestion } from '@rootTypes'
 import { Box, Grid2 } from '@mui/material'
 import { spotsSchema } from '../schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useSpotQuestions } from './useSpotQuestions'
 import { AddIcon, DeleteIcon } from '@icons'
-import {
-  defaultValues,
-  IQuestion,
-  SpotsQuestionsFormProps,
-} from './SpotsQuestions.config'
+import { defaultValues, SpotsQuestionsFormProps } from './SpotsQuestions.config'
 import {
   TextFieldElement,
+  ArrayFieldElement,
   NumberFieldElement,
   CheckboxFieldElement,
   AutoCompleteFieldElement,
@@ -113,7 +110,7 @@ const SpotsQuestionsForm = ({
               />
             </Grid2>
             <Grid2 size={12}>
-              <SpotsAnwersFieldArray />
+              <ArrayFieldElement />
             </Grid2>
           </Grid2>
         </Box>

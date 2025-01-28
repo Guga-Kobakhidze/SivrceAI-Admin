@@ -1,9 +1,8 @@
 import { QKeys } from '@queryKeys'
 import { toast } from 'react-toastify'
-import { IApiError } from '@rootTypes'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { CreateRequest, ErrorResponse } from './SpotsQuestions.config'
 import { axiosInstance, SPOT_QUESTIONS } from '@config'
+import { CreateRequest, ErrorResponse, IApiError } from '@rootTypes'
 
 const createSpotQuestion = async ({
   data,

@@ -1,7 +1,7 @@
 import { QKeys } from '@queryKeys'
 import { useQuery } from '@tanstack/react-query'
+import { IQuestion } from '@rootTypes'
 import { axiosInstance, SPOT_QUESTION_ID } from '@config'
-import { IQuestion } from './SpotsQuestions.config'
 
 const spotQuestionById = async (id: string) => {
   const response = await axiosInstance.get(`${QKeys.getSpotQuestionById}${id}/`)

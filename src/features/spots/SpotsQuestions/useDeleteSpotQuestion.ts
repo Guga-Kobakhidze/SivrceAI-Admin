@@ -1,9 +1,8 @@
 import { QKeys } from '@queryKeys'
 import { toast } from 'react-toastify'
-import { IApiError } from '@rootTypes'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { axiosInstance, SPOT_QUESTIONS } from '@config'
-import { DeleteRequest, ErrorResponse } from './SpotsQuestions.config'
+import { DeleteRequest, ErrorResponse, IApiError } from '@rootTypes'
 
 const deleteSpotQuestion = async ({
   id,

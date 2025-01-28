@@ -12,7 +12,6 @@ const Login = lazy(() => import('@features/auth/Login'))
 const SpotsTable = lazy(() => import('./pages/SpotsPage'))
 const SpotsCreate = lazy(() => import('@features/spots/SpotsCreate'))
 const SpotsEdit = lazy(() => import('@features/spots/SpotsEdit'))
-
 const SpotsQuesetionEdit = lazy(
   () => import('@features/spots/SpotsQuestions/SpotQuestionEdit'),
 )
@@ -21,6 +20,12 @@ const SpotsQuesetionCreate = lazy(
 )
 
 const InteriersPage = lazy(() => import('./pages/InteriorPage'))
+const InteriorQuestionCreate = lazy(
+  () => import('@features/interiors/InteriorQuestionCreate'),
+)
+const InteriorQuestionEdit = lazy(
+  () => import('@features/interiors/InteriorQuestionEdit'),
+)
 
 const UsersPage = lazy(() => import('./pages/UsersPage'))
 const CreateUser = lazy(() => import('@features/users/UsersCreate'))
@@ -61,10 +66,18 @@ const Router = () => {
               element={<SpotsQuesetionEdit />}
             />
           </Route>
-        </Route>
 
-        <Route path={ROUTES.interiorPage}>
-          <Route index element={<InteriersPage />} />
+          <Route path={ROUTES.interiorQuestionTable}>
+            <Route index element={<InteriersPage />} />
+            <Route
+              path={ROUTES.createInteriorQuestion}
+              element={<InteriorQuestionCreate />}
+            />
+            <Route
+              path={`${ROUTES.editInteriorQuestion}/:questionId`}
+              element={<InteriorQuestionEdit />}
+            />
+          </Route>
         </Route>
 
         <Route

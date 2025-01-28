@@ -8,7 +8,7 @@ import {
   TextFieldElement,
 } from '@components'
 
-const SpotsAnwersFieldArray = () => {
+const AnwersFieldArray = () => {
   const iconRef = useRef<string[]>([])
   const { control } = useFormContext()
   const { append, fields, remove } = useFieldArray({
@@ -21,7 +21,7 @@ const SpotsAnwersFieldArray = () => {
       {fields.map((field, index) => (
         <Box key={field.id} bgcolor="#fff" borderRadius={2} p={2} mb={2}>
           <Box display="flex" justifyContent="space-between" mb={1}>
-            <Typography>Answer {index + 1}</Typography>
+            <Typography mb={1}>Answer {index + 1}</Typography>
             {index !== 0 && (
               <Button
                 variant="text"
@@ -99,4 +99,4 @@ const SpotsAnwersFieldArray = () => {
   )
 }
 
-export default SpotsAnwersFieldArray
+export default AnwersFieldArray

@@ -6,3 +6,4 @@ export { default as AutoCompleteFieldElement } from './AutoCompleteFieldElement/
 export { default as ImageFieldElement } from './ImageFieldElement/ImageFieldElement'
 export { default as ReachTextEditor } from './ReachTextFieldElement/ReachTextFieldElement'
 export { default as ActionDialog } from './ActionDialog/ActionDialog'
+export { default as ArrayFieldElement } from './ArrayFieldElement/AnwersFieldArray'
