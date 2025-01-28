@@ -87,7 +87,8 @@ const ConfirmDialogContextProvider = ({
     close()
   }, [dialogData, close])
 
-  const values = useMemo(() => ({
+  const values = useMemo(
+    () => ({
       showConfirmDialog,
     }),
     [showConfirmDialog],

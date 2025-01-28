@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify'
 import { ROUTES } from '@constants'
 import { IQuestion } from '@rootTypes'
-import { useConfirmDialog } from '@context/confirmDialog'
+import { useConfirmDialog } from '@context/ConfirmDialog/ConfirmDialog'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useInterioriQuestionById } from './useInteriorQuestionById'
 import Loading from '@widgets/Loading'

@@ -1,6 +1,6 @@
-import { ROUTES } from '@constants'
-import { useUser } from '@context/userContext'
 import React, { PropsWithChildren, useEffect } from 'react'
+import { ROUTES } from '@constants'
+import { useUser } from '@context/UserContext/userContext'
 import { useNavigate } from 'react-router-dom'
 
 const AuthenticatedRoute: React.FC<PropsWithChildren> = ({ children }) => {

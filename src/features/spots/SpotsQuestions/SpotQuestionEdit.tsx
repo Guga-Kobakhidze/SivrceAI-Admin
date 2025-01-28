@@ -5,7 +5,7 @@ import useDeleteSpotQuestion from './useDeleteSpotQuestion'
 import { toast } from 'react-toastify'
 import { ROUTES } from '@constants'
 import { IQuestion } from '@rootTypes'
-import { useConfirmDialog } from '@context/confirmDialog'
+import { useConfirmDialog } from '@context/ConfirmDialog/ConfirmDialog'
 import { useSpotQuestionById } from './useSpotQuestionById'
 import { useNavigate, useParams } from 'react-router-dom'
 
