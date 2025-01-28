@@ -5,7 +5,7 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   build: {
-    outDir: './build',
+    outDir: './dist',
   },
   define: {
     global: 'window',
@@ -25,14 +25,16 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, './src/pages/index.ts'),
       '@queryKeys': path.resolve(__dirname, './src/shared/utils/queryKeys.ts'),
       '@constants': path.resolve(__dirname, './src/shared/utils/constants.ts'),
-      '@components': path.resolve(__dirname, './src/shared/components/index.ts'),
-      '@helpers': path.resolve(__dirname, "./src/shared/helpers/index.ts"),
-      "@types": path.resolve(__dirname, "./src/types"),
-      "@config": path.resolve(__dirname, "./src/config.ts"),
-      "@rootTypes": path.resolve(__dirname, "./src/types.ts"),
-      "@routes": path.resolve(__dirname, "./src/routes/index.ts")
+      '@components': path.resolve(
+        __dirname,
+        './src/shared/components/index.ts',
+      ),
+      '@helpers': path.resolve(__dirname, './src/shared/helpers/index.ts'),
+      '@types': path.resolve(__dirname, './src/types'),
+      '@config': path.resolve(__dirname, './src/config.ts'),
+      '@rootTypes': path.resolve(__dirname, './src/types.ts'),
+      '@routes': path.resolve(__dirname, './src/routes/index.ts'),
     },
   },
   plugins: [react()],
 })
-
