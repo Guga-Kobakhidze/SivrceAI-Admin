@@ -37,4 +37,5 @@ export default defineConfig({
     },
   },
   plugins: [react()],
+  base: '/sivrce-ai',
 })
