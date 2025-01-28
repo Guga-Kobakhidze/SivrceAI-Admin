@@ -1,7 +1,20 @@
-// const API_URI = ''
-const REFACTOR_API_URI = ''
-
 // if (!API_URI) throw new Error('Can not find API_URI in env')
+import axios from 'axios'
+
+const SPOT_QUESTIONS = 'spot_questions'
+const SPOT_QUESTION_ID = 'spot_question_id'
+const INTERIOR_QUESTIONS = 'interior_questions'
+const INTERIOR_QUESTION_ID = 'interior_question_id'
+
+export const BASE_URL = import.meta.env.VITE_API_BASE_URL
+
+export const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    'accept-language': 'en',
+  },
+})
 
 const DEBOUNCE_TIME = 250
 const PAGE_SIZE = 10
@@ -12,11 +25,13 @@ const PAGE_SIZES = [10, 25, 50, 100]
 
 export {
   DEBOUNCE_TIME,
-  // API_URI,
   PAGE_SIZE,
   ACCESS_TOKEN_KEY,
   LOCALE_KEY,
   HEADER_HEIGHT,
-  REFACTOR_API_URI,
   PAGE_SIZES,
+  SPOT_QUESTIONS,
+  SPOT_QUESTION_ID,
+  INTERIOR_QUESTIONS,
+  INTERIOR_QUESTION_ID,
 }

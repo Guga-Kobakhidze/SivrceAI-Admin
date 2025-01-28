@@ -1,6 +1,6 @@
+import Table, { getTableProps } from '@widgets/Table'
 import { Box, Button } from '@mui/material'
 import { getSearchParams } from '@utils'
-import Table, { getTableProps } from '@widgets/Table'
 import { Link, useSearchParams } from 'react-router-dom'
 
 const someImage =

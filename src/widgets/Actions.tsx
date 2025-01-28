@@ -1,12 +1,15 @@
 import React from 'react'
-import { PageHeaderToolbar } from '@toolpad/core/PageContainer'
-import { Box, Button, Grid2, Link, Stack, styled } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { RightArrowIcon } from '@icons'
+import { ArrowBackIcon } from '@icons'
+import { PageHeaderToolbar } from '@toolpad/core/PageContainer'
+import { Button, Grid2, Link, Stack, styled } from '@mui/material'
 
 const StyledLink = styled(Link)({
   fontSize: 22,
   color: 'black',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '5px',
 })
 
 interface CustomPageToolbarProps {
@@ -18,36 +21,33 @@ interface CustomPageToolbarProps {
   action?: () => void
   type?: 'button' | 'submit'
   hidden?: boolean
+  disabled?: boolean
+  loadText?: string
 }
 
 interface ActionsProps {
-  title: string
-  subtitle?: string
+  title?: string
   toolbars: CustomPageToolbarProps[]
+  isNavigate?: boolean
 }
 
-const Actions = ({ toolbars, title, subtitle }: ActionsProps) => {
+const Actions = ({ toolbars, title, isNavigate = false }: ActionsProps) => {
   const navigate = useNavigate()
 
   return (
-    <Grid2 container alignItems="center" mb={4}>
-      <Box display="flex" textAlign="center">
-        {subtitle && (
-          <React.Fragment>
-            <StyledLink
-              sx={{ cursor: 'pointer' }}
-              underline="hover"
-              onClick={() => navigate(-1)}
-            >
-              {subtitle}
-            </StyledLink>
-            <RightArrowIcon />
-          </React.Fragment>
-        )}
-        <StyledLink underline="none" sx={{ opacity: 0.7 }}>
-          {title}
-        </StyledLink>
-      </Box>
+    <Grid2 container alignItems="center" mb={2}>
+      {Boolean(title) && (
+        <React.Fragment>
+          <StyledLink
+            underline={isNavigate ? 'hover' : 'none'}
+            sx={{ cursor: isNavigate ? 'pointer' : 'default' }}
+            onClick={isNavigate ? () => navigate(-1) : undefined}
+          >
+            {isNavigate && <ArrowBackIcon />}
+            {title}
+          </StyledLink>
+        </React.Fragment>
+      )}
 
       <PageHeaderToolbar>
         <Stack direction="row" spacing={1} alignItems="center">
@@ -68,9 +68,10 @@ const Actions = ({ toolbars, title, subtitle }: ActionsProps) => {
                 color={toolbar.color}
                 startIcon={toolbar.icon}
                 variant={toolbar.variant}
+                disabled={toolbar.disabled}
                 type={toolbar.type ?? 'button'}
               >
-                {toolbar.title}
+                {toolbar.disabled ? toolbar.loadText : toolbar.title}
               </Button>
             )
           })}

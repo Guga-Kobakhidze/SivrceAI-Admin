@@ -1,7 +1,7 @@
-import Interiors from '@features/interiors'
+import Interior from '@features/interiors'
 
 const InteriorPage = () => {
-  return <Interiors />
+  return <Interior />
 }
 
 export default InteriorPage
