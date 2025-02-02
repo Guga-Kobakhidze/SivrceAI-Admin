@@ -17,12 +17,12 @@ const TablePaginator: React.FC<TablePaginatorProps> = ({
       rowsPerPage={per_page ?? 10}
       page={current_page - 1}
       onPageChange={(_, newPage) =>
-        onChange({ page: newPage + 1, paginate: per_page! })
+        onChange({ page: newPage + 1, size: per_page! })
       }
       onRowsPerPageChange={e => {
         onChange({
           page: 1,
-          paginate: Number(e.target.value),
+          size: Number(e.target.value),
         })
       }}
     />

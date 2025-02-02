@@ -20,7 +20,7 @@ import { TableDatePicker } from './components/DatePicker'
 import { Data, TablePageInfo, TableProps } from './Table.config'
 
 const getTableProps = <T extends string, K extends T = T>(
-  x: TableProps<T, K>
+  x: TableProps<T, K>,
 ) => x
 
 const Table = <T extends string, K extends T>(props: TableProps<T, K>) => {

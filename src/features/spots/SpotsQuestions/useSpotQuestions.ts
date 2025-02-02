@@ -1,17 +1,31 @@
 import { QKeys } from '@queryKeys'
-import { IQuestions } from '@rootTypes'
-import { useQuery, UseQueryResult } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
+import { getPageInfo } from '@helpers'
 import { axiosInstance, SPOT_QUESTIONS } from '@config'
+import { IQuestions, WithKeyword, WithPagination } from '@rootTypes'
 
-const spotQuestions = async (): Promise<IQuestions> => {
-  const response = await axiosInstance.get(QKeys.getSpotQuestions)
+export type QuestionsFilters = WithKeyword & WithPagination
+
+const spotQuestions = async (
+  filters: QuestionsFilters,
+): Promise<IQuestions> => {
+  console.log(filters)
+  const response = await axiosInstance.get(QKeys.getSpotQuestions, {
+    params: filters,
+  })
   return response.data
 }
 
-export const useSpotQuestions = (): UseQueryResult<IQuestions> => {
-  return useQuery<IQuestions>({
-    queryKey: [SPOT_QUESTIONS],
-    queryFn: spotQuestions,
+export const useSpotQuestions = (payload: QuestionsFilters) => {
+  console.log(payload)
+  const { data, isPending, error } = useQuery<IQuestions>({
+    queryKey: [SPOT_QUESTIONS, payload],
+    queryFn: () => spotQuestions(payload),
     staleTime: 60 * 5000,
   })
+
+  const questions = data?.items || []
+  const pageInfo = getPageInfo(data as IQuestions)
+
+  return { questions, pageInfo, isLoading: isPending, error }
 }

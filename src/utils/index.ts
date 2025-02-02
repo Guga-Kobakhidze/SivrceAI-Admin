@@ -1,4 +1,5 @@
-import querystring from "qs";
+import { PAGE_SIZE, PAGE_SIZES } from '@config'
+import querystring from 'qs'
 
 export const qs = {
   stringify: querystring.stringify,
@@ -11,26 +12,60 @@ export const qs = {
           false: false,
           null: null,
           undefined: undefined,
-        };
+        }
         if (value in keywords) {
-          return keywords[value as keyof typeof keywords];
+          return keywords[value as keyof typeof keywords]
         }
 
-        const strWithoutPlus = value.replace(/\+/g, " ");
-        if (charset === "iso-8859-1") {
-          return strWithoutPlus.replace(/%[0-9a-f]{2}/gi, unescape);
+        const strWithoutPlus = value.replace(/\+/g, ' ')
+        if (charset === 'iso-8859-1') {
+          return strWithoutPlus.replace(/%[0-9a-f]{2}/gi, unescape)
         }
         // utf-8
         try {
-          return decodeURIComponent(strWithoutPlus);
+          return decodeURIComponent(strWithoutPlus)
         } catch (e) {
-          console.error(e);
-          return strWithoutPlus;
+          console.error(e)
+          return strWithoutPlus
         }
       },
     }),
-};
+}
 
 export const getSearchParams = <T>() => {
-  return qs.parse(window.location.search.substr(1)) as T;
-};
+  return qs.parse(window.location.search.substr(1)) as T
+}
+
+// Pagination
+
+export const isEmptyObject = (obj: object) => {
+  for (const prop in obj) {
+    if (Object.hasOwn(obj, prop)) {
+      return false
+    }
+  }
+  return true
+}
+
+export const adjustPageSize = (pageSize: number) =>
+  PAGE_SIZES.reduce(
+    (prev, curr) => (curr <= pageSize ? curr : prev),
+    PAGE_SIZES[0],
+  )
+
+export const extractPageAndSize = (
+  query: unknown,
+): { size: number; page: number } => {
+  if (!query || typeof query !== 'object' || isEmptyObject(query))
+    return { page: 1, size: PAGE_SIZE }
+
+  // @ts-ignore
+  const page = parseFloat(query.page)
+  // @ts-ignore
+  const size = parseFloat(query['size'])
+
+  return {
+    page: page && !isNaN(page) ? page : 1,
+    size: size && !isNaN(size) ? adjustPageSize(size) : PAGE_SIZE,
+  }
+}

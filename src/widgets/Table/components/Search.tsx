@@ -32,11 +32,11 @@ export const Search: React.FC<
           prev.set('page', '1')
           return prev
         })
-      }, 300)
+      }, 500)
 
       return () => clearTimeout(timer)
     },
-    [name, setParams]
+    [name, setParams],
   )
 
   return (
