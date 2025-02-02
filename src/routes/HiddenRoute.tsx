@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../shared/utils/constants'
 import { useUser } from '@context/UserContext/userContext'
 
-const HiddenRoute: React.FC<PropsWithChildren> = ({ children }) => {
+const HiddenRoute = ({ children }: PropsWithChildren) => {
   const { isAuthenticated } = useUser()
   const navigate = useNavigate()
 

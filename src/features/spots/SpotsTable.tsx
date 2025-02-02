@@ -35,10 +35,10 @@ const SpotsTable = () => {
             total: 1,
           },
           loading: false,
-          onPagination: ({ paginate, page }) => {
+          onPagination: ({ size, page }) => {
             setParams(params => {
               params.set('page', String(page))
-              params.set('paginate', String(paginate))
+              params.set('size', String(size))
               return params
             })
           },

@@ -1,17 +1,31 @@
 import { QKeys } from '@queryKeys'
-import { IQuestions } from '@rootTypes'
-import { useQuery, UseQueryResult } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { axiosInstance, INTERIOR_QUESTIONS } from '@config'
+import { IQuestions, WithKeyword, WithPagination } from '@rootTypes'
+import { getPageInfo } from '@helpers'
 
-const interiorQuestions = async (): Promise<IQuestions> => {
-  const response = await axiosInstance.get(QKeys.getInteriorQuestions)
+export type QuestionsFilters = WithKeyword & WithPagination
+
+const interiorQuestions = async (
+  filters: QuestionsFilters,
+): Promise<IQuestions> => {
+  console.log(filters)
+  const response = await axiosInstance.get(QKeys.getInteriorQuestions, {
+    params: filters,
+  })
   return response.data
 }
 
-export const useInteriorQuestions = (): UseQueryResult<IQuestions> => {
-  return useQuery<IQuestions>({
-    queryKey: [INTERIOR_QUESTIONS],
-    queryFn: interiorQuestions,
+export const useInteriorQuestions = (payload: QuestionsFilters) => {
+  console.log(payload)
+  const { data, isPending, error } = useQuery<IQuestions>({
+    queryKey: [INTERIOR_QUESTIONS, payload],
+    queryFn: () => interiorQuestions(payload),
     staleTime: 60 * 5000,
   })
+
+  const pageInfo = getPageInfo(data as IQuestions)
+  const questions = data?.items || []
+
+  return { questions, pageInfo, isLoading: isPending, error }
 }

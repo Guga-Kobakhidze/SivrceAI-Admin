@@ -12,10 +12,18 @@ export type PageInfo = {
   current_page: number
 }
 
-export type OnChangeParams = { page: number; paginate: number }
+export type OnChangeParams = { page: number; size: number }
 
 export type TablePaginatorProps = Partial<PageInfo> & {
-  onChange: ({ page, paginate }: OnChangeParams) => void
+  onChange: ({ page, size }: OnChangeParams) => void
+}
+
+export type WithPagination = {
+  size: number
+  page: number
+}
+export type WithKeyword = {
+  keyword: string
 }
 
 export interface IApiError {
@@ -47,7 +55,20 @@ export type IQuestion = {
   answers: IAnswers[]
 }
 
-export type IQuestions = IQuestion[]
+export type IPageInfo = {
+  page: number
+  pages: number
+  size: number
+  total: number
+}
+
+export type IQuestions = {
+  items: IQuestion[]
+  page: number
+  pages: number
+  size: number
+  total: number
+}
 
 // Create Question
 
