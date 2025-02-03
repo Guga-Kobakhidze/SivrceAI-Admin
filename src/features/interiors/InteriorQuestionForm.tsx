@@ -34,7 +34,9 @@ const InteriorQuestionTable = ({
   })
 
   const { control, handleSubmit } = methods
-  const { data: questions } = useInteriorQuestions()
+  const { questions } = useInteriorQuestions()
+
+  console.log('here', questions)
 
   const submit = (data: IQuestion) => onSubmit(data)
 

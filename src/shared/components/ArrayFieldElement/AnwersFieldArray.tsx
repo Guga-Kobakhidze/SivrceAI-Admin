@@ -43,7 +43,7 @@ const AnwersFieldArray = () => {
             id="panel1bh-header"
           >
             <StyledFieldArrayText>
-              <Typography mb={1}>Answer {index + 1}</Typography>
+              <Typography>Answer {index + 1}</Typography>
               {index !== 0 && (
                 <Button
                   variant="text"

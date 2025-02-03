@@ -7,19 +7,17 @@ import { getPageInfo } from '@helpers'
 export type QuestionsFilters = WithKeyword & WithPagination
 
 const interiorQuestions = async (
-  filters: QuestionsFilters,
+  filters?: QuestionsFilters,
 ): Promise<IQuestions> => {
-  console.log(filters)
   const response = await axiosInstance.get(QKeys.getInteriorQuestions, {
-    params: filters,
+    params: filters ?? {},
   })
   return response.data
 }
 
-export const useInteriorQuestions = (payload: QuestionsFilters) => {
-  console.log(payload)
+export const useInteriorQuestions = (payload?: QuestionsFilters) => {
   const { data, isPending, error } = useQuery<IQuestions>({
-    queryKey: [INTERIOR_QUESTIONS, payload],
+    queryKey: [INTERIOR_QUESTIONS, payload || {}],
     queryFn: () => interiorQuestions(payload),
     staleTime: 60 * 5000,
   })

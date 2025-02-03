@@ -31,7 +31,7 @@ const SpotsQuestionsForm = ({
   })
 
   const { control, handleSubmit } = methods
-  const { data: questions } = useSpotQuestions()
+  const { questions } = useSpotQuestions()
 
   const submit = (data: IQuestion) => onSubmit(data)
 
