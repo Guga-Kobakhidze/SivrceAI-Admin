@@ -7,19 +7,17 @@ import { IQuestions, WithKeyword, WithPagination } from '@rootTypes'
 export type QuestionsFilters = WithKeyword & WithPagination
 
 const spotQuestions = async (
-  filters: QuestionsFilters,
+  filters?: QuestionsFilters,
 ): Promise<IQuestions> => {
-  console.log(filters)
   const response = await axiosInstance.get(QKeys.getSpotQuestions, {
-    params: filters,
+    params: filters ?? {},
   })
   return response.data
 }
 
-export const useSpotQuestions = (payload: QuestionsFilters) => {
-  console.log(payload)
+export const useSpotQuestions = (payload?: QuestionsFilters) => {
   const { data, isPending, error } = useQuery<IQuestions>({
-    queryKey: [SPOT_QUESTIONS, payload],
+    queryKey: [SPOT_QUESTIONS, payload || {}],
     queryFn: () => spotQuestions(payload),
     staleTime: 60 * 5000,
   })
