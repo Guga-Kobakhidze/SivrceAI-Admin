@@ -1,6 +1,8 @@
 // if (!API_URI) throw new Error('Can not find API_URI in env')
 import axios from 'axios'
 
+const SPOT = 'spot'
+const SPOT_ID = 'spot_id'
 const SPOT_QUESTIONS = 'spot_questions'
 const SPOT_QUESTION_ID = 'spot_question_id'
 const INTERIOR_QUESTIONS = 'interior_questions'
@@ -24,6 +26,8 @@ const HEADER_HEIGHT = '64px'
 const PAGE_SIZES = [10, 25, 50, 100]
 
 export {
+  SPOT,
+  SPOT_ID,
   DEBOUNCE_TIME,
   PAGE_SIZE,
   ACCESS_TOKEN_KEY,

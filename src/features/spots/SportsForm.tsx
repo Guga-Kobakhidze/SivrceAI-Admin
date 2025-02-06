@@ -6,21 +6,41 @@ import { Box, Grid2 } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { AddIcon, DeleteIcon } from '@icons'
 import {
+  CategoryEnum,
+  DistrictEnum,
+  EventType,
+  eventTypes,
+  PeopleRangeEnum,
+  PriceRangeEnum,
+  StreetEnum,
+  subcategories,
+  SubCategoryType,
+} from '@enums'
+import {
   ReachTextEditor,
   TextFieldElement,
   ImageFieldElement,
   NumberFieldElement,
+  AutoCompleteFieldElement,
 } from '@components'
 
 const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
   const { spotId } = useParams()
   const fileBlobs = useRef<string[]>([])
+
   const methods = useForm({
     // resolver: yupResolver(),
     defaultValues: defaultValues,
   })
 
-  const { control, handleSubmit, reset, formState } = methods
+  const { control, handleSubmit, reset, formState, watch } = methods
+  const category = watch('category') as SubCategoryType | ''
+  const subcategory = watch('subcategory') as EventType | ''
+
+  const validSubcategories: EventType[] = ['Wedding', 'Birthday', 'Banquet']
+  const isValidSubcategory = validSubcategories.some(
+    type => type === subcategory,
+  )
 
   const submit = (data: any) => {
     onSubmit(data)
@@ -79,6 +99,89 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
             </Grid2>
             <Grid2 size={6}>
               <TextFieldElement name="spotAddress" label="Spot Address" />
+            </Grid2>
+            <Grid2 size={6}>
+              <AutoCompleteFieldElement
+                label="Street"
+                name="street"
+                options={Object.entries(StreetEnum).map(([key, value]) => ({
+                  label: value,
+                  value: key,
+                }))}
+              />
+            </Grid2>
+            <Grid2 size={6}>
+              <AutoCompleteFieldElement
+                label="District"
+                name="district"
+                options={Object.entries(DistrictEnum).map(([key, value]) => ({
+                  label: value,
+                  value: key,
+                }))}
+              />
+            </Grid2>
+            <Grid2 size={6}>
+              <AutoCompleteFieldElement
+                label="Category"
+                name="category"
+                options={Object.entries(CategoryEnum).map(([, value]) => ({
+                  label: value,
+                  value: value,
+                }))}
+              />
+            </Grid2>
+            <Grid2 size={6}>
+              <AutoCompleteFieldElement
+                label="Subcategory"
+                name="subcategory"
+                disabled={!category}
+                options={
+                  category && subcategories[category]
+                    ? subcategories[category]?.map(item => ({
+                        label: item,
+                        value: item,
+                      }))
+                    : []
+                }
+              />
+            </Grid2>
+            {subcategory && isValidSubcategory && (
+              <Grid2 size={6}>
+                <AutoCompleteFieldElement
+                  label="Event Type"
+                  name="eventType"
+                  options={
+                    subcategory && eventTypes[subcategory]
+                      ? eventTypes[subcategory].map(item => ({
+                          label: item,
+                          value: item,
+                        }))
+                      : []
+                  }
+                />
+              </Grid2>
+            )}
+            <Grid2 size={6}>
+              <AutoCompleteFieldElement
+                label="People Range"
+                name="peopleRange"
+                options={Object.entries(PeopleRangeEnum).map(
+                  ([key, value]) => ({
+                    label: value,
+                    value: key,
+                  }),
+                )}
+              />
+            </Grid2>
+            <Grid2 size={6}>
+              <AutoCompleteFieldElement
+                label="Price Rnage"
+                name="priceRange"
+                options={Object.entries(PriceRangeEnum).map(([key, value]) => ({
+                  label: value,
+                  value: key,
+                }))}
+              />
             </Grid2>
             <Grid2 size={12}>
               <ReachTextEditor

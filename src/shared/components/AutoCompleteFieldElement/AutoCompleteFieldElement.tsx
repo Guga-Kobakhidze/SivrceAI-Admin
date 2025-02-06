@@ -7,6 +7,7 @@ const AutoCompleteFieldElement = ({
   name,
   label,
   options,
+  disabled,
 }: FieldProps & OptionProps) => {
   const { control } = useFormContext()
 
@@ -22,6 +23,7 @@ const AutoCompleteFieldElement = ({
           onChange={(_, selectedOption) => {
             field.onChange(selectedOption?.value || '')
           }}
+          disabled={disabled}
           value={options.find(option => option.value === field.value) || null}
           renderInput={params => (
             <TextField
