@@ -23,7 +23,7 @@ export type WithPagination = {
   page: number
 }
 export type WithKeyword = {
-  keyword: string
+  keyword?: string
 }
 
 export interface IApiError {

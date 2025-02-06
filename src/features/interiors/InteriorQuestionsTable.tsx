@@ -14,9 +14,12 @@ const InteriorQuestionsTable = () => {
   const paginate = extractPageAndSize(searchParams)
   const navigate = useNavigate()
 
-  const { questions, isLoading, pageInfo, error } = useInteriorQuestions(
-    Object.assign(paginate, searchParams),
-  )
+  console.log('here', paginate)
+
+  const { questions, isLoading, pageInfo, error } = useInteriorQuestions({
+    ...searchParams,
+    ...paginate,
+  })
 
   if (error) return <NoDataFound />
 

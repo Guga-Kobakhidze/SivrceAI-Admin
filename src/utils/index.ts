@@ -54,14 +54,12 @@ export const adjustPageSize = (pageSize: number) =>
   )
 
 export const extractPageAndSize = (
-  query: unknown,
+  query: any,
 ): { size: number; page: number } => {
   if (!query || typeof query !== 'object' || isEmptyObject(query))
     return { page: 1, size: PAGE_SIZE }
 
-  // @ts-ignore
   const page = parseFloat(query.page)
-  // @ts-ignore
   const size = parseFloat(query['size'])
 
   return {
