@@ -16,7 +16,6 @@ const interiorQuestions = async (
 }
 
 export const useInteriorQuestions = (payload?: QuestionsFilters) => {
-  console.log(payload)
   const queryClient = useQueryClient()
   const { data, isPending, error } = useQuery<IQuestions>({
     queryKey: [INTERIOR_QUESTIONS, payload || {}],
