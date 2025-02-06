@@ -14,9 +14,11 @@ const SpotsQuestionsTable = () => {
   const pagination = extractPageAndSize(searchParams)
   const navigate = useNavigate()
 
-  const { questions, isLoading, pageInfo, error } = useSpotQuestions(
-    Object.assign(pagination, searchParams),
-  )
+  const { questions, isLoading, pageInfo, error } = useSpotQuestions({
+    ...searchParams,
+    ...pagination,
+  })
+
   if (error) return <NoDataFound />
 
   return (
