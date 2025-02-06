@@ -14,8 +14,6 @@ const InteriorQuestionsTable = () => {
   const paginate = extractPageAndSize(searchParams)
   const navigate = useNavigate()
 
-  console.log('here', paginate)
-
   const { questions, isLoading, pageInfo, error } = useInteriorQuestions({
     ...searchParams,
     ...paginate,
