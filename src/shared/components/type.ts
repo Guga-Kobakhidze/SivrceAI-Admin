@@ -8,6 +8,7 @@ export interface FieldProps extends Omit<TextFieldProps, 'name'> {
 
 export interface OptionProps {
   options: { label: string; value: string }[]
+  disabled?: boolean
 }
 
 export interface ImageFieldElementProps extends FieldProps {

@@ -36,10 +36,7 @@ const InteriorQuestionTable = ({
   const { control, handleSubmit } = methods
   const { questions } = useInteriorQuestions()
 
-  console.log('here', questions)
-
   const submit = (data: IQuestion) => onSubmit(data)
-
   if (error && isEdit) return <NoDataFound />
 
   return (
