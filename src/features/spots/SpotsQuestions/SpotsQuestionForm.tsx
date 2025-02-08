@@ -32,7 +32,6 @@ const SpotsQuestionsForm = ({
 
   const { control, handleSubmit } = methods
   const { questions } = useSpotQuestions(undefined)
-  console.log(questions)
 
   const submit = (data: IQuestion) => onSubmit(data)
 

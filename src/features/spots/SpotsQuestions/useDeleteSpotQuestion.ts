@@ -9,7 +9,7 @@ const deleteSpotQuestion = async ({
 }: DeleteRequest): Promise<ErrorResponse> => {
   try {
     const response = await axiosInstance.delete(
-      `${QKeys.deleteSpotQuestion}${id}/`,
+      `${QKeys.deleteSpotQuestion}${id}`,
     )
     return response.data
   } catch (error: any) {
