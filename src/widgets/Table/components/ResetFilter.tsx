@@ -32,7 +32,7 @@ export const ResetFilter: React.FC<Pick<TableFilterProps<unknown>, 'sx'>> = ({
       }}
     >
       <Icon color="error">
-        <ReplayIcon sx={{ fontSize: 20 }} />
+        <ReplayIcon sx={{ fontSize: 20, mb: 0.5 }} />
       </Icon>
       <Typography fontSize={14} color="error.main" fontWeight="bold">
         Reset filters

@@ -16,7 +16,7 @@ const FullPageLoading = () => {
     <Box
       sx={{
         position: 'absolute',
-        bgcolor: '#171717',
+        bgcolor: '#27262C',
         top: 0,
         left: 0,
         right: 0,

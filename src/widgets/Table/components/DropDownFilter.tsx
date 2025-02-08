@@ -54,7 +54,7 @@ export const DropdownFilter = ({
             {title}
           </Typography>
           <Icon>
-            <ArrowDown />
+            <ArrowDown sx={{ mb: 0.3 }} />
           </Icon>
         </HStack>
       }

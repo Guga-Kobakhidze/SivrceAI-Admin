@@ -1,4 +1,9 @@
-import { PAGE_SIZE, PAGE_SIZES } from '@config'
+import { AUTH_CONFIG, PAGE_SIZE, PAGE_SIZES } from '@config'
+import {
+  getLocalStorageItem,
+  removeLocalStorageItem,
+  setLocalStorageItem,
+} from '@storage'
 import querystring from 'qs'
 
 export const qs = {
@@ -66,4 +71,24 @@ export const extractPageAndSize = (
     page: page && !isNaN(page) ? page : 1,
     size: size && !isNaN(size) ? adjustPageSize(size) : PAGE_SIZE,
   }
+}
+
+// Set Localstorage
+
+export const setAuthParams = (email: string, isAuthorized: boolean) => {
+  setLocalStorageItem(AUTH_CONFIG, { email, isAuthorized })
+}
+
+// Get LocalStorage
+
+export const getAuthParams = () =>
+  getLocalStorageItem<{
+    email: string
+    isAuthorized: boolean
+  }>(AUTH_CONFIG)
+
+// Remove Localstorage
+
+export const removeAuthParams = () => {
+  removeLocalStorageItem(AUTH_CONFIG)
 }

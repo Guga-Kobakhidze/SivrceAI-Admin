@@ -1,6 +1,10 @@
 // if (!API_URI) throw new Error('Can not find API_URI in env')
 import axios from 'axios'
 
+const EMAIL_ADDRESS = 'sivrceai@gmail.com'
+const PASSWORD = 'Sivrce123'
+const AUTH_CONFIG = 'AuthConfig'
+
 const SPOT = 'spot'
 const SPOT_ID = 'spot_id'
 const SPOT_QUESTIONS = 'spot_questions'
@@ -38,4 +42,7 @@ export {
   SPOT_QUESTION_ID,
   INTERIOR_QUESTIONS,
   INTERIOR_QUESTION_ID,
+  EMAIL_ADDRESS,
+  PASSWORD,
+  AUTH_CONFIG,
 }

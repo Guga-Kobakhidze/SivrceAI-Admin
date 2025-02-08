@@ -1,21 +1,30 @@
 import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
+import LoginBg from '@assets/login.jpg'
+import Logo from '@assets/logo.png'
 
 const AuthLayout = () => {
   return (
     <Box
       sx={{
-        height: '100vh',
-        width: '100vw',
         position: 'relative',
+        backgroundImage: `url(${LoginBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        width: '100%',
+        height: '100%',
       }}
     >
       <Box
-        sx={{
-          height: '100vh',
-          width: '100vw',
-          position: 'absolute',
-        }}
+        component="img"
+        alt="logo"
+        src={Logo}
+        width={60}
+        height={60}
+        position="absolute"
+        right="40px"
+        top="40px"
       />
       <Box
         sx={{

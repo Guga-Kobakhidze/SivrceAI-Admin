@@ -4,6 +4,10 @@ import FormProvider from '@widgets/FormProvider'
 import { TextFieldElement } from '@components'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '@context/UserContext/userContext'
+import { EMAIL_ADDRESS, PASSWORD } from '@config'
+import { setAuthParams } from '@utils'
+import { toast } from 'react-toastify'
+import { textFieldStyles } from './LoginForm.style'
 
 const LoginForm = () => {
   const { setIsAuthenticated } = useUser()
@@ -18,10 +22,14 @@ const LoginForm = () => {
   const { handleSubmit, control } = methods
 
   const submit = (data: any) => {
-    if (data.email !== '') {
-      setIsAuthenticated(true)
-      navigate('/')
+    if (data.email !== EMAIL_ADDRESS && data.password !== PASSWORD) {
+      toast.error('Email or password is incorrect. Please try again.')
+      return
     }
+
+    setAuthParams(data.email, true)
+    setIsAuthenticated(true)
+    navigate('/')
   }
 
   return (
@@ -31,11 +39,9 @@ const LoginForm = () => {
           <Grid2 container spacing={3}>
             <Grid2 size={12}>
               <TextFieldElement
-                label="Email"
                 name="email"
-                InputLabelProps={{
-                  shrink: true,
-                }}
+                label="Email"
+                {...textFieldStyles}
               />
             </Grid2>
             <Grid2 size={12}>
@@ -43,9 +49,7 @@ const LoginForm = () => {
                 label="Password"
                 name="password"
                 type="password"
-                InputLabelProps={{
-                  shrink: true,
-                }}
+                {...textFieldStyles}
               />
             </Grid2>
             <Grid2 size={6} m="auto">

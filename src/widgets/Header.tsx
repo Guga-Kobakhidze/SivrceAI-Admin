@@ -7,19 +7,25 @@ import { HEADER_HEIGHT } from '@config'
 import { useConfirmDialog } from '@context/ConfirmDialog/ConfirmDialog'
 import { AccountIcon, LogoutIcon } from '@icons'
 import { AppBar, Box, IconButton, ListItemIcon, Toolbar } from '@mui/material'
+import { removeAuthParams } from '@utils'
 
 const Header = () => {
   const navigate = useNavigate()
   const { setIsAuthenticated } = useUser()
   const { showConfirmDialog } = useConfirmDialog()
 
+  const onLogout = () => {
+    setIsAuthenticated(false)
+    removeAuthParams()
+  }
+
   const logout = () => {
     showConfirmDialog({
       title: 'Log Out',
       buttonType: 'error',
+      onSuccess: onLogout,
       cancelLabel: 'Cancel',
       confirmLabel: 'Log out',
-      onSuccess: () => setIsAuthenticated(false),
       description: 'Are you sure you want to log out?',
     })
   }
