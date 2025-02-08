@@ -9,7 +9,7 @@ const deleteInteriorQuestion = async ({
 }: DeleteRequest): Promise<ErrorResponse> => {
   try {
     const response = await axiosInstance.delete(
-      `${QKeys.deleteInteriorQuestion}${id}/`,
+      `${QKeys.deleteInteriorQuestion}${id}`,
     )
     return response.data
   } catch (error: any) {
