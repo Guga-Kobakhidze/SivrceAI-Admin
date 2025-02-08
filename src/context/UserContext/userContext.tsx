@@ -1,6 +1,8 @@
+import { getAuthParams } from '@utils'
 import React, { createContext, useContext, useMemo, useState } from 'react'
 
 interface UserContextProps {
+  email: string
   isAuthenticated: boolean
   setIsAuthenticated: (val: boolean) => void
 }
@@ -8,14 +10,20 @@ interface UserContextProps {
 const UserContext = createContext<UserContextProps | null>(null)
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const { email, isAuthorized } = getAuthParams().orDefault({
+    email: '',
+    isAuthorized: false,
+  })
+
+  const [isAuthenticated, setIsAuthenticated] = useState(() => isAuthorized)
 
   const value = useMemo(() => {
     return {
+      email,
       isAuthenticated,
       setIsAuthenticated,
     }
-  }, [isAuthenticated, setIsAuthenticated])
+  }, [email, isAuthenticated, setIsAuthenticated])
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }

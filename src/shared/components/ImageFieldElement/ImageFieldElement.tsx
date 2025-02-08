@@ -1,9 +1,9 @@
 import React from 'react'
 import { Controller } from 'react-hook-form'
+import { StyledImageBox } from './style'
 import { useFormContext } from '@widgets/FormProvider'
 import { ImageFieldElementProps } from '../type'
 import { Box, FormControl, FormLabel, TextField } from '@mui/material'
-import { StyledImageBox } from './style'
 
 const ImageFieldElement = ({
   name,

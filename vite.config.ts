@@ -32,6 +32,7 @@ export default defineConfig({
       '@config': path.resolve(__dirname, './src/config.ts'),
       '@rootTypes': path.resolve(__dirname, './src/types.ts'),
       '@routes': path.resolve(__dirname, './src/routes/index.ts'),
+      '@theme': path.resolve(__dirname,'./src/theme/theme.ts' )
     },
   },
   plugins: [react()],

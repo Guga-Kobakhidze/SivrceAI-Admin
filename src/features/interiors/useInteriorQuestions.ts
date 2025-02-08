@@ -10,7 +10,7 @@ const interiorQuestions = async (
   filters?: QuestionsFilters,
 ): Promise<IQuestions> => {
   const response = await axiosInstance.get(QKeys.getInteriorQuestions, {
-    params: filters ?? {},
+    params: filters,
   })
   return response.data
 }
@@ -18,14 +18,14 @@ const interiorQuestions = async (
 export const useInteriorQuestions = (payload?: QuestionsFilters) => {
   const queryClient = useQueryClient()
   const { data, isPending, error } = useQuery<IQuestions>({
-    queryKey: [INTERIOR_QUESTIONS, payload || {}],
+    queryKey: [INTERIOR_QUESTIONS, payload],
     queryFn: () => interiorQuestions(payload),
   })
 
   const pageInfo = getPageInfo(data as IQuestions)
   const questions = data?.items || []
 
-  if (pageInfo?.current_page != null) {
+  if (pageInfo?.current_page != null && payload) {
     const nextPage = pageInfo.current_page + 1
 
     queryClient.prefetchQuery({

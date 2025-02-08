@@ -4,10 +4,13 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import 'react-toastify/dist/ReactToastify.css'
+import MuiThemeProvider from '@context/MuiThemeContext/MuiThemeContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
-    <App />
-    <ToastProvider />
+    <MuiThemeProvider>
+      <App />
+      <ToastProvider />
+    </MuiThemeProvider>
   </BrowserRouter>,
 )

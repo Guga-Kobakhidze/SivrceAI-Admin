@@ -61,7 +61,7 @@ export const TableDatePicker: React.FC<
             {searchParams[name] || label}
           </Typography>
           <Icon>
-            <ArrowDown />
+            <ArrowDown sx={{ mb: 0.3 }} />
           </Icon>
         </HStack>
       }

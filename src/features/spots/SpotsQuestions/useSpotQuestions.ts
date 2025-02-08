@@ -10,7 +10,7 @@ const spotQuestions = async (
   filters?: QuestionsFilters,
 ): Promise<IQuestions> => {
   const response = await axiosInstance.get(QKeys.getSpotQuestions, {
-    params: filters ?? {},
+    params: filters,
   })
   return response.data
 }
@@ -18,14 +18,15 @@ const spotQuestions = async (
 export const useSpotQuestions = (payload?: QuestionsFilters) => {
   const queryClient = useQueryClient()
   const { data, isPending, error } = useQuery<IQuestions>({
-    queryKey: [SPOT_QUESTIONS, payload || {}],
+    queryKey: [SPOT_QUESTIONS, payload],
     queryFn: () => spotQuestions(payload),
+    retry: false,
   })
 
   const questions = data?.items || []
   const pageInfo = getPageInfo(data as IQuestions)
 
-  if (pageInfo?.current_page != null) {
+  if (pageInfo?.current_page != null && payload) {
     const nextPage = pageInfo.current_page + 1
 
     queryClient.prefetchQuery({
