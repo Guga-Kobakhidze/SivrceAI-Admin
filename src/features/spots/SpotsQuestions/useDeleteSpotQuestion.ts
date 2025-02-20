@@ -1,7 +1,7 @@
-import { QKeys } from '@queryKeys'
 import { toast } from 'react-toastify'
+import { axiosInstance } from '@config'
+import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { axiosInstance, SPOT_QUESTIONS } from '@config'
 import { DeleteRequest, ErrorResponse, IApiError } from '@rootTypes'
 
 const deleteSpotQuestion = async ({
@@ -9,7 +9,7 @@ const deleteSpotQuestion = async ({
 }: DeleteRequest): Promise<ErrorResponse> => {
   try {
     const response = await axiosInstance.delete(
-      `${QKeys.deleteSpotQuestion}${id}`,
+      `${REQ_KEYS.deleteSpotQuestion}${id}`,
     )
     return response.data
   } catch (error: any) {
@@ -29,7 +29,7 @@ export default function useDeleteSpotQuestion() {
     onSuccess: () => {
       toast.success('Question Deleted Successfully')
       queryQlient.invalidateQueries({
-        queryKey: [SPOT_QUESTIONS],
+        queryKey: [QUERY_KEYS.SPOT_QUESTIONS],
       })
     },
   })

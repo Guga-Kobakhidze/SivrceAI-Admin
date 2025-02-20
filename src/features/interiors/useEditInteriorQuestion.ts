@@ -1,7 +1,7 @@
-import { QKeys } from '@queryKeys'
 import { toast } from 'react-toastify'
+import { axiosInstance } from '@config'
+import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { axiosInstance, INTERIOR_QUESTIONS } from '@config'
 import { CreateRequest, ErrorResponse, IApiError } from '@rootTypes'
 
 const editInteriorQuestion = async ({
@@ -10,7 +10,7 @@ const editInteriorQuestion = async ({
 }: CreateRequest & { id: string }): Promise<ErrorResponse> => {
   try {
     const response = await axiosInstance.put(
-      `${QKeys.addEditInteriorQuestion}${id}`,
+      `${REQ_KEYS.addEditInteriorQuestion}${id}`,
       data,
     )
     return response.data
@@ -32,7 +32,7 @@ export default function useEditInteriorQuestion() {
     onSuccess: () => {
       toast.success('Question Edited Successfully')
       queryQlient.invalidateQueries({
-        queryKey: [INTERIOR_QUESTIONS],
+        queryKey: [QUERY_KEYS.INTERIOR_QUESTIONS],
       })
     },
   })

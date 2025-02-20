@@ -4,13 +4,8 @@ import axios from 'axios'
 const EMAIL_ADDRESS = 'sivrceai@gmail.com'
 const PASSWORD = 'Sivrce123'
 const AUTH_CONFIG = 'AuthConfig'
-
-const SPOT = 'spot'
-const SPOT_ID = 'spot_id'
-const SPOT_QUESTIONS = 'spot_questions'
-const SPOT_QUESTION_ID = 'spot_question_id'
-const INTERIOR_QUESTIONS = 'interior_questions'
-const INTERIOR_QUESTION_ID = 'interior_question_id'
+const ACCESS_TOKEN = 'ACCESS_TOKEN'
+const REFRESH_TOKEN = 'REFRESH_TOKEN'
 
 export const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -19,6 +14,14 @@ export const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'accept-language': 'en',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdXBlcnVzZXIiLCJleHAiOjE3NDAwMDYwMDJ9.hrx0fgulyIIdTiSthqRiL_BCUj78ztslc7D2n7JBGQU'
+  },
+})
+
+export const axiosLoginInstance = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
   },
 })
 
@@ -30,18 +33,14 @@ const HEADER_HEIGHT = '64px'
 const PAGE_SIZES = [10, 25, 50, 100]
 
 export {
-  SPOT,
-  SPOT_ID,
+  ACCESS_TOKEN,
+  REFRESH_TOKEN,
   DEBOUNCE_TIME,
   PAGE_SIZE,
   ACCESS_TOKEN_KEY,
   LOCALE_KEY,
   HEADER_HEIGHT,
   PAGE_SIZES,
-  SPOT_QUESTIONS,
-  SPOT_QUESTION_ID,
-  INTERIOR_QUESTIONS,
-  INTERIOR_QUESTION_ID,
   EMAIL_ADDRESS,
   PASSWORD,
   AUTH_CONFIG,

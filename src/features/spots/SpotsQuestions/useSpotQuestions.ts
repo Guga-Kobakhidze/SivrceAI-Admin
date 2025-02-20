@@ -1,7 +1,7 @@
-import { QKeys } from '@queryKeys'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getPageInfo } from '@helpers'
-import { axiosInstance, SPOT_QUESTIONS } from '@config'
+import { axiosInstance } from '@config'
+import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { IQuestions, WithKeyword, WithPagination } from '@rootTypes'
 
 export type QuestionsFilters = WithKeyword & WithPagination
@@ -9,7 +9,7 @@ export type QuestionsFilters = WithKeyword & WithPagination
 const spotQuestions = async (
   filters?: QuestionsFilters,
 ): Promise<IQuestions> => {
-  const response = await axiosInstance.get(QKeys.getSpotQuestions, {
+  const response = await axiosInstance.get(REQ_KEYS.getSpotQuestions, {
     params: filters,
   })
   return response.data
@@ -18,7 +18,7 @@ const spotQuestions = async (
 export const useSpotQuestions = (payload?: QuestionsFilters) => {
   const queryClient = useQueryClient()
   const { data, isPending, error } = useQuery<IQuestions>({
-    queryKey: [SPOT_QUESTIONS, payload],
+    queryKey: [QUERY_KEYS.SPOT_QUESTIONS, payload],
     queryFn: () => spotQuestions(payload),
     retry: false,
   })
@@ -30,7 +30,7 @@ export const useSpotQuestions = (payload?: QuestionsFilters) => {
     const nextPage = pageInfo.current_page + 1
 
     queryClient.prefetchQuery({
-      queryKey: [SPOT_QUESTIONS, { ...payload, page: nextPage }],
+      queryKey: [QUERY_KEYS.SPOT_QUESTIONS, { ...payload, page: nextPage }],
       queryFn: () =>
         spotQuestions(payload ? { ...payload, page: nextPage } : undefined),
     })

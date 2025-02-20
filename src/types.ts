@@ -85,3 +85,5 @@ export interface DeleteRequest {
 export interface ErrorResponse {
   error: { message: string }
 }
+
+export type ImageType = File | string

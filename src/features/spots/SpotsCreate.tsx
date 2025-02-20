@@ -1,27 +1,29 @@
-import { StreetEnum } from '@enums'
+import { CityEnum } from '@enums'
 import SportForm from './SportsForm'
 
 const SpotCreate = () => {
   const defaultValues = {
-    spotName: '',
-    spotEmail: '',
-    spotTitle: '',
-    spotDescription: '',
-    pricePerPerson: '',
-    spotNumber: '',
-    spotAddress: '',
-    spotImages: [],
-    street: StreetEnum.Tbilisi,
-    district: '',
-    category: '',
-    subcategory: '',
-    eventType: '',
-    peopleRange: '',
-    priceRange: '',
+    name: '',
+    title: '',
+    description: '',
+    description_ge: '',
+    price_per_person: '',
+    website: '',
+    phone: '',
+    address: '',
+    image: [],
+    city: CityEnum.Tbilisi,
+    district: [],
+    category: [],
+    subcategory: [],
+    cuisine_type: [],
+    people_range: [],
+    price_range: [],
   }
 
   const onSubmit = (data: any) => {
-    console.log(data)
+    const districts = ['ANY', ...data.district]
+    console.log({ ...data, district: districts })
   }
 
   return <SportForm defaultValues={defaultValues} onSubmit={onSubmit} />

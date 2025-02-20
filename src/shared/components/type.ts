@@ -1,4 +1,6 @@
 import { TextFieldProps } from '@mui/material'
+import { ImageType } from '@rootTypes'
+import { Dispatch, SetStateAction } from 'react'
 
 export interface FieldProps extends Omit<TextFieldProps, 'name'> {
   name: string
@@ -12,6 +14,10 @@ export interface OptionProps {
 }
 
 export interface ImageFieldElementProps extends FieldProps {
-  imageBlob: React.MutableRefObject<string[]>
-  multiple?: boolean
+  label: string
+  disabled?: boolean
+  isMltiple?: boolean
+  images: ImageType[]
+  setImages: Dispatch<SetStateAction<ImageType[]>>
+  name: string
 }

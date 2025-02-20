@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { ROUTES } from '@constants'
 import { AuthLayout } from '@layouts'
-import { UserProvider } from '@context/UserContext/userContext'
 import { Routes, Route } from 'react-router-dom'
 import AppLayout from './layouts/AppLayout'
 import HiddenRoute from './routes/HiddenRoute'
@@ -37,71 +36,69 @@ const PageNotFound = lazy(() => import('./pages/PageNotFound'))
 
 const Router = () => {
   return (
-    <UserProvider>
-      <ConfirmDialogContextProvider>
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route
-              element={
-                <AuthenticatedRoute>
-                  <AppLayout />
-                </AuthenticatedRoute>
-              }
-            >
-              <Route path="/">
-                <Route index element={<UsersPage />} />
-                <Route path={ROUTES.createUser} element={<CreateUser />} />
-                <Route
-                  path={`${ROUTES.editUser}/:userId`}
-                  element={<EditUser />}
-                />
-              </Route>
-
-              <Route path={ROUTES.spotsTable}>
-                <Route index element={<SpotsTable />} />
-                <Route path={ROUTES.createSpot} element={<SpotsCreate />} />
-                <Route
-                  path={`${ROUTES.editSpot}/:spotId`}
-                  element={<SpotsEdit />}
-                />
-                <Route
-                  path={ROUTES.createSpotQuestion}
-                  element={<SpotsQuesetionCreate />}
-                />
-                <Route
-                  path={`${ROUTES.editSpotQuestion}/:questionId`}
-                  element={<SpotsQuesetionEdit />}
-                />
-              </Route>
-
-              <Route path={ROUTES.interiorQuestionTable}>
-                <Route index element={<InteriersPage />} />
-                <Route
-                  path={ROUTES.createInteriorQuestion}
-                  element={<InteriorQuestionCreate />}
-                />
-                <Route
-                  path={`${ROUTES.editInteriorQuestion}/:questionId`}
-                  element={<InteriorQuestionEdit />}
-                />
-              </Route>
+    <ConfirmDialogContextProvider>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route
+            element={
+              <AuthenticatedRoute>
+                <AppLayout />
+              </AuthenticatedRoute>
+            }
+          >
+            <Route path="/">
+              <Route index element={<UsersPage />} />
+              <Route path={ROUTES.createUser} element={<CreateUser />} />
+              <Route
+                path={`${ROUTES.editUser}/:userId`}
+                element={<EditUser />}
+              />
             </Route>
 
-            <Route
-              element={
-                <HiddenRoute>
-                  <AuthLayout />
-                </HiddenRoute>
-              }
-            >
-              <Route path={ROUTES.userLogin} element={<Login />} />
+            <Route path={ROUTES.spotsTable}>
+              <Route index element={<SpotsTable />} />
+              <Route path={ROUTES.createSpot} element={<SpotsCreate />} />
+              <Route
+                path={`${ROUTES.editSpot}/:spotId`}
+                element={<SpotsEdit />}
+              />
+              <Route
+                path={ROUTES.createSpotQuestion}
+                element={<SpotsQuesetionCreate />}
+              />
+              <Route
+                path={`${ROUTES.editSpotQuestion}/:questionId`}
+                element={<SpotsQuesetionEdit />}
+              />
             </Route>
 
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </Suspense>
-      </ConfirmDialogContextProvider>
-    </UserProvider>
+            <Route path={ROUTES.interiorQuestionTable}>
+              <Route index element={<InteriersPage />} />
+              <Route
+                path={ROUTES.createInteriorQuestion}
+                element={<InteriorQuestionCreate />}
+              />
+              <Route
+                path={`${ROUTES.editInteriorQuestion}/:questionId`}
+                element={<InteriorQuestionEdit />}
+              />
+            </Route>
+          </Route>
+
+          <Route
+            element={
+              <HiddenRoute>
+                <AuthLayout />
+              </HiddenRoute>
+            }
+          >
+            <Route path={ROUTES.userLogin} element={<Login />} />
+          </Route>
+
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Suspense>
+    </ConfirmDialogContextProvider>
   )
 }
 

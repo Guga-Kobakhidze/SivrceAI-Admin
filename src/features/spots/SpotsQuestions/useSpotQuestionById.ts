@@ -1,16 +1,18 @@
-import { QKeys } from '@queryKeys'
 import { useQuery } from '@tanstack/react-query'
 import { IQuestion } from '@rootTypes'
-import { axiosInstance, SPOT_QUESTION_ID } from '@config'
+import { axiosInstance } from '@config'
+import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
 
 const spotQuestionById = async (id: string) => {
-  const response = await axiosInstance.get(`${QKeys.getSpotQuestionById}${id}/`)
+  const response = await axiosInstance.get(
+    `${REQ_KEYS.getSpotQuestionById}${id}/`,
+  )
   return response.data
 }
 
 export const useSpotQuestionById = (id: string) => {
   const { data, error, isPending, refetch } = useQuery<IQuestion[]>({
-    queryKey: [SPOT_QUESTION_ID, { id }],
+    queryKey: [QUERY_KEYS.SPOT_QUESTION_ID, { id }],
     queryFn: () => spotQuestionById(id),
     enabled: !!id,
   })

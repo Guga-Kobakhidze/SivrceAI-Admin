@@ -1,18 +1,18 @@
-import { QKeys } from '@queryKeys'
 import { useQuery } from '@tanstack/react-query'
 import { IQuestion } from '@rootTypes'
-import { axiosInstance, INTERIOR_QUESTION_ID } from '@config'
+import { axiosInstance } from '@config'
+import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
 
 const interiorQuestionById = async (id: string) => {
   const response = await axiosInstance.get(
-    `${QKeys.getInteriorQuestionById}${id}/`,
+    `${REQ_KEYS.getInteriorQuestionById}${id}/`,
   )
   return response.data
 }
 
 export const useInterioriQuestionById = (id: string) => {
   const { data, error, isPending, refetch } = useQuery<IQuestion[]>({
-    queryKey: [INTERIOR_QUESTION_ID, { id }],
+    queryKey: [QUERY_KEYS.INTERIOR_QUESTION_ID, { id }],
     queryFn: () => interiorQuestionById(id),
     enabled: !!id,
   })

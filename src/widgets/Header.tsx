@@ -1,22 +1,19 @@
 import Logo from './Logo'
 import DropdownMenu from './DropdownMenu'
 import { ROUTES } from '@constants'
-import { useUser } from '@context/UserContext/userContext'
 import { useNavigate } from 'react-router-dom'
 import { HEADER_HEIGHT } from '@config'
 import { useConfirmDialog } from '@context/ConfirmDialog/ConfirmDialog'
 import { AccountIcon, LogoutIcon } from '@icons'
 import { AppBar, Box, IconButton, ListItemIcon, Toolbar } from '@mui/material'
-import { removeAuthParams } from '@utils'
+import { removeAuthToken } from '@utils'
 
 const Header = () => {
   const navigate = useNavigate()
-  const { setIsAuthenticated } = useUser()
   const { showConfirmDialog } = useConfirmDialog()
 
   const onLogout = () => {
-    setIsAuthenticated(false)
-    removeAuthParams()
+    removeAuthToken()
   }
 
   const logout = () => {

@@ -1,7 +1,7 @@
-import { QKeys } from '@queryKeys'
 import { toast } from 'react-toastify'
+import { axiosInstance } from '@config'
+import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { axiosInstance, INTERIOR_QUESTIONS } from '@config'
 import { DeleteRequest, ErrorResponse, IApiError } from '@rootTypes'
 
 const deleteInteriorQuestion = async ({
@@ -9,7 +9,7 @@ const deleteInteriorQuestion = async ({
 }: DeleteRequest): Promise<ErrorResponse> => {
   try {
     const response = await axiosInstance.delete(
-      `${QKeys.deleteInteriorQuestion}${id}`,
+      `${REQ_KEYS.deleteInteriorQuestion}${id}`,
     )
     return response.data
   } catch (error: any) {
@@ -29,7 +29,7 @@ export default function useDeleteInteriorQuestion() {
     onSuccess: () => {
       toast.success('Question Deleted Successfully')
       queryQlient.invalidateQueries({
-        queryKey: [INTERIOR_QUESTIONS],
+        queryKey: [QUERY_KEYS.INTERIOR_QUESTIONS],
       })
     },
   })

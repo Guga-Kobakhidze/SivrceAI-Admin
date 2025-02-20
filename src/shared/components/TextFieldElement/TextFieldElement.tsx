@@ -17,7 +17,7 @@ const TextFieldElement = ({ name, label, ...rest }: FieldProps) => {
           {...field}
           label={label}
           variant="outlined"
-          id="outlined-basic"
+          id={`outlined-basic-${name}`}
           error={!!error}
           helperText={!!error && error.message}
         />

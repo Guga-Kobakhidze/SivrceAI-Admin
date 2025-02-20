@@ -1,17 +1,22 @@
-import React, { PropsWithChildren, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '../shared/utils/constants'
-import { useUser } from '@context/UserContext/userContext'
+// import FullPageLoading from '@widgets/FullPageLoading'
+import { PropsWithChildren } from 'react'
+// import { useNavigate } from 'react-router-dom'
+// import { useUser } from '@features/auth/useUser'
+// import { ROUTES } from '@constants'
 
-const HiddenRoute = ({ children }: PropsWithChildren) => {
-  const { isAuthenticated } = useUser()
-  const navigate = useNavigate()
+const HiddenRoute: React.FC<PropsWithChildren> = ({ children }) => {
+  // const { isAuthenticated, loading } = useUser()
+  // const navigate = useNavigate()
 
-  useEffect(() => {
-    if (isAuthenticated) navigate(ROUTES.usersPage, { replace: true })
-  }, [isAuthenticated, navigate])
+  // useEffect(() => {
+  //   if (!loading && isAuthenticated)
+  //     navigate(ROUTES.usersPage, { replace: true })
+  // }, [isAuthenticated, loading, navigate])
 
-  if (!isAuthenticated) return <React.Fragment>{children}</React.Fragment>
+  // if (loading) return <FullPageLoading />
+  // if (!isAuthenticated)
+
+  return <>{children}</>
 }
 
 export default HiddenRoute

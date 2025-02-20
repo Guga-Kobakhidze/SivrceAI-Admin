@@ -1,82 +1,80 @@
-import React from 'react'
-import { Controller } from 'react-hook-form'
-import { StyledImageBox } from './style'
-import { useFormContext } from '@widgets/FormProvider'
+import AddIcon from '@mui/icons-material/Add'
+import CloseIcon from '@mui/icons-material/Close'
+import { toast } from 'react-toastify'
 import { ImageFieldElementProps } from '../type'
-import { Box, FormControl, FormLabel, TextField } from '@mui/material'
+import { Box, Grid2, TextField, Typography } from '@mui/material'
+import {
+  StyledImageContent,
+  StyledImageUplaodBox,
+  StyledImageUploadBox,
+} from './style'
 
 const ImageFieldElement = ({
-  name,
   label,
-  imageBlob,
-  multiple = false,
+  disabled,
+  isMltiple = true,
+  images,
+  setImages,
+  name,
 }: ImageFieldElementProps) => {
-  const { control } = useFormContext()
+  const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || [])
+    const totalImages = images.length + files.length
+
+    if (totalImages > 8) {
+      console.log('here')
+      toast.error('You can upload only 8 images')
+      files.splice(8 - images.length)
+    }
+
+    setImages(prevImages => [...prevImages, ...files])
+  }
+
+  const onImageDelete = (index: number) => {
+    setImages(prev => prev.filter((_, i) => i !== index))
+  }
 
   return (
-    <FormControl>
-      <FormLabel sx={{ mb: 0.5 }}>{label}</FormLabel>
-      <Controller
+    <>
+      <TextField
         name={name}
-        control={control}
-        render={({
-          field: { value, onChange, ...field },
-          fieldState: { error, invalid },
-        }) => {
-          let previews: string[] = []
-          if (Array.isArray(value)) {
-            previews = value.map((file: File | string) => {
-              if (file instanceof File) {
-                const blob = URL.createObjectURL(file)
-                imageBlob.current.push(blob)
-                return blob
-              } else {
-                return file
-              }
-            })
-          } else if (value instanceof File) {
-            const blob = URL.createObjectURL(value)
-            previews.push(blob)
-            imageBlob.current.push(blob)
-          } else if (typeof value === 'string') {
-            previews.push(value)
-          }
-          return (
-            <React.Fragment>
-              <TextField
-                {...field}
-                type="file"
-                error={invalid}
-                helperText={error?.message || ''}
-                inputProps={{
-                  accept: 'image/*',
-                  multiple,
-                }}
-                onChange={event => {
-                  const input = event.target as HTMLInputElement
-                  if (input.files) {
-                    const files = Array.from(input.files)
-                    onChange(multiple ? files : files[0])
-                  }
-                }}
-              />
-              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mt: 2 }}>
-                {previews &&
-                  previews.map((src, index) => (
-                    <Box
-                      key={index}
-                      component="img"
-                      sx={StyledImageBox}
-                      src={src}
-                      alt={`preview-${index}`}
-                    />
-                  ))}
-              </Box>
-            </React.Fragment>
-          )
+        disabled={disabled}
+        onChange={onUpload}
+        sx={{ display: 'none' }}
+        type="file"
+        fullWidth
+        id="uploadImage"
+        slotProps={{
+          htmlInput: {
+            multiple: isMltiple,
+            accept: 'image/*',
+          },
         }}
       />
-    </FormControl>
+      <StyledImageUplaodBox>
+        <Box width="100%" component="label" htmlFor="uploadImage">
+          <StyledImageUploadBox bgcolor="#EFEFEF">
+            <Box>
+              <AddIcon />
+            </Box>
+            <Typography component="span">{label}</Typography>
+          </StyledImageUploadBox>
+        </Box>
+        <Grid2 container spacing={2}>
+          {images.slice(0, 8).map((img, index) => (
+            <StyledImageContent size={{ xs: 12, sm: 6, md: 2 }} key={index}>
+              <Box className="closeIcon" onClick={() => onImageDelete(index)}>
+                <CloseIcon />
+              </Box>
+              <img
+                src={typeof img === 'string' ? img : URL.createObjectURL(img)}
+                alt={`uploaded image ${index}`}
+              />
+            </StyledImageContent>
+          ))}
+        </Grid2>
+      </StyledImageUplaodBox>
+    </>
   )
 }
 
