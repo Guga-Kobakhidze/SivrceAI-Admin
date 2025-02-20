@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import { axiosInstance } from '@config'
+import { apiClient } from '@axiosInstance'
 import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { CreateRequest, ErrorResponse, IApiError } from '@rootTypes'
@@ -9,7 +9,7 @@ const editSpotQuestion = async ({
   data,
 }: CreateRequest & { id: string }): Promise<ErrorResponse> => {
   try {
-    const response = await axiosInstance.put(
+    const response = await apiClient.put(
       `${REQ_KEYS.addEditSpotQuestion}${id}`,
       data,
     )

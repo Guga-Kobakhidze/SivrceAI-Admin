@@ -1,5 +1,5 @@
 const REQ_KEYS = {
-  getAuth: '/auth/token',
+  getAuth: '/auth/login',
   getAuthRefresh: '/auth/token/refresh',
   getUser: '/auth/users/me/',
   getUsers: '/auth/admin_user_info/',

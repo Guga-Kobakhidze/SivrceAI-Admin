@@ -1,5 +1,5 @@
+import { apiClient } from '@axiosInstance'
 import { getPageInfo } from '@helpers'
-import { axiosInstance } from '@config'
 import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { IQuestions, WithKeyword, WithPagination } from '@rootTypes'
@@ -9,7 +9,7 @@ export type QuestionsFilters = WithKeyword & WithPagination
 const spotQuestions = async (
   filters?: QuestionsFilters,
 ): Promise<IQuestions> => {
-  const response = await axiosInstance.get(REQ_KEYS.getSpotQuestions, {
+  const response = await apiClient.get(REQ_KEYS.getSpotQuestions, {
     params: filters,
   })
   return response.data

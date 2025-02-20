@@ -33,6 +33,7 @@
       "@layouts": ["src/layouts/index.ts"],
       "@pages": ["src/pages/index.ts"],
       "@queryKeys": ["src/shared/utils/queryKeys.ts"],
+      "@axiosInstance": ["src/shared/utils/axiosInstance.ts"],
       "@constants": ["src/shared/utils/constants.ts"],
       "@enums": ["src/shared/utils/enums.ts"],
       "@helpers": ["src/shared/helpers/index.ts"],

@@ -1,7 +1,7 @@
 import { ILogin } from './Auth.config'
 import { useMutation } from '@tanstack/react-query'
-import { axiosLoginInstance } from '@config'
 import { REQ_KEYS } from '@queryKeys'
+import { apiClient } from '@axiosInstance'
 
 export const useLogin = () => {
   const { mutate, isPending, error } = useMutation({
@@ -11,9 +11,8 @@ export const useLogin = () => {
 }
 
 const loginRequest = async (payload: ILogin) => {
-  const { data } = await axiosLoginInstance.post(REQ_KEYS.getAuth, payload)
+  const { data } = await apiClient.post(REQ_KEYS.getAuth, payload)
   return data as unknown as {
-    accessToken: string
-    refreshToken: string
+    access_token: string
   }
 }

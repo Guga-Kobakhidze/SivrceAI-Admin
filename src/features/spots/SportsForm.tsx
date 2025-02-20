@@ -20,10 +20,10 @@ import {
 import {
   ReachTextEditor,
   TextFieldElement,
-  ImageFieldElement,
   NumberFieldElement,
   AutoCompleteFieldElement,
   MultiSelectFieldElement,
+  MultiImageFieldElement,
 } from '@components'
 
 const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
@@ -46,7 +46,7 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
   )
 
   const submit = (data: any) => {
-    onSubmit({ ...data, image: images })
+    onSubmit(data, images)
     setImages([])
     reset()
   }
@@ -93,10 +93,7 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
               <NumberFieldElement label="Spot Number" name="phone" />
             </Grid2>
             <Grid2 size={6}>
-              <NumberFieldElement
-                name="price_per_person"
-                label="Price Per Person"
-              />
+              <NumberFieldElement name="email" label="Spot Email" />
             </Grid2>
             <Grid2 size={6}>
               <TextFieldElement label="Spot Address" name="address" />
@@ -115,6 +112,7 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
               <MultiSelectFieldElement
                 label="District"
                 name="district"
+                isMltiple
                 options={Object.entries(DistrictEnum).map(([key, value]) => ({
                   label: value,
                   value: key,
@@ -215,9 +213,9 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
               />
             </Grid2>
             <Grid2 size={12}>
-              <ImageFieldElement
+              <MultiImageFieldElement
                 isMltiple
-                name="image"
+                name="images"
                 images={images}
                 setImages={setImages}
                 label="Spot Images"

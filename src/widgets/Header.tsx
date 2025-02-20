@@ -7,13 +7,18 @@ import { useConfirmDialog } from '@context/ConfirmDialog/ConfirmDialog'
 import { AccountIcon, LogoutIcon } from '@icons'
 import { AppBar, Box, IconButton, ListItemIcon, Toolbar } from '@mui/material'
 import { removeAuthToken } from '@utils'
+import { useQueryClient } from '@tanstack/react-query'
 
 const Header = () => {
   const navigate = useNavigate()
   const { showConfirmDialog } = useConfirmDialog()
 
+  const client = useQueryClient()
+
   const onLogout = () => {
     removeAuthToken()
+    client.removeQueries()
+    navigate(ROUTES.userLogin, { replace: true })
   }
 
   const logout = () => {

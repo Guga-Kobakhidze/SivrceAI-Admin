@@ -14,6 +14,7 @@ const MultiSelectFieldElemen = ({
   name,
   label,
   options,
+  isMltiple = false,
 }: FieldProps & OptionProps) => {
   const { control } = useFormContext()
 
@@ -30,9 +31,10 @@ const MultiSelectFieldElemen = ({
           getOptionLabel={option => option.label}
           value={options.filter(option => value?.includes(option.value)) || []}
           onChange={(_, newValue) => {
-            if (newValue.length <= 2) {
-              onChange(newValue.map(item => item.value))
+            if (!isMltiple && newValue.length > 2) {
+              newValue = newValue?.slice(0, 2)
             }
+            onChange(newValue.map(item => item.value))
           }}
           renderOption={(props, option, { selected }) => {
             const { key, ...optionProps } = props

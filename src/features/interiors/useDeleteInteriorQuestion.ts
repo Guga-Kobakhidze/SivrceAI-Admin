@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import { axiosInstance } from '@config'
+import { apiClient } from '@axiosInstance'
 import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { DeleteRequest, ErrorResponse, IApiError } from '@rootTypes'
@@ -8,7 +8,7 @@ const deleteInteriorQuestion = async ({
   id,
 }: DeleteRequest): Promise<ErrorResponse> => {
   try {
-    const response = await axiosInstance.delete(
+    const response = await apiClient.delete(
       `${REQ_KEYS.deleteInteriorQuestion}${id}`,
     )
     return response.data

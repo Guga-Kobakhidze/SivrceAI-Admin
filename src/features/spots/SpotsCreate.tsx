@@ -1,5 +1,6 @@
 import { CityEnum } from '@enums'
 import SportForm from './SportsForm'
+import useImageUploader from '@hooks/useImageUploader'
 
 const SpotCreate = () => {
   const defaultValues = {
@@ -7,11 +8,11 @@ const SpotCreate = () => {
     title: '',
     description: '',
     description_ge: '',
-    price_per_person: '',
+    email: '',
     website: '',
     phone: '',
     address: '',
-    image: [],
+    images: [],
     city: CityEnum.Tbilisi,
     district: [],
     category: [],
@@ -21,9 +22,12 @@ const SpotCreate = () => {
     price_range: [],
   }
 
-  const onSubmit = (data: any) => {
+  const { uploadImages } = useImageUploader()
+
+  const onSubmit = (data: any, images: File[]) => {
+    uploadImages(images)
     const districts = ['ANY', ...data.district]
-    console.log({ ...data, district: districts })
+    console.log({ ...data, district: districts, images: images })
   }
 
   return <SportForm defaultValues={defaultValues} onSubmit={onSubmit} />

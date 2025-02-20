@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { useFieldArray } from 'react-hook-form'
 import { useFormContext } from '@widgets/FormProvider'
 import { Box, Button, Grid2, Typography } from '@mui/material'
@@ -8,15 +8,20 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import {
   CheckboxFieldElement,
-  ImageFieldElement,
+  SingleImageFieldElement,
   TextFieldElement,
 } from '@components'
 import { DeleteIcon } from '@icons'
 import { StyledFieldArrayText } from './AnswersFieldArray.style'
+import { ImageType } from '@rootTypes'
 
-const AnwersFieldArray = () => {
-  const [expanded, setExpanded] = React.useState<string | false>(false)
-  const iconRef = useRef<string[]>([])
+interface AnwersFieldArrayProps {
+  images: ImageType[]
+  setImage: Dispatch<SetStateAction<ImageType[]>>
+}
+
+const AnwersFieldArray = ({ images, setImage }: AnwersFieldArrayProps) => {
+  const [expanded, setExpanded] = useState<string | false>(false)
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -45,13 +50,9 @@ const AnwersFieldArray = () => {
             <StyledFieldArrayText>
               <Typography>Answer {index + 1}</Typography>
               {index !== 0 && (
-                <Button
-                  variant="text"
-                  color="error"
-                  onClick={() => remove(index)}
-                >
-                  <DeleteIcon />
-                </Button>
+                <span onClick={() => remove(index)}>
+                  <DeleteIcon sx={{ color: '#9d3232' }} />
+                </span>
               )}
             </StyledFieldArrayText>
           </AccordionSummary>
@@ -94,9 +95,11 @@ const AnwersFieldArray = () => {
                     name={`answers.${index}.disabled`}
                   />
                 </Grid2>
-                <Grid2 size={12} bgcolor="#9f9f9f4a" p={2} borderRadius={2}>
-                  <ImageFieldElement
-                    imageBlob={iconRef}
+                <Grid2 size={12} bgcolor="#cbcbcb48" p={2} borderRadius={2}>
+                  <SingleImageFieldElement
+                    index={index}
+                    image={images[index]}
+                    setImage={setImage}
                     label="Answer Icon"
                     name={`answers.${index}.icon`}
                   />

@@ -25,6 +25,7 @@ export default defineConfig({
       '@layouts': path.resolve(__dirname, './src/layouts/index.ts'),
       '@pages': path.resolve(__dirname, './src/pages/index.ts'),
       '@queryKeys': path.resolve(__dirname, './src/shared/utils/queryKeys.ts'),
+      '@axiosInstance': path.resolve(__dirname, './src/shared/utils/axiosInstance.ts'),
       '@constants': path.resolve(__dirname, './src/shared/utils/constants.ts'),
       '@components': path.resolve(__dirname, './src/shared/components/index.ts'),
       '@helpers': path.resolve(__dirname, './src/shared/helpers/index.ts'),

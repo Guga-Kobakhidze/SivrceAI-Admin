@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN, PAGE_SIZE, PAGE_SIZES, REFRESH_TOKEN } from '@config'
+import { ACCESS_TOKEN, PAGE_SIZE, PAGE_SIZES } from '@config'
 import {
   getLocalStorageItem,
   removeLocalStorageItem,
@@ -76,13 +76,10 @@ export const extractPageAndSize = (
 
 // Set Localstorage
 
-export const setAuthToken = (accessToken: string, refreshToken: string) => {
+export const setAuthToken = (accessToken: string) => {
   removeAuthToken()
   setLocalStorageItem(ACCESS_TOKEN, {
     accessToken: `Bearer ${accessToken}`,
-  })
-  setLocalStorageItem(REFRESH_TOKEN, {
-    refreshToken,
   })
 }
 
@@ -91,19 +88,13 @@ export const setAuthToken = (accessToken: string, refreshToken: string) => {
 export const getAccessToken = () =>
   getLocalStorageItem<{ accessToken: string }>(ACCESS_TOKEN)
 
-export const getRefreshToken = () =>
-  getLocalStorageItem<{ refreshToken: string }>(REFRESH_TOKEN)
-
 export const getTokens = () =>
-  getAccessToken().chain(({ accessToken }) =>
-    getRefreshToken().chain(({ refreshToken }) => {
-      return Maybe.of({ accessToken, refreshToken })
-    }),
-  )
+  getAccessToken().chain(({ accessToken }) => {
+    return Maybe.of({ accessToken })
+  })
 
 // Remove Localstorage
 
 export const removeAuthToken = () => {
   removeLocalStorageItem(ACCESS_TOKEN)
-  removeLocalStorageItem(REFRESH_TOKEN)
 }

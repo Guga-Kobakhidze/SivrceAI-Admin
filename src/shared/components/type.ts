@@ -11,13 +11,20 @@ export interface FieldProps extends Omit<TextFieldProps, 'name'> {
 export interface OptionProps {
   options: { label: string; value: string }[]
   disabled?: boolean
+  isMltiple?: boolean
 }
 
-export interface ImageFieldElementProps extends FieldProps {
+export interface MultiImageFieldElementProps extends FieldProps {
   label: string
   disabled?: boolean
   isMltiple?: boolean
   images: ImageType[]
   setImages: Dispatch<SetStateAction<ImageType[]>>
   name: string
+}
+
+export interface SingleImageFieldElementProps
+  extends Pick<MultiImageFieldElementProps, 'label' | 'name' | 'disabled'> {
+  image: ImageType | null
+  setImage: Dispatch<SetStateAction<ImageType[]>>
 }

@@ -2,7 +2,7 @@ import Actions from '@widgets/Actions'
 import NoDataFound from '@widgets/NoDataFound'
 import FormProvider from '@widgets/FormProvider'
 import { useForm } from 'react-hook-form'
-import { IQuestion } from '@rootTypes'
+import { ImageType, IQuestion } from '@rootTypes'
 import { Box, Grid2 } from '@mui/material'
 import { spotsSchema } from '../schema'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -16,6 +16,7 @@ import {
   CheckboxFieldElement,
   AutoCompleteFieldElement,
 } from '@components'
+import { useState } from 'react'
 
 const SpotsQuestionsForm = ({
   error,
@@ -25,6 +26,9 @@ const SpotsQuestionsForm = ({
   prefill = undefined,
   isEdit = false,
 }: SpotsQuestionsFormProps) => {
+  const prefillImages = prefill?.answers.map(ans => ans.icon) || []
+  const [images, setImage] = useState<ImageType[]>(prefillImages)
+
   const methods = useForm<IQuestion>({
     resolver: yupResolver(spotsSchema),
     defaultValues: prefill || defaultValues,
@@ -32,7 +36,6 @@ const SpotsQuestionsForm = ({
 
   const { control, handleSubmit } = methods
   const { questions } = useSpotQuestions(undefined)
-
   const submit = (data: IQuestion) => onSubmit(data)
 
   if (error && isEdit) return <NoDataFound />
@@ -110,7 +113,7 @@ const SpotsQuestionsForm = ({
               />
             </Grid2>
             <Grid2 size={12}>
-              <ArrayFieldElement />
+              <ArrayFieldElement images={images} setImage={setImage} />
             </Grid2>
           </Grid2>
         </Box>

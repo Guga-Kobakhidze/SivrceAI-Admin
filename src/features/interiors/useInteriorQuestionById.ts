@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { IQuestion } from '@rootTypes'
-import { axiosInstance } from '@config'
+import { apiClient } from '@axiosInstance'
 import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
 
 const interiorQuestionById = async (id: string) => {
-  const response = await axiosInstance.get(
+  const response = await apiClient.get(
     `${REQ_KEYS.getInteriorQuestionById}${id}/`,
   )
   return response.data

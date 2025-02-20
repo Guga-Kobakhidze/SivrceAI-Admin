@@ -1,36 +1,26 @@
 import { IUser } from './Auth.config'
 import { useQuery } from '@tanstack/react-query'
-import { axiosInstance } from '@config'
-import { getAccessToken } from '@utils'
 import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
+import { apiClient } from '@axiosInstance'
 
-const emptyUser = new Object() as IUser
-
-const getUser = async () => {
-  const { data } = await axiosInstance.get(REQ_KEYS.getUser)
-  return data as unknown as IUser
+const getUser = async (): Promise<IUser> => {
+  const { data } = await apiClient.get(REQ_KEYS.getUser)
+  return data as IUser
 }
 
 export const useUser = () => {
-  const { data, isPending, refetch } = useQuery({
-    staleTime: 0,
-    queryFn: () => {
-      try {
-        getAccessToken().unsafeCoerce()
-        return getUser()
-      } catch {
-        return Promise.resolve(emptyUser)
-      }
-    },
+  const { data, isLoading } = useQuery<IUser>({
     queryKey: [QUERY_KEYS.USER],
+    queryFn: getUser,
+    retry: false,
+    staleTime: 600000, // 10 minutes
   })
 
+  const isAuthenticated = Boolean(data && data.id)
+
   return {
-    user: data,
-    loading: isPending,
-    isAuthenticated: Boolean(
-      data !== undefined && data !== emptyUser && data.id,
-    ),
-    refetch,
+    data,
+    isAuthenticated,
+    loading: isLoading,
   }
 }

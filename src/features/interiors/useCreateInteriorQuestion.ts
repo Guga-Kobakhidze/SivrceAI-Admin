@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify'
-import { axiosInstance } from '@config'
+import { apiClient } from '@axiosInstance'
 import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { CreateRequest, ErrorResponse, IApiError } from '@rootTypes'
@@ -8,7 +8,7 @@ const createInteriorQuestion = async ({
   data,
 }: CreateRequest): Promise<ErrorResponse> => {
   try {
-    const response = await axiosInstance.post(
+    const response = await apiClient.post(
       `${REQ_KEYS.addEditInteriorQuestion}`,
       data,
     )

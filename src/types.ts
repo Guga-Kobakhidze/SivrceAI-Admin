@@ -86,4 +86,4 @@ export interface ErrorResponse {
   error: { message: string }
 }
 
-export type ImageType = File | string
+export type ImageType = File | string | null

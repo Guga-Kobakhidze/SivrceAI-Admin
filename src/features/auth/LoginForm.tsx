@@ -14,12 +14,8 @@ const LoginForm = () => {
   const navigate = useNavigate()
   const methods = useForm<ILogin>({
     defaultValues: {
-      grant_type: '',
       username: '',
       password: '',
-      scope: '',
-      client_id: '',
-      client_secret: '',
     },
   })
 
@@ -29,7 +25,8 @@ const LoginForm = () => {
   const handleLogin = (values: ILogin) => {
     login(values, {
       onSuccess: result => {
-        setAuthToken(result.accessToken, result.refreshToken)
+        console.log(result)
+        setAuthToken(result.access_token)
         navigate(ROUTES.usersPage)
       },
       onError: (errors: any) => {
