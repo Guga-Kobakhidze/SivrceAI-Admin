@@ -1,4 +1,4 @@
-export enum StreetEnum {
+export enum CityEnum {
   Tbilisi = 'Tbilisi',
   Batumi = 'Batumi',
   Kutaisi = 'Kutaisi',
@@ -12,7 +12,6 @@ export enum DistrictEnum {
   VAKE = 'Vake',
   SABURTALO = 'Saburtalo',
   ISANI_SAMGORI = 'Isani Samgori',
-  ANY = 'Any',
 }
 
 export enum CategoryEnum {

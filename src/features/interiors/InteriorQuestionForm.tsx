@@ -2,7 +2,7 @@ import Actions from '@widgets/Actions'
 import NoDataFound from '@widgets/NoDataFound'
 import FormProvider from '@widgets/FormProvider'
 import { useForm } from 'react-hook-form'
-import { IQuestion } from '@rootTypes'
+import { ImageType, IQuestion } from '@rootTypes'
 import { Box, Grid2 } from '@mui/material'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { interiorSchema } from './schema'
@@ -19,6 +19,7 @@ import {
   defaultValues,
   InteriorsQuestionsFormProps,
 } from './InteriorQuestions.config'
+import { useState } from 'react'
 
 const InteriorQuestionTable = ({
   error,
@@ -28,6 +29,9 @@ const InteriorQuestionTable = ({
   prefill = undefined,
   isEdit = false,
 }: InteriorsQuestionsFormProps) => {
+  const prefillImages = prefill?.answers.map(ans => ans.icon) || []
+  const [images, setImage] = useState<ImageType[]>(prefillImages)
+
   const methods = useForm<IQuestion>({
     resolver: yupResolver(interiorSchema),
     defaultValues: prefill || defaultValues,
@@ -112,7 +116,7 @@ const InteriorQuestionTable = ({
               />
             </Grid2>
             <Grid2 size={12}>
-              <ArrayFieldElement />
+              <ArrayFieldElement images={images} setImage={setImage} />
             </Grid2>
           </Grid2>
         </Box>

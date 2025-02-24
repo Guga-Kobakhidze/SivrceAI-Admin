@@ -1,27 +1,33 @@
-import { StreetEnum } from '@enums'
+import { CityEnum } from '@enums'
 import SportForm from './SportsForm'
+import useImageUploader from '@hooks/useImageUploader'
 
 const SpotCreate = () => {
   const defaultValues = {
-    spotName: '',
-    spotEmail: '',
-    spotTitle: '',
-    spotDescription: '',
-    pricePerPerson: '',
-    spotNumber: '',
-    spotAddress: '',
-    spotImages: [],
-    street: StreetEnum.Tbilisi,
-    district: '',
-    category: '',
-    subcategory: '',
-    eventType: '',
-    peopleRange: '',
-    priceRange: '',
+    name: '',
+    title: '',
+    description: '',
+    description_ge: '',
+    email: '',
+    website: '',
+    phone: '',
+    address: '',
+    images: [],
+    city: CityEnum.Tbilisi,
+    district: [],
+    category: [],
+    subcategory: [],
+    cuisine_type: [],
+    people_range: [],
+    price_range: [],
   }
 
-  const onSubmit = (data: any) => {
-    console.log(data)
+  const { uploadImages } = useImageUploader()
+
+  const onSubmit = (data: any, images: File[]) => {
+    uploadImages(images)
+    const districts = ['ANY', ...data.district]
+    console.log({ ...data, district: districts, images: images })
   }
 
   return <SportForm defaultValues={defaultValues} onSubmit={onSubmit} />

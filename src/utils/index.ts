@@ -1,9 +1,10 @@
-import { AUTH_CONFIG, PAGE_SIZE, PAGE_SIZES } from '@config'
+import { ACCESS_TOKEN, PAGE_SIZE, PAGE_SIZES } from '@config'
 import {
   getLocalStorageItem,
   removeLocalStorageItem,
   setLocalStorageItem,
 } from '@storage'
+import { Maybe } from 'purify-ts'
 import querystring from 'qs'
 
 export const qs = {
@@ -75,20 +76,25 @@ export const extractPageAndSize = (
 
 // Set Localstorage
 
-export const setAuthParams = (email: string, isAuthorized: boolean) => {
-  setLocalStorageItem(AUTH_CONFIG, { email, isAuthorized })
+export const setAuthToken = (accessToken: string) => {
+  removeAuthToken()
+  setLocalStorageItem(ACCESS_TOKEN, {
+    accessToken: `Bearer ${accessToken}`,
+  })
 }
 
 // Get LocalStorage
 
-export const getAuthParams = () =>
-  getLocalStorageItem<{
-    email: string
-    isAuthorized: boolean
-  }>(AUTH_CONFIG)
+export const getAccessToken = () =>
+  getLocalStorageItem<{ accessToken: string }>(ACCESS_TOKEN)
+
+export const getTokens = () =>
+  getAccessToken().chain(({ accessToken }) => {
+    return Maybe.of({ accessToken })
+  })
 
 // Remove Localstorage
 
-export const removeAuthParams = () => {
-  removeLocalStorageItem(AUTH_CONFIG)
+export const removeAuthToken = () => {
+  removeLocalStorageItem(ACCESS_TOKEN)
 }

@@ -1,7 +1,7 @@
-import { QKeys } from '@queryKeys'
 import { toast } from 'react-toastify'
+import { apiClient } from '@axiosInstance'
+import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { axiosInstance, SPOT_QUESTIONS } from '@config'
 import { CreateRequest, ErrorResponse, IApiError } from '@rootTypes'
 
 const editSpotQuestion = async ({
@@ -9,8 +9,8 @@ const editSpotQuestion = async ({
   data,
 }: CreateRequest & { id: string }): Promise<ErrorResponse> => {
   try {
-    const response = await axiosInstance.put(
-      `${QKeys.addEditSpotQuestion}${id}`,
+    const response = await apiClient.put(
+      `${REQ_KEYS.addEditSpotQuestion}${id}`,
       data,
     )
     return response.data
@@ -32,7 +32,7 @@ export default function useEditSpotQuestion() {
     onSuccess: () => {
       toast.success('Question Edited Successfully')
       queryQlient.invalidateQueries({
-        queryKey: [SPOT_QUESTIONS],
+        queryKey: [QUERY_KEYS.SPOT_QUESTIONS],
       })
     },
   })

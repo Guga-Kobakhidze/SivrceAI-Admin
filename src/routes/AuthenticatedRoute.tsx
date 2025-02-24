@@ -1,17 +1,18 @@
-import React, { PropsWithChildren, useEffect } from 'react'
-import { ROUTES } from '@constants'
-import { useUser } from '@context/UserContext/userContext'
+import FullPageLoading from '@widgets/FullPageLoading'
+import { useUser } from '@features/auth/useUser'
 import { useNavigate } from 'react-router-dom'
+import { PropsWithChildren, useEffect } from 'react'
 
-const AuthenticatedRoute = ({ children }: PropsWithChildren) => {
-  const { isAuthenticated } = useUser()
+const AuthenticatedRoute: React.FC<PropsWithChildren> = ({ children }) => {
+  const { loading, isAuthenticated } = useUser()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!isAuthenticated) navigate(ROUTES.userLogin, { replace: true })
-  }, [isAuthenticated, navigate])
+    if (!loading && !isAuthenticated) navigate('/login', { replace: true })
+  }, [isAuthenticated, loading, navigate])
 
-  if (isAuthenticated) return <React.Fragment>{children}</React.Fragment>
+  if (loading) return <FullPageLoading />
+  if (isAuthenticated) return <>{children}</>
 }
 
 export default AuthenticatedRoute
