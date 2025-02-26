@@ -27,12 +27,12 @@ const SingleImageFieldElement = ({
     <React.Fragment>
       <ImageUploadTexField
         name={name}
-        index={index}
+        id={`${name}-${index}`}
         onUpload={onUpload}
         disabled={disabled}
       />
       <StyledImageUplaodBox>
-        <Box width="100%" component="label" htmlFor={`uploadImage-${index}`}>
+        <Box width="100%" component="label" htmlFor={`${name}-${index}`}>
           <StyledImageUploadBox bgcolor="#EFEFEF">
             <Box>
               <AddIcon />

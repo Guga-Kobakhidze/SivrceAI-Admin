@@ -5,13 +5,14 @@ interface ImageUploaderTexFieldProps {
   disabled?: boolean
   onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
   index?: number
+  id: string
 }
 
 const ImageUploadTexField = ({
+  id,
   name,
   disabled,
   onUpload,
-  index,
 }: ImageUploaderTexFieldProps) => {
   return (
     <TextField
@@ -22,7 +23,7 @@ const ImageUploadTexField = ({
       sx={{ display: 'none' }}
       type="file"
       fullWidth
-      id={`uploadImage-${index}`}
+      id={id}
       slotProps={{
         htmlInput: {
           accept: 'image/*',

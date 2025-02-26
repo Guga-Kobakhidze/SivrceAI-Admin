@@ -37,12 +37,13 @@ const MultiImageFieldElement = ({
   return (
     <React.Fragment>
       <ImageUploadTexField
+        id={name}
         name={name}
         onUpload={onUpload}
         disabled={disabled}
       />
       <StyledImageUplaodBox>
-        <Box width="100%" component="label" htmlFor="uploadImage">
+        <Box width="100%" component="label" htmlFor={name}>
           <StyledImageUploadBox bgcolor="#EFEFEF">
             <Box>
               <AddIcon />

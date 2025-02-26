@@ -87,7 +87,7 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
               <TextFieldElement label="Spot Name" name="name" />
             </Grid2>
             <Grid2 size={6}>
-              <TextFieldElement label="Spot Title" name="title" />
+              <TextFieldElement label="Spot name Georgian" name="name_ge" />
             </Grid2>
             <Grid2 size={6}>
               <NumberFieldElement label="Spot Number" name="phone" />
@@ -214,7 +214,6 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
             </Grid2>
             <Grid2 size={12}>
               <MultiImageFieldElement
-                isMltiple
                 name="images"
                 images={images}
                 setImages={setImages}
