@@ -70,6 +70,14 @@ export type IQuestions = {
   total: number
 }
 
+export type IUser = {
+  id: string,
+  username: string,
+  email: string | null,
+  roles: string[],
+  created_at: string
+}
+
 // Create Question
 
 export interface CreateRequest {

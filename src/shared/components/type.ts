@@ -17,7 +17,6 @@ export interface OptionProps {
 export interface MultiImageFieldElementProps extends FieldProps {
   label: string
   disabled?: boolean
-  isMltiple?: boolean
   images: ImageType[]
   setImages: Dispatch<SetStateAction<ImageType[]>>
   name: string

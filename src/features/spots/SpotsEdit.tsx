@@ -4,7 +4,7 @@ import SportsForm from './SportsForm'
 const SpotsEdit = () => {
   const defaultValues = {
     name: 'Lashas bari',
-    title: 'Lashas bari',
+    name_ge: 'ლაშას ბარი',
     description: 'The Shortest Description',
     description_ge: 'გრძელი ინფორმაცია',
     email: '',

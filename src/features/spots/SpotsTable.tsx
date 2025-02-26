@@ -1,12 +1,20 @@
 import Table, { getTableProps } from '@widgets/Table'
 import { Box, Button } from '@mui/material'
 import { getSearchParams } from '@utils'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import {
+  CategoryEnum,
+  CityEnum,
+  DistrictEnum,
+  PeopleRangeEnum,
+  PriceRangeEnum,
+} from '@enums'
 
 const someImage =
   'https://bigseventravel.com/wp-content/uploads/2019/07/62534608_449458172549390_9203865442152611840_o-1920x1280.jpg'
 
 const SpotsTable = () => {
+  const navigate = useNavigate()
   const [, setParams] = useSearchParams()
   const searchParams = getSearchParams<any>()
 
@@ -15,15 +23,46 @@ const SpotsTable = () => {
       <Table.Filters>
         <Table.Search name="keyword" defaultValue={searchParams.keyword} />
         <Table.DropdownFilter
-          items={[{ label: 'Ratis Bar', value: 'ratis bari' }]}
-          label="Spot Name"
-          name="spotName"
+          items={Object.values(CityEnum).map(item => ({
+            label: item,
+            value: item,
+          }))}
+          label="Spot City"
+          name="city"
         />
         <Table.DropdownFilter
-          items={[{ label: 'Tbilisi', value: 'Tbilisi' }]}
-          label="Spot Address"
-          name="spotAddress"
+          items={Object.values(DistrictEnum).map(item => ({
+            label: item,
+            value: item,
+          }))}
+          label="Spot District"
+          name="districts"
         />
+        <Table.DropdownFilter
+          items={Object.values(CategoryEnum).map(item => ({
+            label: item,
+            value: item,
+          }))}
+          label="Categories"
+          name="categories"
+        />
+        <Table.DropdownFilter
+          items={Object.values(PeopleRangeEnum).map(item => ({
+            label: item,
+            value: item,
+          }))}
+          label="People Range"
+          name="people_range"
+        />
+        <Table.DropdownFilter
+          items={Object.values(PriceRangeEnum).map(item => ({
+            label: item,
+            value: item,
+          }))}
+          label="Price Range"
+          name="price_range"
+        />
+
         <Table.ResetFilter />
       </Table.Filters>
       <Table
@@ -84,8 +123,15 @@ const SpotsTable = () => {
             {
               Header: 'Action',
               accessor: 'action',
-              Cell: () => {
-                return <Button variant="contained">Details</Button>
+              Cell: ({ row }) => {
+                return (
+                  <Button
+                    onClick={() => navigate(`spots/${row.id}`)}
+                    variant="contained"
+                  >
+                    Details
+                  </Button>
+                )
               },
             },
           ],

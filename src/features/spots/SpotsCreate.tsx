@@ -5,7 +5,7 @@ import useImageUploader from '@hooks/useImageUploader'
 const SpotCreate = () => {
   const defaultValues = {
     name: '',
-    title: '',
+    name_ge: '',
     description: '',
     description_ge: '',
     email: '',

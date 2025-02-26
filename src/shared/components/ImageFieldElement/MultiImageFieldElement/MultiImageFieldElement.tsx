@@ -22,7 +22,6 @@ const MultiImageFieldElement = ({
     const totalImages = images.length + files.length
 
     if (totalImages > 8) {
-      console.log('here')
       toast.error('You can upload only 8 images')
       files.splice(8 - images.length)
     }
@@ -37,12 +36,13 @@ const MultiImageFieldElement = ({
   return (
     <React.Fragment>
       <ImageUploadTexField
+        id={name}
         name={name}
         onUpload={onUpload}
         disabled={disabled}
       />
       <StyledImageUplaodBox>
-        <Box width="100%" component="label" htmlFor="uploadImage">
+        <Box width="100%" component="label" htmlFor={name}>
           <StyledImageUploadBox bgcolor="#EFEFEF">
             <Box>
               <AddIcon />
