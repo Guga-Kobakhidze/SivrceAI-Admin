@@ -22,7 +22,6 @@ const MultiImageFieldElement = ({
     const totalImages = images.length + files.length
 
     if (totalImages > 8) {
-      console.log('here')
       toast.error('You can upload only 8 images')
       files.splice(8 - images.length)
     }
