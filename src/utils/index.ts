@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN, PAGE_SIZE, PAGE_SIZES } from '@config'
+import { ACCESS_TOKEN, PAGE_SIZE, PAGE_SIZES, THEME_MODE } from '@config'
 import {
   getLocalStorageItem,
   removeLocalStorageItem,
@@ -83,6 +83,10 @@ export const setAuthToken = (accessToken: string) => {
   })
 }
 
+export const setThemeMode = (mode: string) => {
+  setLocalStorageItem(THEME_MODE, { themeMode: mode })
+}
+
 // Get LocalStorage
 
 export const getAccessToken = () =>
@@ -92,6 +96,9 @@ export const getTokens = () =>
   getAccessToken().chain(({ accessToken }) => {
     return Maybe.of({ accessToken })
   })
+
+export const getThemeMode = () =>
+  getLocalStorageItem<{ themeMode: string }>(THEME_MODE)
 
 // Remove Localstorage
 

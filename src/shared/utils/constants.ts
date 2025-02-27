@@ -5,6 +5,8 @@ export const ROUTES = {
   createUser: '/create-user',
   editUser: '/edit-user',
 
+  settings: '/settings',
+
   spotsTable: '/spots',
   createSpot: '/spots/create',
   editSpot: '/spots/edit',
