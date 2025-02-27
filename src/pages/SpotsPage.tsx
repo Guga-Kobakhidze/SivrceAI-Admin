@@ -1,6 +1,4 @@
-import { lazy } from 'react'
-
-const Spots = lazy(() => import('@features/spots'))
+import Spots from '@features/spots'
 
 const SpostsPage = () => {
   return <Spots />
