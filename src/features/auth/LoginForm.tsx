@@ -25,7 +25,6 @@ const LoginForm = () => {
   const handleLogin = (values: ILogin) => {
     login(values, {
       onSuccess: result => {
-        console.log(result)
         setAuthToken(result.access_token)
         navigate(ROUTES.usersPage)
       },

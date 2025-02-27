@@ -12,14 +12,13 @@ import {
 } from 'react'
 
 type ThemeContextType = {
-  mode: string
+  mode: 'light' | 'dark'
   toggleThemeMode: () => void
 }
 
-export const ThemeContext = createContext<ThemeContextType>({
-  mode: 'Light',
-  toggleThemeMode: () => {},
-})
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined,
+)
 
 export const MuiThemeProvider = ({ children }: PropsWithChildren) => {
   const { themeMode } = getThemeMode().orDefault({ themeMode: 'light' })
@@ -48,5 +47,9 @@ export const MuiThemeProvider = ({ children }: PropsWithChildren) => {
 }
 
 export const useThemeMode = () => {
-  return useContext(ThemeContext)
+  const context = useContext(ThemeContext)
+  if (!context)
+    throw new Error('useThemeMode is used outside the ThemeContext Provider')
+
+  return context
 }
