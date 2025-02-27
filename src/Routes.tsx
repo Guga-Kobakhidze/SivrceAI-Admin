@@ -7,6 +7,7 @@ import HiddenRoute from './routes/HiddenRoute'
 import AuthenticatedRoute from './routes/AuthenticatedRoute'
 import ConfirmDialogContextProvider from '@context/ConfirmDialog/ConfirmDialog'
 import Loading from '@widgets/Loading'
+import { SettingsPage } from '@pages'
 
 const Login = lazy(() => import('@features/auth/Login'))
 
@@ -83,6 +84,8 @@ const Router = () => {
                 element={<InteriorQuestionEdit />}
               />
             </Route>
+
+            <Route path={ROUTES.settings} element={<SettingsPage />} />
           </Route>
 
           <Route

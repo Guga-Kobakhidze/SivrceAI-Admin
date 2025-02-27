@@ -2,6 +2,7 @@ const EMAIL_ADDRESS = 'sivrceai@gmail.com'
 const PASSWORD = 'Sivrce123'
 const AUTH_CONFIG = 'AuthConfig'
 const ACCESS_TOKEN = 'ACCESS_TOKEN'
+const THEME_MODE = 'ThemeMode'
 
 export const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -23,4 +24,5 @@ export {
   EMAIL_ADDRESS,
   PASSWORD,
   AUTH_CONFIG,
+  THEME_MODE,
 }

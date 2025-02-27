@@ -10,6 +10,9 @@ export default defineConfig({
   define: {
     global: 'window',
   },
+  optimizeDeps: {
+    exclude: ['yup'],
+  },
   resolve: {
     alias: {
       '@widgets': path.resolve(__dirname, './src/widgets'),
@@ -25,15 +28,21 @@ export default defineConfig({
       '@layouts': path.resolve(__dirname, './src/layouts/index.ts'),
       '@pages': path.resolve(__dirname, './src/pages/index.ts'),
       '@queryKeys': path.resolve(__dirname, './src/shared/utils/queryKeys.ts'),
-      '@axiosInstance': path.resolve(__dirname, './src/shared/utils/axiosInstance.ts'),
+      '@axiosInstance': path.resolve(
+        __dirname,
+        './src/shared/utils/axiosInstance.ts',
+      ),
       '@constants': path.resolve(__dirname, './src/shared/utils/constants.ts'),
-      '@components': path.resolve(__dirname, './src/shared/components/index.ts'),
+      '@components': path.resolve(
+        __dirname,
+        './src/shared/components/index.ts',
+      ),
       '@helpers': path.resolve(__dirname, './src/shared/helpers/index.ts'),
       '@types': path.resolve(__dirname, './src/types'),
       '@config': path.resolve(__dirname, './src/config.ts'),
       '@rootTypes': path.resolve(__dirname, './src/types.ts'),
       '@routes': path.resolve(__dirname, './src/routes/index.ts'),
-      '@theme': path.resolve(__dirname,'./src/theme/theme.ts' )
+      '@theme': path.resolve(__dirname, './src/theme/theme.ts'),
     },
   },
   plugins: [react()],

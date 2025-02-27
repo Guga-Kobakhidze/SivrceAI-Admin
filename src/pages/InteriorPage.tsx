@@ -1,6 +1,4 @@
-import { lazy } from 'react'
-
-const Interior = lazy(() => import('@features/interiors'))
+import Interior from '@features/interiors'
 
 const InteriorPage = () => {
   return <Interior />

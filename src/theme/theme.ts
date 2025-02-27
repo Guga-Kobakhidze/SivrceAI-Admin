@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material'
 
-export const theme = createTheme({
+const globalStyles = {
   typography: {
     fontFamily: "'Poppins', sans-serif",
     fontWeightBold: 600,
@@ -8,7 +8,12 @@ export const theme = createTheme({
     fontWeightRegular: 400,
     fontWeightLight: 300,
   },
+}
+
+const theme = createTheme({
+  ...globalStyles,
   palette: {
+    mode: 'light',
     primary: {
       main: '#3172b3',
     },
@@ -33,3 +38,34 @@ export const theme = createTheme({
     },
   },
 })
+
+// const darkTheme = createTheme({
+//   ...globalStyles,
+//   palette: {
+//     mode: 'dark',
+//     primary: {
+//       main: '#000',
+//     },
+//     secondary: {
+//       main: '#000',
+//     },
+//     error: {
+//       main: '#000',
+//     },
+//     warning: {
+//       main: '#000',
+//     },
+//     info: {
+//       main: '#000',
+//     },
+//     success: {
+//       main: '#000',
+//     },
+//     text: {
+//       primary: '#000',
+//       secondary: '#000',
+//     },
+//   },
+// })
+
+export { theme }
