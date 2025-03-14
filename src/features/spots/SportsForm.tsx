@@ -93,7 +93,7 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
               <NumberFieldElement label="Spot Number" name="phone" />
             </Grid2>
             <Grid2 size={6}>
-              <NumberFieldElement name="email" label="Spot Email" />
+              <TextFieldElement name="email" label="Spot Email" />
             </Grid2>
             <Grid2 size={6}>
               <TextFieldElement label="Spot Address" name="address" />
