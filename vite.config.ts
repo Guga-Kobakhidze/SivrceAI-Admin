@@ -6,12 +6,12 @@ import path from 'path'
 export default defineConfig({
   build: {
     outDir: './dist',
+    rollupOptions: {
+      external: ['yup'],
+    },
   },
   define: {
     global: 'window',
-  },
-  optimizeDeps: {
-    exclude: ['yup'],
   },
   resolve: {
     alias: {
