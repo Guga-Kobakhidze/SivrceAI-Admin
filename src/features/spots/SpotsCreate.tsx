@@ -25,7 +25,7 @@ const SpotCreate = () => {
   const { uploadImages } = useImageUploader()
 
   const onSubmit = (data: any, images: File[]) => {
-    uploadImages(images)
+    uploadImages({ images, context: 'object' })
     const districts = ['ANY', ...data.district]
     console.log({ ...data, district: districts, images: images })
   }
