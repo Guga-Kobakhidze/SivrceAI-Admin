@@ -71,10 +71,10 @@ export type IQuestions = {
 }
 
 export type IUser = {
-  id: string,
-  username: string,
-  email: string | null,
-  roles: string[],
+  id: string
+  username: string
+  email: string | null
+  roles: string[]
   created_at: string
 }
 
@@ -93,5 +93,3 @@ export interface DeleteRequest {
 export interface ErrorResponse {
   error: { message: string }
 }
-
-export type ImageType = File | string | null

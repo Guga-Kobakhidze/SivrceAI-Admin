@@ -14,6 +14,7 @@ const MultiSelectFieldElemen = ({
   name,
   label,
   options,
+  disabled,
   isMltiple = false,
 }: FieldProps & OptionProps) => {
   const { control } = useFormContext()
@@ -27,6 +28,7 @@ const MultiSelectFieldElemen = ({
           multiple
           id={name}
           options={options}
+          disabled={disabled}
           disableCloseOnSelect
           getOptionLabel={option => option.label}
           value={options.filter(option => value?.includes(option.value)) || []}

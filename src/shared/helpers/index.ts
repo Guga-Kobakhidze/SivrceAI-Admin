@@ -47,3 +47,8 @@ export const appendToFormData = (
     }
   }
 }
+
+export const getValuesToUpperCase = (data: string | string[]) =>
+  Array.isArray(data)
+    ? data.map(str => str.replace(/\s+/g, '_').toUpperCase())
+    : data.replace(/\s+/g, '_').toUpperCase()

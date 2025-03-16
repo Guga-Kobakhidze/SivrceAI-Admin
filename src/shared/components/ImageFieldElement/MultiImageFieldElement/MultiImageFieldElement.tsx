@@ -2,7 +2,7 @@ import React from 'react'
 import ImageUploadTexField from '../ImageUploadTexField'
 import { toast } from 'react-toastify'
 import { AddIcon, CloseIcon } from '@icons'
-import { Box, Grid2, Typography } from '@mui/material'
+import { Box, Typography, Grid2, Tooltip } from '@mui/material'
 import { MultiImageFieldElementProps } from '../../type'
 import {
   StyledImageContent,
@@ -18,7 +18,10 @@ const MultiImageFieldElement = ({
   setImages,
 }: MultiImageFieldElementProps) => {
   const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || [])
+    const files = Array.from(e.target.files || []).map(file => ({
+      file,
+      isMain: false,
+    }))
     const totalImages = images.length + files.length
 
     if (totalImages > 8) {
@@ -29,9 +32,10 @@ const MultiImageFieldElement = ({
     setImages(prevImages => [...prevImages, ...files])
   }
 
-  const onImageDelete = (index: number) => {
+  const onImageDelete = (index: number) =>
     setImages(prev => prev.filter((_, i) => i !== index))
-  }
+  const handleMainImg = (index: number) =>
+    setImages(prev => prev.map((img, i) => ({ ...img, isMain: i === index })))
 
   return (
     <React.Fragment>
@@ -51,20 +55,34 @@ const MultiImageFieldElement = ({
           </StyledImageUploadBox>
         </Box>
         <Grid2 container spacing={2}>
-          {images?.slice(0, 8).map((img, index) => {
-            if (!img) return
-            return (
-              <StyledImageContent size={{ xs: 12, sm: 6, md: 2 }} key={index}>
-                <Box className="closeIcon" onClick={() => onImageDelete(index)}>
+          {images?.slice(0, 8).map((img, index) => (
+            <Tooltip title="Select as main image" followCursor key={index}>
+              <StyledImageContent
+                size={{ xs: 12, sm: 6, md: 2 }}
+                onClick={() => handleMainImg(index)}
+                ismain={img.isMain ? 'true' : null}
+              >
+                <Box
+                  className="closeIcon"
+                  onClick={e => {
+                    e.stopPropagation()
+                    onImageDelete(index)
+                  }}
+                >
                   <CloseIcon />
                 </Box>
                 <img
-                  src={typeof img === 'string' ? img : URL.createObjectURL(img)}
+                  src={
+                    typeof img.file === 'string'
+                      ? img.file
+                      : URL.createObjectURL(img.file)
+                  }
                   alt={`uploaded image ${index}`}
+                  style={{ width: '100%', height: 'auto', display: 'block' }}
                 />
               </StyledImageContent>
-            )
-          })}
+            </Tooltip>
+          ))}
         </Grid2>
       </StyledImageUplaodBox>
     </React.Fragment>

@@ -1,19 +1,19 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
+import { ImageType } from '../type'
+import { DeleteIcon } from '@icons'
 import { useFieldArray } from 'react-hook-form'
 import { useFormContext } from '@widgets/FormProvider'
+import { StyledFieldArrayText } from './AnswersFieldArray.style'
 import { Box, Button, Grid2, Typography } from '@mui/material'
 import Accordion from '@mui/material/Accordion'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import {
+  TextFieldElement,
   CheckboxFieldElement,
   SingleImageFieldElement,
-  TextFieldElement,
 } from '@components'
-import { DeleteIcon } from '@icons'
-import { StyledFieldArrayText } from './AnswersFieldArray.style'
-import { ImageType } from '@rootTypes'
 
 interface AnwersFieldArrayProps {
   images: ImageType[]

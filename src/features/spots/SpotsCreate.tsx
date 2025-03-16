@@ -1,4 +1,6 @@
+import { ISpot } from './Spots.config'
 import { CityEnum } from '@enums'
+import { MultiImageType } from 'src/shared/components/type'
 import SportForm from './SportsForm'
 import useImageUploader from '@hooks/useImageUploader'
 
@@ -17,17 +19,23 @@ const SpotCreate = () => {
     district: [],
     category: [],
     subcategory: [],
-    cuisine_type: [],
+    event_type: [],
     people_range: [],
     price_range: [],
   }
 
   const { uploadImages } = useImageUploader()
 
-  const onSubmit = (data: any, images: File[]) => {
-    uploadImages({ images, context: 'object' })
+  const onSubmit = (data: ISpot, images: MultiImageType[]) => {
     const districts = ['ANY', ...data.district]
-    console.log({ ...data, district: districts, images: images })
+    uploadImages(
+      { images, context: 'object' },
+      {
+        onSuccess: images => {
+          console.log({ ...data, district: districts, images: images })
+        },
+      },
+    )
   }
 
   return <SportForm defaultValues={defaultValues} onSubmit={onSubmit} />

@@ -1,11 +1,13 @@
 import Actions from '@widgets/Actions'
 import FormProvider from '@widgets/FormProvider'
+import { ISpot } from './Spots.config'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
+import { MultiImageType } from 'src/shared/components/type'
 import { useParams } from 'react-router-dom'
-import { ImageType } from '@rootTypes'
 import { Box, Grid2 } from '@mui/material'
 import { AddIcon, DeleteIcon } from '@icons'
+import { getValuesToUpperCase } from '@helpers'
 import {
   CategoryEnum,
   CityEnum,
@@ -27,7 +29,7 @@ import {
 } from '@components'
 
 const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
-  const [images, setImages] = useState<ImageType[]>([])
+  const [images, setImages] = useState<MultiImageType[]>([])
   const { spotId } = useParams()
 
   const methods = useForm({
@@ -36,7 +38,7 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
   })
 
   const { control, handleSubmit, reset, formState, watch } = methods
-  const category = watch('category') as SubCategoryType | ''
+  const category = watch('category') as SubCategoryType
   const subcategory = watch('subcategory') as EventType | ''
 
   const isEventAndParty = category === 'Event and Parties'
@@ -45,8 +47,15 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
     type => type === subcategory,
   )
 
-  const submit = (data: any) => {
-    onSubmit(data, images)
+  const submit = (data: ISpot) => {
+    const formData = {
+      ...data,
+      city: getValuesToUpperCase(data.city),
+      category: getValuesToUpperCase(data.category),
+      subcategory: getValuesToUpperCase(data.subcategory),
+      event_type: getValuesToUpperCase(data?.event_type) ?? undefined,
+    }
+    onSubmit(formData, images)
     setImages([])
     reset()
   }
@@ -134,7 +143,7 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
                 <AutoCompleteFieldElement
                   label="Subcategory"
                   name="subcategory"
-                  disabled={!category}
+                  disabled={!category.length}
                   options={
                     category && subcategories[category]
                       ? subcategories[category]?.map(item => ({
@@ -148,7 +157,7 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
                 <MultiSelectFieldElement
                   label="Subcategory"
                   name="subcategory"
-                  disabled={!category}
+                  disabled={!category.length}
                   options={
                     category && subcategories[category]
                       ? subcategories[category]?.map(item => ({
@@ -160,11 +169,11 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
                 />
               )}
             </Grid2>
-            {subcategory && isValidSubcategory && (
+            {subcategory && isValidSubcategory && isEventAndParty && (
               <Grid2 size={6}>
                 <MultiSelectFieldElement
                   label="Event Type"
-                  name="cuisine_type"
+                  name="event_type"
                   options={
                     subcategory && eventTypes[subcategory]
                       ? eventTypes[subcategory].map(item => ({

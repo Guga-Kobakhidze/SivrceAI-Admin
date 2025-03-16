@@ -17,7 +17,7 @@ const SingleImageFieldElement = ({
     if (file) {
       setImage(prev => {
         const newImages = [...prev]
-        newImages[index] = file
+        newImages[index] = { file }
         return newImages
       })
     }
@@ -42,11 +42,15 @@ const SingleImageFieldElement = ({
         </Box>
         {image && (
           <Box
-            width={200}
+            width={150}
             height={150}
             component="img"
             alt="uploaded"
-            src={typeof image === 'string' ? image : URL.createObjectURL(image)}
+            src={
+              typeof image.file === 'string'
+                ? image.file
+                : URL.createObjectURL(image.file)
+            }
           />
         )}
       </StyledImageUplaodBox>
