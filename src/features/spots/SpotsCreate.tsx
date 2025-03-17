@@ -1,6 +1,5 @@
 import { ISpot } from './Spots.config'
 import { CityEnum } from '@enums'
-import { MultiImageType } from 'src/shared/components/type'
 import SportForm from './SportsForm'
 
 const SpotCreate = () => {
