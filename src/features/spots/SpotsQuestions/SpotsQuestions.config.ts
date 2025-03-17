@@ -3,7 +3,7 @@ import { IQuestion } from '@rootTypes'
 export const defaultValues: IQuestion = {
   id: '',
   text: '',
-  step: undefined,
+  step: 0,
   text_en: '',
   question_value: '',
   progress_val: 0,

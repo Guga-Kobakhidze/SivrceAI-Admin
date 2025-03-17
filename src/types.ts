@@ -71,10 +71,10 @@ export type IQuestions = {
 }
 
 export type IUser = {
-  id: string,
-  username: string,
-  email: string | null,
-  roles: string[],
+  id: string
+  username: string
+  email: string | null
+  roles: string[]
   created_at: string
 }
 
@@ -95,3 +95,7 @@ export interface ErrorResponse {
 }
 
 export type ImageType = File | string | null
+export type MultiImageType = {
+  file: File
+  isMain: boolean
+}

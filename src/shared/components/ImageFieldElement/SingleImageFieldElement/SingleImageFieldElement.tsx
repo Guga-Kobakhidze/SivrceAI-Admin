@@ -12,6 +12,8 @@ const SingleImageFieldElement = ({
   disabled,
   setImage,
 }: SingleImageFieldElementProps & { index: number }) => {
+  console.log(image)
+
   const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
@@ -42,7 +44,7 @@ const SingleImageFieldElement = ({
         </Box>
         {image && (
           <Box
-            width={200}
+            width={150}
             height={150}
             component="img"
             alt="uploaded"

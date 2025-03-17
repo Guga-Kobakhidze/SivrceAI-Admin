@@ -9,6 +9,7 @@ export enum DistrictEnum {
   MTATSMINDA = 'Mtatsminda',
   DIDUBE_CHUGHURETI = 'Didube Chughureti',
   OLD_TBILISI = 'Old Tbilisi',
+  KRTSANISI= "Krtsanisi",
   VAKE = 'Vake',
   SABURTALO = 'Saburtalo',
   ISANI_SAMGORI = 'Isani Samgori',
@@ -16,18 +17,18 @@ export enum DistrictEnum {
 
 export enum CategoryEnum {
   RESTAURANT = 'Restaurant',
-  BARS_NIGHTLIFE = 'Bars and Nightlife',
+  BARS_AND_NIGHTLIFE = 'Bars and Nightlife',
   SPECIALITY_FOOD = 'Speciality Food',
   FOOD_MARKET = 'Food Market',
-  EVENT_PARTIES = 'Event and Parties',
+  EVENT_AND_PARTIES = 'Event and Parties',
 }
 
 export const subcategories = {
-  [CategoryEnum.RESTAURANT]: ['Buffet', 'Dining', 'Cafe', 'fastfood'],
-  [CategoryEnum.BARS_NIGHTLIFE]: ['wine bar', 'night Club', 'pub', 'bar'],
-  [CategoryEnum.SPECIALITY_FOOD]: ['Vegetarian', 'Seafood', 'Ice-cream', 'Bakery'],
+  [CategoryEnum.RESTAURANT]: ['Buffet', 'Dining', 'Cafe', 'fast food'],
+  [CategoryEnum.BARS_AND_NIGHTLIFE]: ['Wine bar', 'Night Club', 'Pub', 'Bar'],
+  [CategoryEnum.SPECIALITY_FOOD]: ['Vegetarian', 'Seafood', 'Ice cream', 'Bakery'],
   [CategoryEnum.FOOD_MARKET]: ['Grocery', 'Butcher', 'Farmer', 'Fish market'],
-  [CategoryEnum.EVENT_PARTIES]: ['Wedding', 'Conference', 'Birthday', 'Banquet'],
+  [CategoryEnum.EVENT_AND_PARTIES]: ['Wedding', 'Conference', 'Birthday', 'Banquet'],
 };
 
 export const eventTypes = {

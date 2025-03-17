@@ -1,13 +1,15 @@
 import Actions from '@widgets/Actions'
 import NoDataFound from '@widgets/NoDataFound'
 import FormProvider from '@widgets/FormProvider'
+import useImageUploader from '@hooks/useImageUploader'
 import { useForm } from 'react-hook-form'
-import { ImageType, IQuestion } from '@rootTypes'
+import { useState } from 'react'
 import { Box, Grid2 } from '@mui/material'
-import { spotsSchema } from '../schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useSpotQuestions } from './useSpotQuestions'
 import { AddIcon, DeleteIcon } from '@icons'
+import { spotQuestionsSchema } from '../schema'
+import { ImageType, IQuestion } from '@rootTypes'
 import { defaultValues, SpotsQuestionsFormProps } from './SpotsQuestions.config'
 import {
   TextFieldElement,
@@ -16,7 +18,6 @@ import {
   CheckboxFieldElement,
   AutoCompleteFieldElement,
 } from '@components'
-import { useState } from 'react'
 
 const SpotsQuestionsForm = ({
   error,
@@ -30,13 +31,37 @@ const SpotsQuestionsForm = ({
   const [images, setImage] = useState<ImageType[]>(prefillImages)
 
   const methods = useForm<IQuestion>({
-    resolver: yupResolver(spotsSchema),
+    resolver: yupResolver(spotQuestionsSchema),
     defaultValues: prefill || defaultValues,
   })
 
   const { control, handleSubmit } = methods
   const { questions } = useSpotQuestions(undefined)
-  const submit = (data: IQuestion) => onSubmit(data)
+  const { uploadImages } = useImageUploader()
+
+  const submit = (data: IQuestion) => {
+    const imageFiles = images.filter((img): img is File => img instanceof File)
+    const handleSubmit = (updatedData: IQuestion) => {
+      onSubmit(updatedData)
+    }
+
+    if (imageFiles.length) {
+      uploadImages(
+        { images: imageFiles, context: 'object-questions' },
+        {
+          onSuccess: urls => {
+            const updatedAnswers = data.answers.map((answer, index) => ({
+              ...answer,
+              icon: urls[index] || answer.icon,
+            }))
+            handleSubmit({ ...data, answers: updatedAnswers })
+          },
+        },
+      )
+    } else {
+      handleSubmit(data)
+    }
+  }
 
   if (error && isEdit) return <NoDataFound />
 

@@ -9,7 +9,7 @@ const deleteSpotQuestion = async ({
 }: DeleteRequest): Promise<ErrorResponse> => {
   try {
     const response = await apiClient.delete(
-      `${REQ_KEYS.deleteSpotQuestion}${id}`,
+      `${REQ_KEYS.deleteSpotQuestion}/${id}`,
     )
     return response.data
   } catch (error: any) {

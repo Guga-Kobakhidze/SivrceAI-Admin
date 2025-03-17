@@ -1,5 +1,6 @@
 import { CityEnum } from '@enums'
 import SportsForm from './SportsForm'
+import { ISpot } from './Spots.config'
 
 const SpotsEdit = () => {
   const defaultValues = {
@@ -19,12 +20,12 @@ const SpotsEdit = () => {
     district: [],
     category: [],
     subcategory: [],
-    cuisine_type: [],
+    event_type: [],
     people_range: [],
     price_range: [],
   }
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: ISpot) => {
     console.log(data)
   }
 

@@ -10,7 +10,7 @@ const editSpotQuestion = async ({
 }: CreateRequest & { id: string }): Promise<ErrorResponse> => {
   try {
     const response = await apiClient.put(
-      `${REQ_KEYS.addEditSpotQuestion}${id}`,
+      `${REQ_KEYS.addEditSpotQuestion}/${id}`,
       data,
     )
     return response.data

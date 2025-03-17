@@ -1,6 +1,7 @@
 import { TextFieldProps } from '@mui/material'
-import { ImageType } from '@rootTypes'
+import { ImageType, MultiImageType } from '@rootTypes'
 import { Dispatch, SetStateAction } from 'react'
+import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
 
 export interface FieldProps extends Omit<TextFieldProps, 'name'> {
   name: string
@@ -11,19 +12,18 @@ export interface FieldProps extends Omit<TextFieldProps, 'name'> {
 export interface OptionProps {
   options: { label: string; value: string }[]
   disabled?: boolean
-  isMltiple?: boolean
+  isMultiple?: boolean
 }
 
 export interface MultiImageFieldElementProps extends FieldProps {
-  label: string
   disabled?: boolean
-  images: ImageType[]
-  setImages: Dispatch<SetStateAction<ImageType[]>>
-  name: string
+  images: MultiImageType[]
+  setImages: Dispatch<SetStateAction<MultiImageType[]>>
+  errorMsg?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>>
 }
 
 export interface SingleImageFieldElementProps
   extends Pick<MultiImageFieldElementProps, 'label' | 'name' | 'disabled'> {
-  image: ImageType | null
+  image: ImageType
   setImage: Dispatch<SetStateAction<ImageType[]>>
 }

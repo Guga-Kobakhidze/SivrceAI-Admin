@@ -36,6 +36,7 @@ const Table = <T extends string, K extends T>(props: TableProps<T, K>) => {
       sx={{
         border: '1px solid #D8D8D8',
         boxShadow: 'none',
+        position: 'relative',
         fontSize: 'normal',
       }}
     >
@@ -162,13 +163,15 @@ const Table = <T extends string, K extends T>(props: TableProps<T, K>) => {
           })}
         </TableBody>
       </MuiTable>
-      <TablePaginator
-        current_page={paginationInfo.current_page}
-        last_page={paginationInfo.last_page}
-        per_page={paginationInfo.per_page}
-        total={paginationInfo.total}
-        onChange={onPagination}
-      />
+      <Box width="100%" height={55} display="flex" justifyContent="end">
+        <TablePaginator
+          current_page={paginationInfo.current_page}
+          last_page={paginationInfo.last_page}
+          per_page={paginationInfo.per_page}
+          total={paginationInfo.total}
+          onChange={onPagination}
+        />
+      </Box>
     </TableContainer>
   )
 }

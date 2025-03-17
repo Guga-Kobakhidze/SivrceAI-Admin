@@ -1,13 +1,15 @@
 import Actions from '@widgets/Actions'
 import NoDataFound from '@widgets/NoDataFound'
 import FormProvider from '@widgets/FormProvider'
+import useImageUploader from '@hooks/useImageUploader'
 import { useForm } from 'react-hook-form'
-import { ImageType, IQuestion } from '@rootTypes'
+import { useState } from 'react'
 import { Box, Grid2 } from '@mui/material'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { interiorSchema } from './schema'
 import { AddIcon, DeleteIcon } from '@icons'
 import { useInteriorQuestions } from './useInteriorQuestions'
+import { ImageType, IQuestion } from '@rootTypes'
 import {
   TextFieldElement,
   ArrayFieldElement,
@@ -19,7 +21,6 @@ import {
   defaultValues,
   InteriorsQuestionsFormProps,
 } from './InteriorQuestions.config'
-import { useState } from 'react'
 
 const InteriorQuestionTable = ({
   error,
@@ -39,8 +40,32 @@ const InteriorQuestionTable = ({
 
   const { control, handleSubmit } = methods
   const { questions } = useInteriorQuestions()
+  const { uploadImages } = useImageUploader()
 
-  const submit = (data: IQuestion) => onSubmit(data)
+  const submit = (data: IQuestion) => {
+    const imageFiles = images.filter((img): img is File => img instanceof File)
+    const handleSubmit = (updatedData: IQuestion) => {
+      onSubmit(updatedData)
+    }
+
+    if (imageFiles.length) {
+      uploadImages(
+        { images: imageFiles, context: 'object-questions' },
+        {
+          onSuccess: urls => {
+            const updatedAnswers = data.answers.map((answer, index) => ({
+              ...answer,
+              icon: urls[index] || answer.icon,
+            }))
+            handleSubmit({ ...data, answers: updatedAnswers })
+          },
+        },
+      )
+    } else {
+      handleSubmit(data)
+    }
+  }
+
   if (error && isEdit) return <NoDataFound />
 
   return (
