@@ -93,3 +93,9 @@ export interface DeleteRequest {
 export interface ErrorResponse {
   error: { message: string }
 }
+
+export type ImageType = File | string | null
+export type MultiImageType = {
+  file: File
+  isMain: boolean
+}

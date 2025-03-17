@@ -1,5 +1,5 @@
 import RichEditor from './ReachEditor'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { Controller } from 'react-hook-form'
 import { FieldProps } from '../type'
 import { useFormContext } from '@widgets/FormProvider'
@@ -25,18 +25,13 @@ const ReachTextFieldElement = ({
               isSubmited={isSubmited}
             />
             {!!error && (
-              <p
-                style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: '15px',
-                  color: '#F44335',
-                  fontSize: '0.75rem',
-                  fontWeight: 300,
-                }}
+              <Typography
+                fontSize={12}
+                color="#9d3232"
+                sx={{ mt: '10px', ml: '10px' }}
               >
                 {error.message}
-              </p>
+              </Typography>
             )}
           </Box>
         )

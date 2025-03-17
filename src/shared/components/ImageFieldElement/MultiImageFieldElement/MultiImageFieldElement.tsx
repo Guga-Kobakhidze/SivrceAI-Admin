@@ -15,6 +15,7 @@ const MultiImageFieldElement = ({
   label,
   images,
   disabled,
+  errorMsg,
   setImages,
 }: MultiImageFieldElementProps) => {
   const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,6 +86,9 @@ const MultiImageFieldElement = ({
           ))}
         </Grid2>
       </StyledImageUplaodBox>
+      <Typography fontSize={12} color="#9d3232" ml={2}>
+        {typeof errorMsg === 'string' ? errorMsg : ''}
+      </Typography>
     </React.Fragment>
   )
 }

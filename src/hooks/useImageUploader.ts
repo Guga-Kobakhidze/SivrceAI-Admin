@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify'
 import { REQ_KEYS } from '@queryKeys'
+import { MultiImageType } from '@rootTypes'
 import { useMutation } from '@tanstack/react-query'
 import { apiImageClient } from '@axiosInstance'
 
@@ -10,27 +11,27 @@ const uploadImage = async ({
   images,
   context,
 }: {
-  images: ImagesType
+  images: File[] | MultiImageType[]
   context: string
 }): Promise<string[]> => {
   const formData = new FormData()
 
+  if (Array.isArray(images)) {
+    images.forEach(image => {
+      if (image instanceof File) {
+        formData.append('files', image)
+      } else {
+        formData.append('files', image.file)
+        formData.append('isMain', image.isMain.toString())
+      }
+    })
+  }
+
   formData.append('context', context)
-  const imageArray = Array.isArray(images) ? images : [images]
+  const { data } = await apiImageClient.post(REQ_KEYS.uploadImage, formData)
+  const urls: string[] = data.urls
 
-  imageArray.forEach((image, index) => {
-    formData.append('files', image.file)
-    if (image.isMain !== undefined) {
-      formData.append(`isMain_${index}`, String(image.isMain))
-    }
-  })
-
-  const { data } = await apiImageClient.post<{ urls: string[] }>(
-    REQ_KEYS.uploadImage,
-    formData,
-  )
-
-  return data?.urls
+  return urls
 }
 
 export default function useImageUploader() {

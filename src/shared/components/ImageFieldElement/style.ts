@@ -12,7 +12,6 @@ export const StyledImageUplaodBox = styled(Box)({
   overflow: 'auto',
   scrollbarWidth: 'none',
   gap: '8px',
-  marginBottom: '16px',
 })
 
 export const StyledImageUploadBox = styled(Box)({
