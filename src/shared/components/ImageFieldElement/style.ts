@@ -12,7 +12,6 @@ export const StyledImageUplaodBox = styled(Box)({
   overflow: 'auto',
   scrollbarWidth: 'none',
   gap: '8px',
-  marginBottom: '16px',
 })
 
 export const StyledImageUploadBox = styled(Box)({
@@ -26,40 +25,46 @@ export const StyledImageUploadBox = styled(Box)({
   border: '1px solid lightgrey',
 })
 
-export const StyledImageContent = styled(Grid2)({
-  position: 'relative',
-  borderRadius: '8px',
-  overflow: 'hidden',
-  maxHeight: 120,
+export const StyledImageContent = styled(Grid2)(
+  ({ ismain }: { ismain: string | null }) => ({
+    position: 'relative',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    maxHeight: 120,
 
-  img: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  },
-
-  '.closeIcon': {
-    position: 'absolute',
-    top: '2px',
-    right: '2px',
-    zIndex: 999,
-    width: '25px',
-    height: '25px',
-    borderRadius: '50%',
-    display: 'none',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
     cursor: 'pointer',
+    border: ismain ? '3px solid rgb(54, 54, 88)' : '3px solid transparent',
+    transition: 'border 0.3s ease-in-out',
 
-    svg: {
-      color: 'black',
+    img: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
     },
-  },
 
-  '&:hover': {
     '.closeIcon': {
-      display: 'flex',
+      position: 'absolute',
+      top: '2px',
+      right: '2px',
+      zIndex: 999,
+      width: '25px',
+      height: '25px',
+      borderRadius: '50%',
+      display: 'none',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'white',
+      cursor: 'pointer',
+
+      svg: {
+        color: 'black',
+      },
     },
-  },
-})
+
+    '&:hover': {
+      '.closeIcon': {
+        display: 'flex',
+      },
+    },
+  }),
+)
