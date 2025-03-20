@@ -1,4 +1,4 @@
-import Yup from 'yup'
+import * as Yup from 'yup'
 
 export const interiorSchema = Yup.object({
   id: Yup.string().required('Id is required'),

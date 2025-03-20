@@ -6,9 +6,9 @@ import path from 'path'
 export default defineConfig({
   build: {
     outDir: './dist',
-    rollupOptions: {
-      external: ['yup'],
-    },
+  },
+  optimizeDeps: {
+    exclude: ['yup'],
   },
   define: {
     global: 'window',
