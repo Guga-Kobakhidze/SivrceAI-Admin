@@ -52,7 +52,7 @@ const SpotsQuestionsForm = ({
           onSuccess: urls => {
             const updatedAnswers = data.answers.map((answer, index) => ({
               ...answer,
-              icon: urls[index] || answer.icon,
+              icon: urls[index].img_url || answer.icon,
             }))
             handleSubmit({ ...data, answers: updatedAnswers })
           },

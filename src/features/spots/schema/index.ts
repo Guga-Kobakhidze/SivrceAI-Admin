@@ -58,7 +58,6 @@ const spotsSchema = Yup.object({
         isMain: Yup.boolean().required('isMain is required'),
       }),
     )
-    .min(1, 'At least one image is required')
     .default([]),
   city: Yup.string().required('City is required'),
   district: Yup.array()
@@ -66,9 +65,19 @@ const spotsSchema = Yup.object({
     .min(1, 'District is required')
     .required('District is required'),
   category: Yup.string().required('Category is required'),
-  subcategory: Yup.array()
-    .of(Yup.string().required())
-    .min(1, 'Suncategory is required')
+  subcategory: Yup.mixed<string | string[]>()
+    .test('is-valid-subcategory', 'Subcategory is required', value => {
+      if (typeof value === 'string') {
+        return !!value.trim()
+      }
+      if (Array.isArray(value)) {
+        return (
+          value.length > 0 &&
+          value.every(item => typeof item === 'string' && item.trim())
+        )
+      }
+      return false
+    })
     .required('Subcategory is required'),
   event_type: Yup.array().of(Yup.string().required()),
   people_range: Yup.array()

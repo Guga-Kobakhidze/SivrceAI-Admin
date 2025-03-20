@@ -4,8 +4,8 @@ import { MultiImageType } from '@rootTypes'
 import { useMutation } from '@tanstack/react-query'
 import { apiImageClient } from '@axiosInstance'
 
-type ImageItem = { file: File; isMain?: boolean }
-type ImagesType = ImageItem | ImageItem[]
+type ImageItem = { img_url: string; isMain?: boolean }
+type ApiResponse = { images: ImageItem[] }
 
 const uploadImage = async ({
   images,
@@ -13,25 +13,33 @@ const uploadImage = async ({
 }: {
   images: File[] | MultiImageType[]
   context: string
-}): Promise<string[]> => {
+}): Promise<ImageItem[]> => {
   const formData = new FormData()
 
-  if (Array.isArray(images)) {
-    images.forEach(image => {
-      if (image instanceof File) {
-        formData.append('files', image)
-      } else {
-        formData.append('files', image.file)
+  images.forEach(image => {
+    if (image instanceof File) {
+      formData.append('files', image)
+      formData.append('isMain', 'false')
+    } else {
+      formData.append('files', image.file)
+      if (typeof image.isMain === 'boolean') {
         formData.append('isMain', image.isMain.toString())
       }
-    })
-  }
+    }
+  })
 
   formData.append('context', context)
-  const { data } = await apiImageClient.post(REQ_KEYS.uploadImage, formData)
-  const urls: string[] = data.urls
 
-  return urls
+  const { data } = await apiImageClient.post<ApiResponse>(
+    REQ_KEYS.uploadImage,
+    formData,
+  )
+
+  if (!data?.images || !Array.isArray(data.images)) {
+    throw new Error('Invalid response format from API')
+  }
+
+  return data.images
 }
 
 export default function useImageUploader() {

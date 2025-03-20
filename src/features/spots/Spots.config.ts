@@ -13,7 +13,7 @@ export interface ISpot {
   city: string
   district: string[]
   category: string
-  subcategory: string[]
+  subcategory: string[] | string
   event_type?: string[]
   people_range: string[]
   price_range: string[]
