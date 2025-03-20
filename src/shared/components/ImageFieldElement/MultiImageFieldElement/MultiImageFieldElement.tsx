@@ -43,6 +43,7 @@ const MultiImageFieldElement = ({
       <ImageUploadTexField
         id={name}
         name={name}
+        isMultiple
         onUpload={onUpload}
         disabled={disabled}
       />

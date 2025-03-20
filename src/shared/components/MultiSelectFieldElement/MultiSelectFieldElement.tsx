@@ -29,6 +29,7 @@ const MultiSelectFieldElement = ({
           <Autocomplete
             multiple
             id={name}
+            limitTags={2}
             options={options}
             disableCloseOnSelect
             getOptionLabel={option => option.label}

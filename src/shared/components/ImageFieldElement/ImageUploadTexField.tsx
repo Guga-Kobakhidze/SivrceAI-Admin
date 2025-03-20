@@ -6,6 +6,7 @@ interface ImageUploaderTexFieldProps {
   onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
   index?: number
   id: string
+  isMultiple?: boolean
 }
 
 const ImageUploadTexField = ({
@@ -13,6 +14,7 @@ const ImageUploadTexField = ({
   name,
   disabled,
   onUpload,
+  isMultiple = false,
 }: ImageUploaderTexFieldProps) => {
   return (
     <TextField
@@ -27,6 +29,7 @@ const ImageUploadTexField = ({
       slotProps={{
         htmlInput: {
           accept: 'image/*',
+          multiple: isMultiple,
         },
       }}
     />

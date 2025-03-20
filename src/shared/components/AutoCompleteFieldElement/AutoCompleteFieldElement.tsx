@@ -17,6 +17,7 @@ const AutoCompleteFieldElement = ({
       control={control}
       render={({ field, fieldState: { error } }) => (
         <Autocomplete
+          limitTags={2}
           options={options}
           getOptionLabel={option => option.label || ''}
           isOptionEqualToValue={(option, value) => option.value === value.value}

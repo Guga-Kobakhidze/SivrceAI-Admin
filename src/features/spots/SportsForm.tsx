@@ -50,8 +50,6 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
     type => type === subcategory,
   )
 
-  console.log(methods?.formState?.errors)
-
   const resetForm = () => {
     setImages([])
     reset()
@@ -82,6 +80,8 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
   const handleDeleteSpot = () => {
     console.log(spotId)
   }
+
+  console.log(formState.isSubmitSuccessful)
 
   return (
     <Box>
@@ -233,14 +233,14 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
               <ReachTextEditor
                 name="description"
                 label="Spot Description"
-                isSubmited={formState.isSubmitted}
+                isSubmited={formState.isSubmitSuccessful}
               />
             </Grid2>
             <Grid2 size={12}>
               <ReachTextEditor
                 name="description_ge"
-                label="Spot Description English"
-                isSubmited={formState.isSubmitted}
+                label="Spot Description Georgian"
+                isSubmited={formState.isSubmitSuccessful}
               />
             </Grid2>
             <Grid2 size={12}>
