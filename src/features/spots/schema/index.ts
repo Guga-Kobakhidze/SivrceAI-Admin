@@ -1,4 +1,4 @@
-import * as Yup from 'yup'
+import Yup from 'yup'
 
 const spotQuestionsSchema = Yup.object({
   id: Yup.string().required('Id is required'),
