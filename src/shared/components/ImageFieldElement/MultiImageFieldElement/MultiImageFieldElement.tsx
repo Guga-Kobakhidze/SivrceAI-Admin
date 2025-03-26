@@ -57,34 +57,35 @@ const MultiImageFieldElement = ({
           </StyledImageUploadBox>
         </Box>
         <Grid2 container spacing={2}>
-          {images?.slice(0, 8).map((img, index) => (
-            <Tooltip title="Select as main image" followCursor key={index}>
-              <StyledImageContent
-                size={{ xs: 12, sm: 6, md: 2 }}
-                onClick={() => handleMainImg(index)}
-                ismain={img.isMain ? 'true' : null}
-              >
-                <Box
-                  className="closeIcon"
-                  onClick={e => {
-                    e.stopPropagation()
-                    onImageDelete(index)
-                  }}
+          {images?.slice(0, 8).map((img, index) => {
+            const src =
+              typeof img === 'string' ? img : URL.createObjectURL(img.file)
+
+            return (
+              <Tooltip title="Select as main image" followCursor key={index}>
+                <StyledImageContent
+                  size={{ xs: 12, sm: 6, md: 2 }}
+                  onClick={() => handleMainImg(index)}
+                  ismain={img.isMain ? 'true' : null}
                 >
-                  <CloseIcon />
-                </Box>
-                <img
-                  src={
-                    typeof img.file === 'string'
-                      ? img.file
-                      : URL.createObjectURL(img.file)
-                  }
-                  alt={`uploaded image ${index}`}
-                  style={{ width: '100%', height: 'auto', display: 'block' }}
-                />
-              </StyledImageContent>
-            </Tooltip>
-          ))}
+                  <Box
+                    className="closeIcon"
+                    onClick={e => {
+                      e.stopPropagation()
+                      onImageDelete(index)
+                    }}
+                  >
+                    <CloseIcon />
+                  </Box>
+                  <img
+                    src={src}
+                    alt={`uploaded image ${index}`}
+                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                  />
+                </StyledImageContent>
+              </Tooltip>
+            )
+          })}
         </Grid2>
       </StyledImageUplaodBox>
       <Typography fontSize={12} color="#9d3232" ml={2}>

@@ -7,6 +7,11 @@ const REQ_KEYS = {
 
   getAllUser: '/auth/admin_user_info',
 
+  getAllSpots: '/admin/objects/all',
+  getSpotById: '/admin/object',
+  addEditSpot: '/admin/object',
+  deleteSpot: '/adming/object',
+
   getSpotQuestions: '/basic_answers/object/all',
   getSpotQuestionById: '/get_question/object',
   deleteSpotQuestion: '/basic_answers/object',
@@ -24,12 +29,13 @@ const QUERY_KEYS = {
   USER: 'user',
   USERS: 'users',
   SPOT: 'spot',
+  SPOTS: 'spots',
   SPOT_ID: 'spot_id',
   SPOT_QUESTIONS: 'spot_questions',
   SPOT_QUESTION_ID: 'spot_question_id',
   INTERIOR_QUESTIONS: 'interior_questions',
   INTERIOR_QUESTION_ID: 'interior_question_id',
-  UPLOAD_IMAGE: "images"
+  UPLOAD_IMAGE: 'images',
 }
 
 export { REQ_KEYS, QUERY_KEYS }

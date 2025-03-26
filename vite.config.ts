@@ -7,9 +7,6 @@ export default defineConfig({
   build: {
     outDir: './dist',
   },
-  optimizeDeps: {
-    exclude: ['yup'],
-  },
   define: {
     global: 'window',
   },

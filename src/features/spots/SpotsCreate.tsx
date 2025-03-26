@@ -1,32 +1,24 @@
-import { ISpot } from './Spots.config'
-import { CityEnum } from '@enums'
 import SportForm from './SportsForm'
+import useCreateSpot from './useCreateSpot'
+import { toast } from 'react-toastify'
+import { defaultValues, SubmitForm } from './Spots.config'
 
 const SpotCreate = () => {
-  const defaultValues = {
-    name: '',
-    name_ge: '',
-    description: '',
-    description_ge: '',
-    email: '',
-    website: '',
-    phone: '',
-    address: '',
-    images: [],
-    city: CityEnum.Tbilisi,
-    district: [],
-    category: '',
-    subcategory: [],
-    event_type: [],
-    people_range: [],
-    price_range: [],
+  const { createSpot, createError, isCreating } = useCreateSpot()
+
+  const onSubmit = (data: SubmitForm) => {
+    createSpot(data, {
+      onError: () => toast.error(createError?.message),
+    })
   }
 
-  const onSubmit = (data: ISpot) => {
-    console.log(data)
-  }
-
-  return <SportForm defaultValues={defaultValues} onSubmit={onSubmit} />
+  return (
+    <SportForm
+      onSubmit={onSubmit}
+      loading={isCreating}
+      defaultValues={defaultValues}
+    />
+  )
 }
 
 export default SpotCreate

@@ -1,35 +1,40 @@
-import { CityEnum } from '@enums'
+import Loading from '@widgets/Loading'
 import SportsForm from './SportsForm'
-import { ISpot } from './Spots.config'
+import useEditSpot from './useEditSpot'
+import useDeleteSpot from './useDeleteSpot'
+import { toast } from 'react-toastify'
+import { useParams } from 'react-router-dom'
+import { useSpotById } from './useSpotById'
+import { defaultValues, SubmitForm } from './Spots.config'
 
 const SpotsEdit = () => {
-  const defaultValues = {
-    name: 'Lashas bari',
-    name_ge: 'ლაშას ბარი',
-    description: 'The Shortest Description',
-    description_ge: 'გრძელი ინფორმაცია',
-    email: '',
-    website: '',
-    phone: '',
-    address: 'samzareulos gamziri',
-    images: [
-      'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/70/12/8b/evening-at-drunk-owl.jpg?w=600&h=-1&s=1',
-      'https://images.squarespace-cdn.com/content/v1/648331aed0f6882fac88a261/d1dc395b-c60c-4dc1-b683-d8757d86ddb7/barlesieur-9.jpg',
-    ],
-    city: CityEnum.Tbilisi,
-    district: [],
-    category: [],
-    subcategory: [],
-    event_type: [],
-    people_range: [],
-    price_range: [],
+  const { spotId } = useParams()
+  const { prefill, isLoading } = useSpotById(spotId ?? '')
+  const { editSpot, isEditing, editError } = useEditSpot()
+  const { deleteSpot, isDeleting, deleteError } = useDeleteSpot()
+
+  const onSubmit = (data: SubmitForm) => {
+    editSpot(
+      { data, id: spotId ?? '' },
+      { onError: () => toast.error(editError?.message) },
+    )
   }
 
-  const onSubmit = (data: ISpot) => {
-    console.log(data)
+  const onDelete = (id: string) => {
+    deleteSpot({ id }, { onError: () => toast.error(deleteError?.message) })
   }
 
-  return <SportsForm defaultValues={defaultValues} onSubmit={onSubmit} isEdit />
+  if (isLoading) return <Loading />
+
+  return (
+    <SportsForm
+      isEdit
+      onSubmit={onSubmit}
+      onDelete={onDelete}
+      loading={isEditing || isDeleting}
+      defaultValues={prefill || defaultValues}
+    />
+  )
 }
 
 export default SpotsEdit

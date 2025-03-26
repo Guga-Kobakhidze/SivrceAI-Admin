@@ -1,13 +1,16 @@
 import Table, { getTableProps } from '@widgets/Table'
-import { Box, Button } from '@mui/material'
-import { getSearchParams } from '@utils'
+import { ROUTES } from '@constants'
+import { QuestionsFilters, useSpots } from './useSpots'
+import { ISpotResponse } from './Spots.config'
+import { extractPageAndSize, getSearchParams } from '@utils'
+import { Box, Button, Typography } from '@mui/material'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import {
-  CategoryEnum,
   CityEnum,
   DistrictEnum,
-  PeopleRangeEnum,
+  CategoryEnum,
   PriceRangeEnum,
+  PeopleRangeEnum,
 } from '@enums'
 
 const someImage =
@@ -16,7 +19,13 @@ const someImage =
 const SpotsTable = () => {
   const navigate = useNavigate()
   const [, setParams] = useSearchParams()
-  const searchParams = getSearchParams<any>()
+  const searchParams = getSearchParams<QuestionsFilters>()
+  const pagination = extractPageAndSize(searchParams)
+
+  const { spots } = useSpots({
+    ...searchParams,
+    ...pagination,
+  })
 
   return (
     <Box width="100%">
@@ -65,78 +74,120 @@ const SpotsTable = () => {
 
         <Table.ResetFilter />
       </Table.Filters>
-      <Table
-        {...getTableProps({
-          pageInfo: {
-            current_page: 1,
-            last_page: 1,
-            per_page: 10,
-            total: 1,
-          },
-          loading: false,
-          onPagination: ({ size, page }) => {
-            setParams(params => {
-              params.set('page', String(page))
-              params.set('size', String(size))
-              return params
-            })
-          },
-          rows: [
-            {
-              spotName: 'Ratis Bar',
-              spotAddress: 'Tbilisi',
-              spotImage: '',
-              spotNumber: '555222333',
-              spotEmail: 'RatisBar@gmail.com',
+      {spots && spots.length > 0 ? (
+        <Table
+          {...getTableProps({
+            pageInfo: {
+              current_page: 1,
+              last_page: 1,
+              per_page: 10,
+              total: 1,
             },
-          ],
-          columns: [
-            { Header: 'Spot Name', accessor: 'spotName' },
-            { Header: 'Spot Address', accessor: 'spotAddress' },
-            {
-              Header: 'Spot Image',
-              accessor: 'spotImage',
-              Cell: ({ value }) => (
-                <Box
-                  component="img"
-                  width={100}
-                  height={60}
-                  src={(value as string) || someImage}
-                  alt={value as string}
-                />
-              ),
+            loading: false,
+            onPagination: ({ size, page }) => {
+              setParams(params => {
+                params.set('page', String(page))
+                params.set('size', String(size))
+                return params
+              })
             },
-            {
-              Header: 'Spot Number',
-              accessor: 'spotNumber',
-              Cell: ({ value }) => (
-                <Link to={`tel:${value as string}`}>{value as string}</Link>
-              ),
-            },
-            {
-              Header: 'Spot Email',
-              accessor: 'spotEmail',
-              Cell: ({ value }) => (
-                <Link to={`mailto:${value as string}`}>{value as string}</Link>
-              ),
-            },
-            {
-              Header: 'Action',
-              accessor: 'action',
-              Cell: ({ row }) => {
-                return (
-                  <Button
-                    onClick={() => navigate(`spots/${row.id}`)}
-                    variant="contained"
-                  >
-                    Details
-                  </Button>
-                )
+            rows: spots?.map(
+              ({
+                id,
+                name,
+                email,
+                website,
+                address,
+                phone,
+                image,
+              }: ISpotResponse) => ({
+                id,
+                name,
+                email,
+                website,
+                address,
+                phone,
+                image,
+              }),
+            ),
+            columns: [
+              { Header: 'Spot Name', accessor: 'name' },
+              {
+                Header: 'Spot Address',
+                accessor: 'address',
+                Cell: ({ value }) => (
+                  <Typography>
+                    {typeof value === 'string' && value.slice(0, 40)}
+                  </Typography>
+                ),
               },
-            },
-          ],
-        })}
-      />
+              {
+                Header: 'Spot Image',
+                accessor: 'image',
+                Cell: ({ value }) => {
+                  const isValidImage =
+                    value &&
+                    typeof value === 'string' &&
+                    value.startsWith('http')
+
+                  if (!isValidImage) {
+                    return (
+                      <Box
+                        component="img"
+                        width={100}
+                        height={60}
+                        src={someImage}
+                        alt="Fallback"
+                      />
+                    )
+                  }
+                  return (
+                    <Box
+                      component="img"
+                      width={100}
+                      height={60}
+                      src={value as string}
+                      alt={value as string}
+                    />
+                  )
+                },
+              },
+              {
+                Header: 'Spot Number',
+                accessor: 'phone',
+                Cell: ({ value }) => (
+                  <Link to={`tel:${value as string}`}>{value as string}</Link>
+                ),
+              },
+              {
+                Header: 'Spot Email',
+                accessor: 'email',
+                Cell: ({ value }) => (
+                  <Link to={`mailto:${value as string}`}>
+                    {(value as string) ?? 'No Email address'}
+                  </Link>
+                ),
+              },
+              {
+                Header: 'Action',
+                accessor: 'action',
+                Cell: ({ row }) => {
+                  return (
+                    <Button
+                      onClick={() => navigate(`${ROUTES.editSpot}/${row.id}`)}
+                      variant="contained"
+                    >
+                      Details
+                    </Button>
+                  )
+                },
+              },
+            ],
+          })}
+        />
+      ) : (
+        'there are no data'
+      )}
     </Box>
   )
 }

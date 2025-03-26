@@ -94,6 +94,7 @@ export interface ErrorResponse {
   error: { message: string }
 }
 
+export type ImageItem = { img_url: string; isMain?: boolean }
 export type ImageType = File | string | null
 export type MultiImageType = {
   file: File
