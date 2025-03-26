@@ -1,10 +1,9 @@
 import { toast } from 'react-toastify'
 import { REQ_KEYS } from '@queryKeys'
-import { MultiImageType } from '@rootTypes'
 import { useMutation } from '@tanstack/react-query'
 import { apiImageClient } from '@axiosInstance'
+import { ImageItem, MultiImageType } from '@rootTypes'
 
-type ImageItem = { img_url: string; isMain?: boolean }
 type ApiResponse = { images: ImageItem[] }
 
 const uploadImage = async ({

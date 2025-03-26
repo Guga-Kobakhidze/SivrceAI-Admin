@@ -1,28 +1,30 @@
-import * as Yup from 'yup'
+import * as yup from 'yup'
 
-export const interiorSchema = Yup.object({
-  id: Yup.string().required('Id is required'),
-  text: Yup.string().required('Text is required'),
-  text_en: Yup.string().required('Text in English is required'),
-  step: Yup.number().nullable(),
-  question_value: Yup.string().required('Question value is required'),
-  progress_val: Yup.number()
+export const interiorSchema = yup.object({
+  id: yup.string().required('Id is required'),
+  text: yup.string().required('Text is required'),
+  text_en: yup.string().required('Text in English is required'),
+  step: yup.number().nullable(),
+  question_value: yup.string().required('Question value is required'),
+  progress_val: yup
+    .number()
     .nullable()
     .typeError('Progress value is required')
     .default(null),
-  is_multi_choice: Yup.boolean(),
-  is_multi_select: Yup.boolean(),
-  previous_question_id: Yup.string().nullable().notRequired(),
-  answers: Yup.array()
+  is_multi_choice: yup.boolean(),
+  is_multi_select: yup.boolean(),
+  previous_question_id: yup.string().nullable().notRequired(),
+  answers: yup
+    .array()
     .of(
-      Yup.object({
-        id: Yup.string().required('Answer ID is required'),
-        text: Yup.string().required('Answer text is required'),
-        text_en: Yup.string().required('Answer text in English is required'),
-        value: Yup.string().required('Answer value is required'),
-        disabled: Yup.boolean().required('Disabled status is required'),
-        icon: Yup.string().nullable().default(null),
-        next_question_id: Yup.string().nullable().notRequired(),
+      yup.object({
+        id: yup.string().required('Answer ID is required'),
+        text: yup.string().required('Answer text is required'),
+        text_en: yup.string().required('Answer text in English is required'),
+        value: yup.string().required('Answer value is required'),
+        disabled: yup.boolean().required('Disabled status is required'),
+        icon: yup.string().nullable().default(null),
+        next_question_id: yup.string().nullable().notRequired(),
       }),
     )
     .min(1, 'At least one answer is required')

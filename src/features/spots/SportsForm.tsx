@@ -1,7 +1,6 @@
 import Actions from '@widgets/Actions'
 import FormProvider from '@widgets/FormProvider'
 import useImageUploader from '@hooks/useImageUploader'
-import { ISpot } from './Spots.config'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -9,30 +8,41 @@ import { Box, Grid2 } from '@mui/material'
 import { spotsSchema } from './schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { MultiImageType } from '@rootTypes'
-import { AddIcon, DeleteIcon } from '@icons'
 import { getValuesToUpperCase } from '@helpers'
+import { ISpot, SpotsFormProps } from './Spots.config'
+import { AddIcon, DeleteIcon, EditIcon } from '@icons'
 import {
-  CategoryEnum,
   CityEnum,
-  DistrictEnum,
   EventType,
   eventTypes,
-  PeopleRangeEnum,
-  PriceRangeEnum,
+  CategoryEnum,
+  DistrictEnum,
   subcategories,
+  PriceRangeEnum,
   SubCategoryType,
+  PeopleRangeEnum,
 } from '@enums'
 import {
   ReachTextEditor,
   TextFieldElement,
   NumberFieldElement,
-  AutoCompleteFieldElement,
-  MultiSelectFieldElement,
   MultiImageFieldElement,
+  MultiSelectFieldElement,
+  AutoCompleteFieldElement,
 } from '@components'
 
-const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
-  const [images, setImages] = useState<MultiImageType[]>([])
+const SportsForm = ({
+  loading,
+  onDelete,
+  onSubmit,
+  defaultValues,
+  isEdit = false,
+}: SpotsFormProps) => {
+  const image = Array.isArray(defaultValues.image)
+    ? defaultValues.image
+    : [defaultValues.image]
+
+  const [images, setImages] = useState((image as MultiImageType[]) || [])
   const { spotId } = useParams()
 
   const methods = useForm({
@@ -60,28 +70,21 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
     const formData = {
       ...data,
       district: ['ANY', ...data.district],
-      city: getValuesToUpperCase(data.city),
       category: getValuesToUpperCase(data.category),
       subcategory: getValuesToUpperCase(data.subcategory),
       event_type: getValuesToUpperCase(data?.event_type) ?? undefined,
-    }
+    } as Omit<ISpot, 'id'>
 
     uploadImages(
       { images, context: 'object' },
       {
         onSuccess: images => {
-          onSubmit({ ...formData, images: images })
+          onSubmit({ data: formData, image: images })
           resetForm()
         },
       },
     )
   }
-
-  const handleDeleteSpot = () => {
-    console.log(spotId)
-  }
-
-  console.log(formState.isSubmitSuccessful)
 
   return (
     <Box>
@@ -92,18 +95,21 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
           {
             title: 'Delete',
             color: 'error',
-            icon: <DeleteIcon />,
-            variant: 'contained',
             type: 'button',
             hidden: !isEdit,
-            action: handleDeleteSpot,
+            loadText: 'Deleting',
+            variant: 'contained',
+            icon: <DeleteIcon />,
+            action: () => onDelete?.(spotId ?? ''),
           },
           {
-            title: 'Submit',
             color: 'primary',
-            icon: <AddIcon />,
             variant: 'contained',
             type: 'button',
+            disabled: loading,
+            title: isEdit ? 'Edit' : 'Submit',
+            icon: isEdit ? <EditIcon /> : <AddIcon />,
+            loadText: isEdit ? 'Editing' : 'Submitting',
             action: handleSubmit(submit),
           },
         ]}
@@ -249,7 +255,7 @@ const SportsForm = ({ defaultValues, onSubmit, isEdit }: any) => {
                 images={images}
                 setImages={setImages}
                 label="Spot Images"
-                errorMsg={formState.errors.images?.message}
+                errorMsg={formState.errors.image?.message}
               />
             </Grid2>
           </Grid2>
