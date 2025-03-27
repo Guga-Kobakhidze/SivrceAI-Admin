@@ -1,11 +1,11 @@
+import { Maybe } from 'purify-ts'
 import { ACCESS_TOKEN, PAGE_SIZE, PAGE_SIZES, THEME_MODE } from '@config'
+import querystring from 'qs'
 import {
   getLocalStorageItem,
   removeLocalStorageItem,
   setLocalStorageItem,
 } from '@storage'
-import { Maybe } from 'purify-ts'
-import querystring from 'qs'
 
 export const qs = {
   stringify: querystring.stringify,

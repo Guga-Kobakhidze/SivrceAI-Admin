@@ -4,7 +4,7 @@ import { getSearchParams } from '@utils'
 import { useSearchParams } from 'react-router-dom'
 import { TableFilterProps } from '../Table.config'
 import { useForm, Controller } from 'react-hook-form'
-import { useState, useCallback } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export const Search: React.FC<
   TableFilterProps<
@@ -23,21 +23,33 @@ export const Search: React.FC<
   })
 
   const [searchTerm, setSearchTerm] = useState(searchParams[name] || '')
+  const debounceTimer = useRef<NodeJS.Timeout | null>(null)
 
-  const debounceFn = useCallback(
-    (value: string) => {
-      const timer = setTimeout(() => {
-        setParams(prev => {
+  const debounceFn = (value: string) => {
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current)
+    }
+
+    debounceTimer.current = setTimeout(() => {
+      setParams(prev => {
+        if (value.trim() === '') prev.delete(name)
+        else {
           prev.set(name, value)
           prev.set('page', '1')
-          return prev
-        })
-      }, 500)
+        }
 
-      return () => clearTimeout(timer)
-    },
-    [name, setParams],
-  )
+        return prev
+      })
+    }, 500)
+  }
+
+  useEffect(() => {
+    return () => {
+      if (debounceTimer.current) {
+        clearTimeout(debounceTimer.current)
+      }
+    }
+  }, [])
 
   return (
     <FormProvider control={control}>

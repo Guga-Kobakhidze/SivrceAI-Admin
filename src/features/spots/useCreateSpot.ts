@@ -1,13 +1,15 @@
 import { toast } from 'react-toastify'
 import { apiClient } from '@axiosInstance'
-import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { ErrorResponse, IApiError } from '@rootTypes'
 import { SubmitForm } from './Spots.config'
+import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
+import { ErrorResponse, IApiError } from '@rootTypes'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-const createSpot = async ({ data }: SubmitForm): Promise<ErrorResponse> => {
+const createSpot = async ({ data, image }: SubmitForm): Promise<ErrorResponse> => {
+  const formData = {...data, image: image}
+  
   try {
-    const response = await apiClient.post(`${REQ_KEYS.addEditSpot}`, data)
+    const response = await apiClient.post(`${REQ_KEYS.addEditSpot}`, formData)
     return response.data
   } catch (error: any) {
     throw new Error(error || 'Failed to Create spot')

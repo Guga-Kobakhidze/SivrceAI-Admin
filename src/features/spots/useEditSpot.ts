@@ -1,15 +1,16 @@
 import { toast } from 'react-toastify'
 import { apiClient } from '@axiosInstance'
-import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { ErrorResponse, IApiError } from '@rootTypes'
 import { SubmitForm } from './Spots.config'
+import { REQ_KEYS, QUERY_KEYS } from '@queryKeys'
+import { ErrorResponse, IApiError } from '@rootTypes'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 type EditSpotType = { data: SubmitForm } & { id: string }
 
 const editSpot = async ({ id, data }: EditSpotType): Promise<ErrorResponse> => {
+  const formData = { ...data.data, image: data.image }
   try {
-    const response = await apiClient.patch(`${REQ_KEYS.addEditSpot}/${id}`, data)
+    const response = await apiClient.patch(`${REQ_KEYS.addEditSpot}/${id}`, formData)
     return response.data
   } catch (error: any) {
     console.error(error)
