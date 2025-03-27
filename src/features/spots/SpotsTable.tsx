@@ -1,10 +1,12 @@
 import Table, { getTableProps } from '@widgets/Table'
+import Loading from '@widgets/Loading'
+import NoDataFound from '@widgets/NoDataFound'
 import { ROUTES } from '@constants'
-import { QuestionsFilters, useSpots } from './useSpots'
 import { ISpotResponse } from './Spots.config'
-import { extractPageAndSize, getSearchParams } from '@utils'
 import { Box, Button, Typography } from '@mui/material'
+import { QuestionsFilters, useSpots } from './useSpots'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { extractPageAndSize, getSearchParams } from '@utils'
 import {
   CityEnum,
   DistrictEnum,
@@ -22,10 +24,12 @@ const SpotsTable = () => {
   const searchParams = getSearchParams<QuestionsFilters>()
   const pagination = extractPageAndSize(searchParams)
 
-  const { spots } = useSpots({
+  const { spots, isLoading, error } = useSpots({
     ...searchParams,
     ...pagination,
   })
+
+  if (error) return <NoDataFound />
 
   return (
     <Box width="100%">
@@ -74,7 +78,7 @@ const SpotsTable = () => {
 
         <Table.ResetFilter />
       </Table.Filters>
-      {spots && spots.length > 0 ? (
+      {!isLoading ? (
         <Table
           {...getTableProps({
             pageInfo: {
@@ -186,7 +190,7 @@ const SpotsTable = () => {
           })}
         />
       ) : (
-        'there are no data'
+        <Loading />
       )}
     </Box>
   )

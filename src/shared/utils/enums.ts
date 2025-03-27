@@ -17,18 +17,18 @@ export enum DistrictEnum {
 
 export enum CategoryEnum {
   RESTAURANT = 'Restaurant',
-  BARS_AND_NIGHTLIFE = 'Bars and Nightlife',
+  BARS_NIGHTLIFE = 'Bars Nightlife',
   SPECIALITY_FOOD = 'Speciality Food',
   FOOD_MARKET = 'Food Market',
-  EVENT_AND_PARTIES = 'Event and Parties',
+  EVENT_PARTIES = 'Event Parties',
 }
 
 export const subcategories = {
   [CategoryEnum.RESTAURANT]: ['Buffet', 'Dining', 'Cafe', 'fast food'],
-  [CategoryEnum.BARS_AND_NIGHTLIFE]: ['Wine bar', 'Night Club', 'Pub', 'Bar'],
+  [CategoryEnum.BARS_NIGHTLIFE]: ['Wine bar', 'Night Club', 'Pub', 'Bar'],
   [CategoryEnum.SPECIALITY_FOOD]: ['Vegetarian', 'Seafood', 'Ice cream', 'Bakery'],
   [CategoryEnum.FOOD_MARKET]: ['Grocery', 'Butcher', 'Farmer', 'Fish market'],
-  [CategoryEnum.EVENT_AND_PARTIES]: ['Wedding', 'Conference', 'Birthday', 'Banquet'],
+  [CategoryEnum.EVENT_PARTIES]: ['Wedding', 'Conference', 'Birthday', 'Banquet'],
 };
 
 export const eventTypes = {

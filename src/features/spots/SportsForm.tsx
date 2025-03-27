@@ -54,7 +54,7 @@ const SportsForm = ({
   const category = watch('category') as SubCategoryType
   const subcategory = watch('subcategory') as EventType | ''
 
-  const isEventAndParty = category === 'Event and Parties'
+  const isEventAndParty = category === 'Event Parties'
   const validSubcategories: EventType[] = ['Wedding', 'Birthday', 'Banquet']
   const isValidSubcategory = validSubcategories.some(
     type => type === subcategory,
@@ -65,7 +65,7 @@ const SportsForm = ({
     reset()
   }
 
-  const { uploadImages } = useImageUploader()
+  const { uploadImages, isUploading } = useImageUploader()
   const submit = (data: ISpot) => {
     const formData = {
       ...data,
@@ -106,7 +106,7 @@ const SportsForm = ({
             color: 'primary',
             variant: 'contained',
             type: 'button',
-            disabled: loading,
+            disabled: loading || isUploading,
             title: isEdit ? 'Edit' : 'Submit',
             icon: isEdit ? <EditIcon /> : <AddIcon />,
             loadText: isEdit ? 'Editing' : 'Submitting',
