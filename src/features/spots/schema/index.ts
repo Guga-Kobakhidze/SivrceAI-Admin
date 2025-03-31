@@ -72,7 +72,21 @@ const spotsSchema = yup.object({
     .of(yup.string().required())
     .min(1, 'District is required')
     .required('District is required'),
-  category: yup.string().required('Category is required'),
+  category: yup
+    .mixed<string | string[]>()
+    .test('is-valid-category', 'category is required', value => {
+      if (typeof value === 'string') {
+        return !!value.trim()
+      }
+      if (Array.isArray(value)) {
+        return (
+          value.length > 0 &&
+          value.every(item => typeof item === 'string' && item.trim())
+        )
+      }
+      return false
+    })
+    .required('category is required'),
   subcategory: yup
     .mixed<string | string[]>()
     .test('is-valid-subcategory', 'Subcategory is required', value => {

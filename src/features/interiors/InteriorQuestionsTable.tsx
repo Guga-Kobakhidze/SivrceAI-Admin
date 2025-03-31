@@ -22,10 +22,7 @@ const InteriorQuestionsTable = () => {
   if (error) return <NoDataFound />
 
   return (
-    <Box>
-      <Table.Filters>
-        <Table.Search name="keyword" defaultValue={searchParams.keyword} />
-      </Table.Filters>
+    <Box mt={3}>
       {!isLoading ? (
         <Table
           {...getTableProps({

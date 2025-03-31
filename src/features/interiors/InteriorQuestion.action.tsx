@@ -1,5 +1,5 @@
 import { ROUTES } from '@constants'
-import { AddIcon, DownloadIcon } from '@icons'
+import { AddIcon } from '@icons'
 import { Box } from '@mui/material'
 import Actions from '@widgets/Actions'
 
@@ -15,12 +15,12 @@ const InteriorQuestionAction = () => {
             icon: <AddIcon />,
             variant: 'contained',
           },
-          {
-            title: 'Export',
-            color: 'success',
-            icon: <DownloadIcon />,
-            variant: 'contained',
-          },
+          // {
+          //   title: 'Export',
+          //   color: 'success',
+          //   icon: <DownloadIcon />,
+          //   variant: 'contained',
+          // },
         ]}
       />
     </Box>

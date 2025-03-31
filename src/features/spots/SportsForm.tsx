@@ -8,9 +8,9 @@ import { Box, Grid2 } from '@mui/material'
 import { spotsSchema } from './schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { MultiImageType } from '@rootTypes'
-import { getValuesToUpperCase } from '@helpers'
 import { ISpot, SpotsFormProps } from './Spots.config'
 import { AddIcon, DeleteIcon, EditIcon } from '@icons'
+import { formatPhoneNumber, getCapitalize } from '@helpers'
 import {
   CityEnum,
   EventType,
@@ -47,15 +47,21 @@ const SportsForm = ({
 
   const methods = useForm({
     resolver: yupResolver<ISpot>(spotsSchema),
-    defaultValues: defaultValues,
+    defaultValues: {
+      ...defaultValues,
+      phone: formatPhoneNumber(defaultValues.phone),
+      category: Array.isArray(defaultValues.category)
+        ? defaultValues.category[0]
+        : defaultValues.category,
+    },
   })
 
   const { control, handleSubmit, reset, formState, watch } = methods
   const category = watch('category') as SubCategoryType
   const subcategory = watch('subcategory') as EventType | ''
 
-  const isEventAndParty = category === 'Event Parties'
-  const validSubcategories: EventType[] = ['Wedding', 'Birthday', 'Banquet']
+  const isEventAndParty = category === 'EVENT_PARTIES'
+  const validSubcategories: EventType[] = ['WEDDING', 'BIRTHDAY', 'BANQUET']
   const isValidSubcategory = validSubcategories.some(
     type => type === subcategory,
   )
@@ -70,9 +76,6 @@ const SportsForm = ({
     const formData = {
       ...data,
       district: ['ANY', ...data.district],
-      category: getValuesToUpperCase(data.category),
-      subcategory: getValuesToUpperCase(data.subcategory),
-      event_type: getValuesToUpperCase(data?.event_type) ?? undefined,
     } as Omit<ISpot, 'id'>
 
     uploadImages(
@@ -115,7 +118,7 @@ const SportsForm = ({
         ]}
       />
       <FormProvider control={control}>
-        <Box component="form" onSubmit={handleSubmit(submit)}>
+        <Box mt={3} component="form" onSubmit={handleSubmit(submit)}>
           <Grid2 container alignItems="start" spacing={3}>
             <Grid2 size={6}>
               <TextFieldElement label="Spot Name" name="name" />
@@ -140,7 +143,7 @@ const SportsForm = ({
                 label="city"
                 name="city"
                 options={Object.entries(CityEnum).map(([key, value]) => ({
-                  label: value,
+                  label: getCapitalize(value),
                   value: key,
                 }))}
               />
@@ -151,7 +154,7 @@ const SportsForm = ({
                 name="district"
                 isMultiple
                 options={Object.entries(DistrictEnum).map(([key, value]) => ({
-                  label: value,
+                  label: getCapitalize(value),
                   value: key,
                 }))}
               />
@@ -160,9 +163,9 @@ const SportsForm = ({
               <AutoCompleteFieldElement
                 label="Category"
                 name="category"
-                options={Object.entries(CategoryEnum).map(([, value]) => ({
-                  label: value,
-                  value: value,
+                options={Object.entries(CategoryEnum).map(([key, value]) => ({
+                  label: getCapitalize(value),
+                  value: key,
                 }))}
               />
             </Grid2>
@@ -171,11 +174,11 @@ const SportsForm = ({
                 <AutoCompleteFieldElement
                   label="Subcategory"
                   name="subcategory"
-                  disabled={!category.length}
+                  disabled={!category?.length}
                   options={
                     category && subcategories[category]
                       ? subcategories[category]?.map(item => ({
-                          label: item,
+                          label: getCapitalize(item),
                           value: item,
                         }))
                       : []
@@ -185,11 +188,11 @@ const SportsForm = ({
                 <MultiSelectFieldElement
                   label="Subcategory"
                   name="subcategory"
-                  disabled={!category.length}
+                  disabled={!category?.length}
                   options={
                     category && subcategories[category]
                       ? subcategories[category]?.map(item => ({
-                          label: item,
+                          label: getCapitalize(item),
                           value: item,
                         }))
                       : []
@@ -205,7 +208,7 @@ const SportsForm = ({
                   options={
                     subcategory && eventTypes[subcategory]
                       ? eventTypes[subcategory].map(item => ({
-                          label: item,
+                          label: getCapitalize(item),
                           value: item,
                         }))
                       : []

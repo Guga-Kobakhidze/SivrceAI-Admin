@@ -13,7 +13,7 @@ const Spots = () => {
 
   return (
     <Box>
-      <Box display="flex" justifyContent="space-between">
+      <Box display="flex" justifyContent="space-between" alignItems="center">
         <TabSwitcher
           activeTab={+activeTab}
           tabs={[
