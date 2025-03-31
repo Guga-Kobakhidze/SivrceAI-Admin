@@ -16,10 +16,12 @@ const TextFieldElement = ({ name, label, ...rest }: FieldProps) => {
           {...rest}
           {...field}
           label={label}
+          value={field.value ?? ''}
+          onChange={(e) => field.onChange(e.target.value || '')}
           variant="outlined"
           id={`outlined-basic-${name}`}
           error={!!error}
-          helperText={!!error && error.message}
+          helperText={error?.message}
         />
       )}
     />

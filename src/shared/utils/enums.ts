@@ -5,54 +5,72 @@ export enum CityEnum {
 }
 
 export enum DistrictEnum {
-  GLDANI_NADZALADEVI = 'Gldani Nadzaladevi',
-  MTATSMINDA = 'Mtatsminda',
-  DIDUBE_CHUGHURETI = 'Didube Chughureti',
-  OLD_TBILISI = 'Old Tbilisi',
-  KRTSANISI= "Krtsanisi",
-  VAKE = 'Vake',
-  SABURTALO = 'Saburtalo',
-  ISANI_SAMGORI = 'Isani Samgori',
+  GLDANI_NADZALADEVI = "GLDANI_NADZALADEVI",
+  MTATSMINDA = "MTATSMINDA",
+  DIDUBE_CHUGHURETI = "DIDUBE_CHUGHURETI",
+  OLD_TBILISI = "OLD_TBILISI",
+  KRTSANISI= "KRTSANISI",
+  VAKE = "VAKE",
+  SABURTALO = "SABURTALO",
+  ISANI_SAMGORI = "ISANI_SAMGORI" ,
 }
 
 export enum CategoryEnum {
-  RESTAURANT = 'Restaurant',
-  BARS_NIGHTLIFE = 'Bars Nightlife',
-  SPECIALITY_FOOD = 'Speciality Food',
-  FOOD_MARKET = 'Food Market',
-  EVENT_PARTIES = 'Event Parties',
+  RESTAURANT = "RESTAURANT",
+  BARS_NIGHTLIFE = "BARS_NIGHTLIFE",
+  SPECIALITY_FOOD = "SPECIALITY_FOOD",
+  FOOD_MARKET = "FOOD_MARKET",
+  EVENT_PARTIES = "EVENT_PARTIES",
 }
 
 export const subcategories = {
-  [CategoryEnum.RESTAURANT]: ['Buffet', 'Dining', 'Cafe', 'fast food'],
-  [CategoryEnum.BARS_NIGHTLIFE]: ['Wine bar', 'Night Club', 'Pub', 'Bar'],
-  [CategoryEnum.SPECIALITY_FOOD]: ['Vegetarian', 'Seafood', 'Ice cream', 'Bakery'],
-  [CategoryEnum.FOOD_MARKET]: ['Grocery', 'Butcher', 'Farmer', 'Fish market'],
-  [CategoryEnum.EVENT_PARTIES]: ['Wedding', 'Conference', 'Birthday', 'Banquet'],
+  [CategoryEnum.RESTAURANT]: ['BUFFET', 'DINING', 'CAGE', 'FAST_FOOD'],
+  [CategoryEnum.BARS_NIGHTLIFE]: ['WINE_BAR', 'NIGHT_CLUB', 'PUB', 'BAR'],
+  [CategoryEnum.SPECIALITY_FOOD]: ['VEGETARIAN', 'SEAFOOD', 'ICE_CREAM', 'BAKERY'],
+  [CategoryEnum.FOOD_MARKET]: ['GROCERY', 'BUTCHER', 'FARMER', 'FISH_MARKET'],
+  [CategoryEnum.EVENT_PARTIES]: ['WEDDING', 'CONFERENCE', 'BIRTHDAY', 'BANQUET'],
 };
 
 export const eventTypes = {
-  'Wedding': ['Cultural', 'Seasonal', 'Modern', 'Classic'],
-  'Birthday': ['Adult', 'Teen', 'Children'],
-  'Banquet': ['Corporate', 'Seasonal', 'Themed', 'Formal Gala'],
+  'WEDDING': ['CULTURAL', 'SEASONAL', 'MODERN', 'CLASSIC'],
+  'BIRTHDAY': ['ADULT', 'TEEN', 'CHILDREN'],
+  'BANQUET': ['CORPORATE', 'SEASONAL', 'THEMED', 'FORMAL_GALA'],
 };
 
 export type SubCategoryType = typeof CategoryEnum[keyof typeof CategoryEnum];
-export type EventType = 'Wedding' | 'Birthday' | 'Banquet';
+export type EventType = 'WEDDING' | 'BIRTHDAY' | 'BANQUET';
+
+// export enum PeopleRangeEnum {
+//   RANGE_1_2 = '1-2',
+//   RANGE_3_8 = '3-8',
+//   RANGE_9_15 = '9-15',
+//   RANGE_16_30 = '16-30',
+//   RANGE_31_PLUS = '31+',
+// }
+
+// export enum PriceRangeEnum {
+//   RANGE_0_50 = '0-50',
+//   RANGE_50_100 = '50-100',
+//   RANGE_100_300 = '100-300',
+//   RANGE_300_500 = '300-500',
+//   RANGE_500_1000 = '500-1000',
+//   RANGE_1000_PLUS = '1000+'
+// }
+
 
 export enum PeopleRangeEnum {
-  RANGE_1_2 = '1-2',
-  RANGE_3_8 = '3-8',
+  RANGE_1_2 = "1-2",
+  RANGE_3_8 = "3-8",
   RANGE_9_15 = '9-15',
   RANGE_16_30 = '16-30',
   RANGE_31_PLUS = '31+',
 }
 
+
 export enum PriceRangeEnum {
-  RANGE_0_50 = '0-50',
-  RANGE_50_100 = '50-100',
-  RANGE_100_300 = '100-300',
-  RANGE_300_500 = '300-500',
-  RANGE_500_1000 = '500-1000',
-  RANGE_1000_PLUS = '1000+'
+  RANGE_0_50 = "0-50",
+  RANGE_50_100 = "50-100",
+  RANGE_100_250 = "100-250",
+  RANGE_250_500 = "250-500",
+  RANGE_1000_PLUS = "1000+"
 }

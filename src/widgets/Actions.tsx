@@ -35,7 +35,7 @@ const Actions = ({ toolbars, title, isNavigate = false }: ActionsProps) => {
   const navigate = useNavigate()
 
   return (
-    <Grid2 container alignItems="center" mb={2}>
+    <Grid2 container alignItems="center">
       {Boolean(title) && (
         <React.Fragment>
           <StyledLink

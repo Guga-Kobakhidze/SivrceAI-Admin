@@ -2,6 +2,7 @@ import Table, { getTableProps } from '@widgets/Table'
 import Loading from '@widgets/Loading'
 import NoDataFound from '@widgets/NoDataFound'
 import { ROUTES } from '@constants'
+import { getCapitalize } from '@helpers'
 import { ISpotResponse } from './Spots.config'
 import { Box, Button, Typography } from '@mui/material'
 import { QuestionsFilters, useSpots } from './useSpots'
@@ -24,7 +25,7 @@ const SpotsTable = () => {
   const searchParams = getSearchParams<QuestionsFilters>()
   const pagination = extractPageAndSize(searchParams)
 
-  const { spots, isLoading, error } = useSpots({
+  const { spots, isLoading, error, pageInfo } = useSpots({
     ...searchParams,
     ...pagination,
   })
@@ -37,7 +38,7 @@ const SpotsTable = () => {
         <Table.Search name="keyword" defaultValue={searchParams.keyword} />
         <Table.DropdownFilter
           items={Object.values(CityEnum).map(item => ({
-            label: item,
+            label: getCapitalize(item),
             value: item,
           }))}
           label="Spot City"
@@ -45,7 +46,7 @@ const SpotsTable = () => {
         />
         <Table.DropdownFilter
           items={Object.values(DistrictEnum).map(item => ({
-            label: item,
+            label: getCapitalize(item),
             value: item,
           }))}
           label="Spot District"
@@ -53,7 +54,7 @@ const SpotsTable = () => {
         />
         <Table.DropdownFilter
           items={Object.values(CategoryEnum).map(item => ({
-            label: item,
+            label: getCapitalize(item),
             value: item,
           }))}
           label="Categories"
@@ -61,7 +62,7 @@ const SpotsTable = () => {
         />
         <Table.DropdownFilter
           items={Object.values(PeopleRangeEnum).map(item => ({
-            label: item,
+            label: getCapitalize(item),
             value: item,
           }))}
           label="People Range"
@@ -69,7 +70,7 @@ const SpotsTable = () => {
         />
         <Table.DropdownFilter
           items={Object.values(PriceRangeEnum).map(item => ({
-            label: item,
+            label: getCapitalize(item),
             value: item,
           }))}
           label="Price Range"
@@ -81,12 +82,7 @@ const SpotsTable = () => {
       {!isLoading ? (
         <Table
           {...getTableProps({
-            pageInfo: {
-              current_page: 1,
-              last_page: 1,
-              per_page: 10,
-              total: 1,
-            },
+            pageInfo,
             loading: false,
             onPagination: ({ size, page }) => {
               setParams(params => {

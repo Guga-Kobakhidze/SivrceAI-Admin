@@ -13,7 +13,7 @@ export const defaultValues = {
   image: [],
   city: CityEnum.Tbilisi,
   district: [],
-  category: '',
+  category: [],
   subcategory: [],
   event_type: [],
   people_range: [],
@@ -32,7 +32,7 @@ export interface ISpot {
   image: MultiImageType[]
   city: string
   district: string[]
-  category: string
+  category: string[] | string
   subcategory: string[] | string
   event_type?: string[]
   people_range: string[]
@@ -52,7 +52,7 @@ export interface ISpotResponse {
   image: MultiImageType[]
   city: string
   district: string[]
-  category: string
+  category: string[] | string
   subcategory: string[] | string
   event_type?: string[]
   people_range: string[]
@@ -71,11 +71,19 @@ export interface ISpotRequest {
   image: MultiImageType[]
   city: string
   district: string[]
-  category: string
+  category: string[] | string
   subcategory: string[] | string
   event_type?: string[]
   people_range: string[]
   price_range: string[]
+}
+
+export type ISpots = {
+  items: ISpotResponse[]
+  page: number
+  pages: number
+  size: number
+  total: number
 }
 
 export interface SubmitForm {

@@ -48,7 +48,14 @@ export const appendToFormData = (
   }
 }
 
-export const getValuesToUpperCase = (data?: string | string[]) =>
-  Array.isArray(data)
-    ? data.map(str => str.replace(/\s+/g, '_').toUpperCase())
-    : data?.replace(/\s+/g, '_').toUpperCase()
+export const getCapitalize = (value: string) => {
+  return value
+    .toLowerCase()
+    .split('_')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
+
+export const formatPhoneNumber = (value: string) => {
+  return value.replace(/\D/g, '')
+}

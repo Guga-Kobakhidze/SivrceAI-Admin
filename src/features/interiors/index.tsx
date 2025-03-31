@@ -7,7 +7,7 @@ import InteriorQuestionsTable from './InteriorQuestionsTable'
 const Interior = () => {
   return (
     <Box>
-      <Box display="flex" justifyContent="space-between">
+      <Box display="flex" justifyContent="space-between" alignItems="center">
         <TabSwitcher
           activeTab={0}
           tabs={[
