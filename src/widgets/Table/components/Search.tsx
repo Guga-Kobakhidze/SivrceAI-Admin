@@ -1,5 +1,5 @@
 import FormProvider from '@widgets/FormProvider'
-import { TextField } from '@mui/material'
+import { Box, TextField } from '@mui/material'
 import { getSearchParams } from '@utils'
 import { useSearchParams } from 'react-router-dom'
 import { TableFilterProps } from '../Table.config'
@@ -53,33 +53,36 @@ export const Search: React.FC<
 
   return (
     <FormProvider control={control}>
-      <Controller
-        name="searchTerm"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            sx={{
-              width: '100%',
-              '& .MuiOutlinedInput-root': {
-                background: 'white',
-                height: '62px',
-              },
-              ...sx,
-            }}
-            multiline
-            rows={2}
-            label={noName ? '' : 'Search'}
-            disabled={noName}
-            onChange={e => {
-              const value = e.target.value
-              setSearchTerm(value)
-              debounceFn(value)
-            }}
-            value={searchTerm}
-          />
-        )}
-      />
+      <Box overflow="visible" width="100%">
+        <Controller
+          name="searchTerm"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              sx={{
+                width: '100%',
+                '& .MuiOutlinedInput-root': {
+                  background: 'white',
+                  height: '62px',
+                  minWidth: 300,
+                },
+                ...sx,
+              }}
+              multiline
+              rows={2}
+              placeholder={noName ? '' : 'Search'}
+              disabled={noName}
+              onChange={e => {
+                const value = e.target.value
+                setSearchTerm(value)
+                debounceFn(value)
+              }}
+              value={searchTerm}
+            />
+          )}
+        />
+      </Box>
     </FormProvider>
   )
 }

@@ -100,7 +100,7 @@ export type ImageItem = { img_url: string; isMain?: boolean }
 export type ImageType = File | string | null
 
 export type MultiImageType = {
-  file?: File
+  file: File
   isMain: boolean
   img_url?: string
 }
