@@ -39,7 +39,7 @@ export type TablePageInfo = PageInfo
 export type TableProps<T extends string = string, K extends T = T> = {
   columns: Column<K | any>[]
   rows: Data<T>[]
-  pageInfo?: TablePageInfo | undefined
+  pageInfo?: TablePageInfo
   actions?:
     | (TableAction<T> | ((row: Data<T>, index: number) => TableAction<T>))[]
     | undefined
