@@ -2,6 +2,8 @@ export enum CityEnum {
   Tbilisi = 'Tbilisi',
   Batumi = 'Batumi',
   Kutaisi = 'Kutaisi',
+  Chokhatauri = "Chokhatauri",
+  Ozurgeti = "Ozurgeti"
 }
 
 export enum DistrictEnum {
