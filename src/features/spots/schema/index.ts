@@ -60,12 +60,14 @@ const spotsSchema = yup.object({
   image: yup
     .array()
     .of(
-      yup.object().shape({
-        file: yup.mixed<File>().required('File is required'),
+      yup.object({
+        file: yup.mixed<File>().required('Image file is required'),
         isMain: yup.boolean().required('isMain is required'),
+        img_url: yup.string().optional(),
       }),
     )
-    .default([]),
+    .transform(value => (value === null ? [] : value))
+    .default(() => []),
   city: yup.string().required('City is required'),
   district: yup
     .array()

@@ -59,3 +59,11 @@ export const getCapitalize = (value: string) => {
 export const formatPhoneNumber = (value: string) => {
   return value.replace(/\D/g, '')
 }
+
+type ImgType = string | { file?: File } | null | undefined
+
+export const getImageSrc = (img: ImgType): string => {
+  if (typeof img === 'string') return img
+  if (img?.file instanceof File) return URL.createObjectURL(img.file)
+  return ''
+}

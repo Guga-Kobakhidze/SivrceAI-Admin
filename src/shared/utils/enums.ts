@@ -2,6 +2,8 @@ export enum CityEnum {
   Tbilisi = 'Tbilisi',
   Batumi = 'Batumi',
   Kutaisi = 'Kutaisi',
+  Chokhatauri = "Chokhatauri",
+  Ozurgeti = "Ozurgeti"
 }
 
 export enum DistrictEnum {
@@ -24,7 +26,7 @@ export enum CategoryEnum {
 }
 
 export const subcategories = {
-  [CategoryEnum.RESTAURANT]: ['BUFFET', 'DINING', 'CAGE', 'FAST_FOOD'],
+  [CategoryEnum.RESTAURANT]: ['BUFFET', 'DINING', 'CAFE', 'FAST_FOOD', "BAKERY"],
   [CategoryEnum.BARS_NIGHTLIFE]: ['WINE_BAR', 'NIGHT_CLUB', 'PUB', 'BAR'],
   [CategoryEnum.SPECIALITY_FOOD]: ['VEGETARIAN', 'SEAFOOD', 'ICE_CREAM', 'BAKERY'],
   [CategoryEnum.FOOD_MARKET]: ['GROCERY', 'BUTCHER', 'FARMER', 'FISH_MARKET'],

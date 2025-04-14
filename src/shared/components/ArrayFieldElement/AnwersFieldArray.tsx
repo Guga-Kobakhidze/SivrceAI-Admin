@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
-import { ImageType } from '../type'
+import { ImageType } from '@rootTypes'
 import { DeleteIcon } from '@icons'
 import { useFieldArray } from 'react-hook-form'
 import { useFormContext } from '@widgets/FormProvider'
