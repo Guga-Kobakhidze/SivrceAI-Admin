@@ -27,9 +27,9 @@ const SingleImageFieldElement = ({
     <React.Fragment>
       <ImageUploadTexField
         name={name}
-        id={`${name}-${index}`}
         onUpload={onUpload}
         disabled={disabled}
+        id={`${name}-${index}`}
       />
       <StyledImageUplaodBox>
         <Box width="100%" component="label" htmlFor={`${name}-${index}`}>

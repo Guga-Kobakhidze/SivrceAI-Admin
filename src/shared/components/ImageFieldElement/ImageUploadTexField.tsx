@@ -2,11 +2,11 @@ import { TextField } from '@mui/material'
 
 interface ImageUploaderTexFieldProps {
   name: string
-  disabled?: boolean
-  onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
-  index?: number
   id: string
+  index?: number
+  disabled?: boolean
   isMultiple?: boolean
+  onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const ImageUploadTexField = ({

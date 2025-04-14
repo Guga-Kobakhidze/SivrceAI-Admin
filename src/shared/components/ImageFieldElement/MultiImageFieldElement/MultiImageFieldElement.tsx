@@ -9,6 +9,7 @@ import {
   StyledImageUplaodBox,
   StyledImageUploadBox,
 } from '../style'
+import { getImageSrc } from '@helpers'
 
 const MultiImageFieldElement = ({
   name,
@@ -18,11 +19,9 @@ const MultiImageFieldElement = ({
   errorMsg,
   setImages,
 }: MultiImageFieldElementProps) => {
+  
   const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []).map(file => ({
-      file,
-      isMain: false,
-    }))
+    const files = Array.from(e.target.files || []).map(file => ({ file, isMain: false }))
     const totalImages = images.length + files.length
 
     if (totalImages > 8) {
@@ -35,6 +34,7 @@ const MultiImageFieldElement = ({
 
   const onImageDelete = (index: number) =>
     setImages(prev => prev.filter((_, i) => i !== index))
+  
   const handleMainImg = (index: number) =>
     setImages(prev => prev.map((img, i) => ({ ...img, isMain: i === index })))
 
@@ -58,15 +58,14 @@ const MultiImageFieldElement = ({
         </Box>
         <Grid2 container spacing={2}>
           {images?.slice(0, 8).map((img, index) => {
-            const src =
-              typeof img === 'string' ? img : URL.createObjectURL(img.file!)
+            const src = getImageSrc(img)
 
             return (
               <Tooltip title="Select as main image" followCursor key={index}>
                 <StyledImageContent
                   size={{ xs: 12, sm: 6, md: 2 }}
                   onClick={() => handleMainImg(index)}
-                  ismain={img.isMain ? 'true' : null}
+                  ismain={img?.isMain ? 'true' : null}
                 >
                   <Box
                     className="closeIcon"

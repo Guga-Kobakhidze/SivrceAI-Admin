@@ -77,16 +77,19 @@ const SportsForm = ({
       ...data,
       district: ['ANY', ...data.district],
     } as Omit<ISpot, 'id'>
+    console.log('here')
 
-    uploadImages(
-      { images, context: 'object' },
-      {
-        onSuccess: images => {
-          onSubmit({ data: formData, image: images })
-          resetForm()
-        },
-      },
-    )
+    !!images.length
+      ? uploadImages(
+          { images, context: 'object' },
+          {
+            onSuccess: images => {
+              onSubmit({ data: formData, image: images })
+              resetForm()
+            },
+          },
+        )
+      : onSubmit({ data: formData, image: [] })
   }
 
   return (

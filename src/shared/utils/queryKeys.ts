@@ -10,7 +10,7 @@ const REQ_KEYS = {
   getAllSpots: '/admin/objects/all',
   getSpotById: '/admin/object',
   addEditSpot: '/admin/object',
-  deleteSpot: '/adming/object',
+  deleteSpot: '/admin/object',
 
   getSpotQuestions: '/basic_answers/object/all',
   getSpotQuestionById: '/get_question/object',

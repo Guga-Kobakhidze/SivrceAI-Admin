@@ -59,25 +59,6 @@ export interface ISpotResponse {
   price_range: string[]
 }
 
-export interface ISpotRequest {
-  name: string
-  name_ge?: string
-  description: string
-  description_ge: string
-  email: string
-  website: string
-  phone: string
-  address: string
-  image: MultiImageType[]
-  city: string
-  district: string[]
-  category: string[] | string
-  subcategory: string[] | string
-  event_type?: string[]
-  people_range: string[]
-  price_range: string[]
-}
-
 export type ISpots = {
   items: ISpotResponse[]
   page: number
@@ -87,7 +68,7 @@ export type ISpots = {
 }
 
 export interface SubmitForm {
-  data: ISpotRequest
+  data: ISpot
   image: ImageItem[]
 }
 

@@ -1,7 +1,7 @@
-import { PropsWithChildren, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../shared/utils/constants'
 import { useUser } from '@features/auth/useUser'
+import { useNavigate } from 'react-router-dom'
+import { PropsWithChildren, useEffect } from 'react'
 import FullPageLoading from '@widgets/FullPageLoading'
 
 const HiddenRoute: React.FC<PropsWithChildren> = ({ children }) => {

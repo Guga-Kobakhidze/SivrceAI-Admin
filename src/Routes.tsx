@@ -1,34 +1,26 @@
-import { lazy, Suspense } from 'react'
 import { ROUTES } from '@constants'
 import { AuthLayout } from '@layouts'
 import { Routes, Route } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+import Loading from '@widgets/Loading'
 import AppLayout from './layouts/AppLayout'
 import HiddenRoute from './routes/HiddenRoute'
 import AuthenticatedRoute from './routes/AuthenticatedRoute'
 import ConfirmDialogContextProvider from '@context/ConfirmDialog/ConfirmDialog'
-import Loading from '@widgets/Loading'
-import { SettingsPage } from '@pages'
 
 const Login = lazy(() => import('@features/auth/Login'))
 
 const SpotsTable = lazy(() => import('./pages/SpotsPage'))
 const SpotsCreate = lazy(() => import('@features/spots/SpotsCreate'))
 const SpotsEdit = lazy(() => import('@features/spots/SpotsEdit'))
-const SpotsQuesetionEdit = lazy(
-  () => import('@features/spots/SpotsQuestions/SpotQuestionEdit'),
-)
-const SpotsQuesetionCreate = lazy(
-  () => import('@features/spots/SpotsQuestions/SpotsQuestionCreate'),
-)
+const SpotsQuesetionEdit = lazy(() => import('@features/spots/SpotsQuestions/SpotQuestionEdit'))
+const SpotsQuesetionCreate = lazy(() => import('@features/spots/SpotsQuestions/SpotsQuestionCreate'))
 
 const InteriersPage = lazy(() => import('./pages/InteriorPage'))
-const InteriorQuestionCreate = lazy(
-  () => import('@features/interiors/InteriorQuestionCreate'),
-)
-const InteriorQuestionEdit = lazy(
-  () => import('@features/interiors/InteriorQuestionEdit'),
-)
+const InteriorQuestionCreate = lazy(() => import('@features/interiors/InteriorQuestionCreate'))
+const InteriorQuestionEdit = lazy(() => import('@features/interiors/InteriorQuestionEdit'))
 
+const SettingsPage = lazy(() => import('./pages/SettingsPage'))
 const UsersPage = lazy(() => import('./pages/UsersPage'))
 const CreateUser = lazy(() => import('@features/users/UsersCreate'))
 const EditUser = lazy(() => import('@features/users/UsersEdit'))
