@@ -1,6 +1,7 @@
 // StackedChart.tsx
 import React from 'react'
 import { Chart } from 'react-chartjs-2'
+import { useTheme } from '@mui/material'
 import {
   Chart as ChartJS,
   Title,
@@ -14,8 +15,9 @@ import {
   ChartData,
   ChartOptions,
   ChartType,
+  BarController,
+  LineController,
 } from 'chart.js'
-import { useTheme } from '@mui/material'
 
 ChartJS.register(
   Title,
@@ -26,6 +28,8 @@ ChartJS.register(
   PointElement,
   CategoryScale,
   LinearScale,
+  BarController,
+  LineController,
 )
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
