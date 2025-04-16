@@ -14,6 +14,8 @@ import {
   ChartData,
   ChartOptions,
   ChartType,
+  BarController,
+  LineController,
 } from 'chart.js'
 import { useTheme } from '@mui/material'
 
@@ -26,6 +28,8 @@ ChartJS.register(
   PointElement,
   CategoryScale,
   LinearScale,
+  BarController,
+  LineController,
 )
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
