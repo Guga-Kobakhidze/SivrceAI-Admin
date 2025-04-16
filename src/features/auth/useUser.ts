@@ -13,7 +13,7 @@ export const useUser = () => {
     queryKey: [QUERY_KEYS.USER],
     queryFn: getUser,
     retry: false,
-    staleTime: 600000, // 10 minutes
+    staleTime: 600000,
   })
 
   const isAuthenticated = Boolean(data && data.id)

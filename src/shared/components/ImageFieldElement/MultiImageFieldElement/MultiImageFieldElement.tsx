@@ -19,7 +19,6 @@ const MultiImageFieldElement = ({
   errorMsg,
   setImages,
 }: MultiImageFieldElementProps) => {
-  
   const onUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []).map(file => ({ file, isMain: false }))
     const totalImages = images.length + files.length
@@ -59,6 +58,7 @@ const MultiImageFieldElement = ({
         <Grid2 container spacing={2}>
           {images?.slice(0, 8).map((img, index) => {
             const src = getImageSrc(img)
+            if (!src) return
 
             return (
               <Tooltip title="Select as main image" followCursor key={index}>

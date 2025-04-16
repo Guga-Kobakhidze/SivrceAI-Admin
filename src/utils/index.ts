@@ -11,8 +11,7 @@ export const qs = {
   stringify: querystring.stringify,
   parse: (data: string | Record<string, string>) =>
     querystring.parse(data, {
-      // @ts-expect-error: Ignoring unused variable warning
-      decoder(value, decoder, charset) {
+      decoder(value, _, charset) {
         const keywords = {
           true: true,
           false: false,

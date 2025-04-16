@@ -9,3 +9,4 @@ export { default as ArrayFieldElement } from './ArrayFieldElement/AnwersFieldArr
 export { default as MultiSelectFieldElement } from './MultiSelectFieldElement/MultiSelectFieldElement'
 export { default as MultiImageFieldElement } from './ImageFieldElement/MultiImageFieldElement/MultiImageFieldElement'
 export { default as SingleImageFieldElement } from './ImageFieldElement/SingleImageFieldElement/SingleImageFieldElement'
+export { default as UserOverview } from './UserOverview/UserOverview'

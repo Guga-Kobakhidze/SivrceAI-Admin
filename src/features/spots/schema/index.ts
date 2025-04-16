@@ -61,7 +61,7 @@ const spotsSchema = yup.object({
     .array()
     .of(
       yup.object({
-        file: yup.mixed<File>().required('Image file is required'),
+        file: yup.mixed<File>().optional(),
         isMain: yup.boolean().required('isMain is required'),
         img_url: yup.string().optional(),
       }),
@@ -72,8 +72,12 @@ const spotsSchema = yup.object({
   district: yup
     .array()
     .of(yup.string().required())
-    .min(1, 'District is required')
-    .required('District is required'),
+    .when('city', {
+      is: (value: string) => value !== 'Chokhatauri' && value !== 'Ozurgeti',
+      then: schema =>
+        schema.min(1, 'District is required').required('District is required'),
+      otherwise: schema => schema.notRequired(),
+    }),
   category: yup
     .mixed<string | string[]>()
     .test('is-valid-category', 'category is required', value => {
@@ -115,6 +119,7 @@ const spotsSchema = yup.object({
     .of(yup.string().required())
     .min(1, 'Price Range is required')
     .required('Price Range is required'),
+  additional: yup.array().of(yup.string().required()),
 })
 
 export { spotQuestionsSchema, spotsSchema }

@@ -26,7 +26,7 @@ const getTableProps = <T extends string, K extends T = T>(
 ) => x
 
 const Table = <T extends string, K extends T>(props: TableProps<T, K>) => {
-  const { columns, rows, actions, pageInfo, loading, onPagination } = props
+  const { columns, rows, actions, pageInfo, loading, onPagination, sx } = props
   const paginationInfo = pageInfo || ({} as TablePageInfo)
 
   const hasActions = actions !== undefined
@@ -43,6 +43,7 @@ const Table = <T extends string, K extends T>(props: TableProps<T, K>) => {
             fontSize: 'normal',
             position: 'relative',
             minHeight: '60dvh',
+            ...sx,
           }}
         >
           {!loading ? (
@@ -90,6 +91,7 @@ const Table = <T extends string, K extends T>(props: TableProps<T, K>) => {
                         if (Cell && typeof Cell === 'function') {
                           return (
                             <TableCell
+                              height={46}
                               sx={{ fontSize: 'inherit' }}
                               key={column.accessor}
                               align={column.align}
@@ -187,13 +189,15 @@ const Table = <T extends string, K extends T>(props: TableProps<T, K>) => {
           )}
         </TableContainer>
       </Box>
-      <TablePaginator
-        current_page={paginationInfo.current_page}
-        last_page={paginationInfo.last_page}
-        per_page={paginationInfo.per_page}
-        total={paginationInfo.total}
-        onChange={onPagination}
-      />
+      {onPagination && (
+        <TablePaginator
+          current_page={paginationInfo.current_page}
+          last_page={paginationInfo.last_page}
+          per_page={paginationInfo.per_page}
+          total={paginationInfo.total}
+          onChange={onPagination}
+        />
+      )}
     </Box>
   )
 }

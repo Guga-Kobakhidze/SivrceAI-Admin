@@ -27,7 +27,6 @@ const InteriorQuestionsTable = () => {
         <Table
           {...getTableProps({
             pageInfo,
-            loading: false,
             onPagination: ({ size, page }) => {
               setParams(params => {
                 params.set('page', String(page))

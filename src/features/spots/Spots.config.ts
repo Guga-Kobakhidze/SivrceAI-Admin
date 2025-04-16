@@ -18,6 +18,7 @@ export const defaultValues = {
   event_type: [],
   people_range: [],
   price_range: [],
+  additional: [],
 }
 
 export interface ISpot {
@@ -31,12 +32,13 @@ export interface ISpot {
   address: string
   image: MultiImageType[]
   city: string
-  district: string[]
+  district?: string[]
   category: string[] | string
   subcategory: string[] | string
   event_type?: string[]
   people_range: string[]
   price_range: string[]
+  additional?: string[]
 }
 
 export interface ISpotResponse {
@@ -57,6 +59,7 @@ export interface ISpotResponse {
   event_type?: string[]
   people_range: string[]
   price_range: string[]
+  additional: string[]
 }
 
 export type ISpots = {
@@ -82,4 +85,11 @@ export interface SpotsFormProps {
   onDelete?: (id: string) => void
   isEdit?: boolean
   loading: boolean
+}
+
+export type ActiveTabKey = 0 | 1
+
+export type TabOption = {
+  Actions: React.ComponentType
+  Table: React.ComponentType
 }
