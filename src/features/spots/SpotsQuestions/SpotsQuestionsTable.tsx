@@ -1,10 +1,10 @@
 import Table, { getTableProps } from '@widgets/Table'
 import { ROUTES } from '@constants'
 import { IQuestion } from '@rootTypes'
-import { extractPageAndSize, getSearchParams } from '@utils'
-import { QuestionsFilters, useSpotQuestions } from './useSpotQuestions'
 import { Box, Button, Typography } from '@mui/material'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { QuestionsFilters, useSpotQuestions } from './useSpotQuestions'
+import { extractPageAndSize, getSearchParams } from '@utils'
 import Loading from '@widgets/Loading'
 import NoDataFound from '@widgets/NoDataFound'
 

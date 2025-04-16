@@ -44,5 +44,6 @@ export type TableProps<T extends string = string, K extends T = T> = {
     | (TableAction<T> | ((row: Data<T>, index: number) => TableAction<T>))[]
     | undefined
   loading?: boolean | undefined
-  onPagination: (arg: OnPaginationChangeParams) => void
+  onPagination?: (arg: OnPaginationChangeParams) => void
+  sx?: SxProps
 }

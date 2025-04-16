@@ -60,10 +60,11 @@ export const formatPhoneNumber = (value: string) => {
   return value.replace(/\D/g, '')
 }
 
-type ImgType = string | { file?: File } | null | undefined
+type ImgType = string | { file?: File; img_url?: string } | null | undefined
 
-export const getImageSrc = (img: ImgType): string => {
+export const getImageSrc = (img: ImgType) => {
   if (typeof img === 'string') return img
   if (img?.file instanceof File) return URL.createObjectURL(img.file)
+  if (typeof img?.img_url === 'string') return img.img_url
   return ''
 }

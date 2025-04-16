@@ -12,12 +12,14 @@ import { ISpot, SpotsFormProps } from './Spots.config'
 import { AddIcon, DeleteIcon, EditIcon } from '@icons'
 import { formatPhoneNumber, getCapitalize } from '@helpers'
 import {
+  CityType,
   CityEnum,
   EventType,
   eventTypes,
   CategoryEnum,
   DistrictEnum,
   subcategories,
+  AdditionalEnum,
   PriceRangeEnum,
   SubCategoryType,
   PeopleRangeEnum,
@@ -40,7 +42,10 @@ const SportsForm = ({
 }: SpotsFormProps) => {
   const image = Array.isArray(defaultValues.image)
     ? defaultValues.image
-    : [defaultValues.image]
+    : [defaultValues.image].map(img => ({
+        img_url: img,
+        isMain: false,
+      }))
 
   const [images, setImages] = useState((image as MultiImageType[]) || [])
   const { spotId } = useParams()
@@ -49,6 +54,7 @@ const SportsForm = ({
     resolver: yupResolver<ISpot>(spotsSchema),
     defaultValues: {
       ...defaultValues,
+      image: image,
       phone: formatPhoneNumber(defaultValues.phone),
       category: Array.isArray(defaultValues.category)
         ? defaultValues.category[0]
@@ -57,9 +63,11 @@ const SportsForm = ({
   })
 
   const { control, handleSubmit, reset, formState, watch } = methods
+  const city = watch('city') as CityType
   const category = watch('category') as SubCategoryType
   const subcategory = watch('subcategory') as EventType | ''
 
+  const isHideDistrict = city !== 'Chokhatauri' && city !== 'Ozurgeti'
   const isEventAndParty = category === 'EVENT_PARTIES'
   const validSubcategories: EventType[] = ['WEDDING', 'BIRTHDAY', 'BANQUET']
   const isValidSubcategory = validSubcategories.some(
@@ -75,9 +83,8 @@ const SportsForm = ({
   const submit = (data: ISpot) => {
     const formData = {
       ...data,
-      district: ['ANY', ...data.district],
+      district: data.district && ['ANY', ...data.district],
     } as Omit<ISpot, 'id'>
-    console.log('here')
 
     !!images.length
       ? uploadImages(
@@ -151,17 +158,19 @@ const SportsForm = ({
                 }))}
               />
             </Grid2>
-            <Grid2 size={6}>
-              <MultiSelectFieldElement
-                label="District"
-                name="district"
-                isMultiple
-                options={Object.entries(DistrictEnum).map(([key, value]) => ({
-                  label: getCapitalize(value),
-                  value: key,
-                }))}
-              />
-            </Grid2>
+            {isHideDistrict && (
+              <Grid2 size={6}>
+                <MultiSelectFieldElement
+                  label="District"
+                  name="district"
+                  isMultiple
+                  options={Object.entries(DistrictEnum).map(([key, value]) => ({
+                    label: getCapitalize(value),
+                    value: key,
+                  }))}
+                />
+              </Grid2>
+            )}
             <Grid2 size={6}>
               <AutoCompleteFieldElement
                 label="Category"
@@ -237,6 +246,16 @@ const SportsForm = ({
                 name="price_range"
                 options={Object.entries(PriceRangeEnum).map(([key, value]) => ({
                   label: value,
+                  value: key,
+                }))}
+              />
+            </Grid2>
+            <Grid2 size={6}>
+              <AutoCompleteFieldElement
+                label="Additional Info"
+                name="additional"
+                options={Object.entries(AdditionalEnum).map(([key, value]) => ({
+                  label: getCapitalize(value),
                   value: key,
                 }))}
               />

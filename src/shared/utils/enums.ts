@@ -14,7 +14,7 @@ export enum DistrictEnum {
   KRTSANISI= "KRTSANISI",
   VAKE = "VAKE",
   SABURTALO = "SABURTALO",
-  ISANI_SAMGORI = "ISANI_SAMGORI" ,
+  ISANI_SAMGORI = "ISANI_SAMGORI",
 }
 
 export enum CategoryEnum {
@@ -23,6 +23,11 @@ export enum CategoryEnum {
   SPECIALITY_FOOD = "SPECIALITY_FOOD",
   FOOD_MARKET = "FOOD_MARKET",
   EVENT_PARTIES = "EVENT_PARTIES",
+}
+
+export enum AdditionalEnum {
+  PET_FRIENDLY = "PET_FRIENDLY",
+  VEGAN = "VEGAN",
 }
 
 export const subcategories = {
@@ -41,6 +46,7 @@ export const eventTypes = {
 
 export type SubCategoryType = typeof CategoryEnum[keyof typeof CategoryEnum];
 export type EventType = 'WEDDING' | 'BIRTHDAY' | 'BANQUET';
+export type CityType = typeof CityEnum[keyof typeof CityEnum]
 
 // export enum PeopleRangeEnum {
 //   RANGE_1_2 = '1-2',
