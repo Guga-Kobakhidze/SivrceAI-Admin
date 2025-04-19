@@ -18,7 +18,7 @@ export const defaultValues = {
   event_type: [],
   people_range: [],
   price_range: [],
-  additional: [],
+  additional: '',
 }
 
 export interface ISpot {
@@ -38,7 +38,7 @@ export interface ISpot {
   event_type?: string[]
   people_range: string[]
   price_range: string[]
-  additional?: string[]
+  additional?: string
 }
 
 export interface ISpotResponse {
@@ -59,7 +59,7 @@ export interface ISpotResponse {
   event_type?: string[]
   people_range: string[]
   price_range: string[]
-  additional: string[]
+  additional: string
 }
 
 export type ISpots = {
