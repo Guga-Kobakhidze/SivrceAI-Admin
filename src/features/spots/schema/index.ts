@@ -119,7 +119,7 @@ const spotsSchema = yup.object({
     .of(yup.string().required())
     .min(1, 'Price Range is required')
     .required('Price Range is required'),
-  additional: yup.array().of(yup.string().required()),
+  additional: yup.string(),
 })
 
 export { spotQuestionsSchema, spotsSchema }
